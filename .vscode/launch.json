@@ -1,0 +1,41 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "API Script",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/server/target/debug/script",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopOnEntry": false,
+            "sourceLanguages": [
+                "rust"
+            ],
+            "preLaunchTask": "cargo build",
+        },
+        {
+            "name": "API Server",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/server/target/debug/serve",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopOnEntry": false,
+            "sourceLanguages": [
+                "rust"
+            ],
+            "preLaunchTask": "cargo build",
+        },
+        {
+            "name": "React App",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:5173",
+            "webRoot": "${workspaceFolder}/browser/app",
+            "sourceMaps": true,
+            "cwd": "${workspaceFolder}/browser",
+        },
+
+    ]
+}

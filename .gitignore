@@ -1,0 +1,7 @@
+.env
+.DS_Store
+browser/build/
+browser/node_modules/
+browser/.react-router/
+server/target/
+

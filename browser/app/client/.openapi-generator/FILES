@@ -1,0 +1,9 @@
+apis/HouseApi.ts
+apis/index.ts
+index.ts
+models/ErrorResponse.ts
+models/HouseResponse.ts
+models/PaginatedResponseHouseResponse.ts
+models/PaginatedResponseHouseResponseItemsInner.ts
+models/index.ts
+runtime.ts
