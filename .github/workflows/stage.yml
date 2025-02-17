@@ -1,0 +1,33 @@
+# name: Deploy staging site
+
+# on:
+#   push:
+#     branches: ["main"]
+#   workflow_dispatch:
+
+# concurrency:
+#   group: "stage"
+#   cancel-in-progress: false
+
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-24.04
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v4
+
+#       - name: Setup AWS credentials
+#         uses: aws-actions/configure-aws-credentials@v4
+#         with:
+#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           aws-region: "ap-southeast-2"
+
+#       - name: Setup terraform
+#         uses: hashicorp/setup-terraform@v3
+
+#       - name: Deploy backend
+#         working-directory: terraform/server/upload
+#         run: |
+#           terraform init -backend-config "key=house_planner/stage/server/upload/terraform.tfstate"
+#           terraform apply -auto-approve -var="environment=stage"

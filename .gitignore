@@ -4,4 +4,5 @@ browser/build/
 browser/node_modules/
 browser/.react-router/
 server/target/
-
+terraform/*.tfstate.*
+terraform/**/.terraform/*
