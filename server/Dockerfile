@@ -6,9 +6,14 @@ RUN apt-get update \
     && apt-get install -y musl-tools musl libssl-dev pkg-config \
     && rm -rf /var/lib/apt/lists/* \
     && rustup target add x86_64-unknown-linux-musl
+ENV OPENSSL_DIR=/usr
+
+# Cache external dependencies
+COPY Cargo.toml Cargo.lock ./
+RUN cargo fetch
 
 # Build the project
-COPY . .
+COPY . . 
 RUN cargo build \
         --no-default-features \
         --features api_gateway_trigger \

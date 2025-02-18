@@ -5,20 +5,20 @@ resource "aws_cloudwatch_log_group" "api" {
 
 resource "aws_lambda_function" "api" {
   package_type  = "Image"
-  image_uri     = "${aws_ecr_repository.lambda.repository_url}@${data.aws_ecr_image.lambda.id}"
+  image_uri     = "${data.aws_ssm_parameter.ecr_url.insecure_value}@${data.aws_ecr_image.lambda.id}"
   function_name = "${local.prefix}-API"
   role          = aws_iam_role.lambda_api.arn
   timeout       = 5
-  image_config {
-    entry_point = ["/ws_handler_cloud"]
-  }
+  #   image_config {
+  #     entry_point = ["/ws_handler_cloud"]
+  #   }
   depends_on = [
     aws_cloudwatch_log_group.api,
     terraform_data.lambda_push,
   ]
   environment {
     variables = {
-      API_GATEWAY_URL      = aws_apigatewayv2_stage.websocket.invoke_url,
+      #   API_GATEWAY_URL = aws_apigatewayv2_stage.websocket.invoke_url,
     }
   }
 }
@@ -28,13 +28,6 @@ resource "aws_iam_role" "lambda_api" {
   description        = "Allows Lambda run"
   assume_role_policy = data.aws_iam_policy_document.lambda_assume_role.json
 }
-
-resource "aws_iam_role_policy" "api_connections" {
-  name   = "ApiConnections"
-  role   = aws_iam_role.lambda_api.name
-  policy = data.aws_iam_policy_document.api_connections.json
-}
-
 
 resource "aws_iam_role_policy_attachment" "execute_api_lambda" {
   role       = aws_iam_role.lambda_api.name

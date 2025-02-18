@@ -12,14 +12,18 @@ import { useEffect, useState } from "react";
 import { Configuration, HouseApi, type HouseResponse } from "~/client";
 import { HouseListLayout } from "~/components/HouseListLayout/HouseListLayout";
 import { idParam, pageParam } from "~/utils/pagination";
-import type { Route } from "./+types/home";
+import type { Route } from "../+types/root";
 
 const ADELAIDE_CENTRE = { lat: -34.92866, lng: 138.59863 };
 
-export const loader = async ({ request, params }: LoaderFunctionArgs) => {
+export const clientLoader = async ({ request, params }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
   const page = url.searchParams.get(pageParam);
-  const config = new Configuration({ basePath: "http://localhost:3000" });
+  const apiUrl = import.meta.env.VITE_API_URL;
+  // const config = new Configuration({
+  //   basePath: "https://x9b98yw9z7.execute-api.eu-west-2.amazonaws.com/v1",
+  // });
+  const config = new Configuration({ basePath: apiUrl });
   const api = new HouseApi(config);
   const housesResponse = await api.getHouses({
     page: page ? parseInt(page) : undefined,
@@ -36,7 +40,7 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  const { housesResponse } = useLoaderData<typeof loader>();
+  const { housesResponse } = useLoaderData<typeof clientLoader>();
   const lookupHouse = (id: number | null): HouseResponse | null => {
     return housesResponse.items.find((house) => house.id === id) || null;
   };

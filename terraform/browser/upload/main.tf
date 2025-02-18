@@ -2,7 +2,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "5.33.0"
+      version = "5.56.1"
     }
   }
   backend "s3" {
@@ -11,45 +11,24 @@ terraform {
   }
 }
 
+module "shared_locals" {
+  source = "../../modules/shared_locals"
+}
+
 locals {
-  prefix_parameter = "/HousePlanner/production"
-  build_folder     = "${path.root}/../../../browser/dist" # Generated as part of build
-  tags = {
-    Project     = "House Planner"
-    Environment = "production"
-  }
+  region              = module.shared_locals.region
+  environment         = module.shared_locals.environment
+  prefix_lower        = module.shared_locals.prefix_lower
+  prefix_parameter    = module.shared_locals.prefix_parameter
+  browser_dir         = module.shared_locals.browser_dir
+  tags                = module.shared_locals.tags
+  build_folder        = "${local.browser_dir}/build"
+  build_folder_client = "${local.build_folder}/client"
 }
 
 provider "aws" {
   region = "ap-southeast-2"
   default_tags {
     tags = local.tags
-  }
-}
-
-module "template_files" {
-  # Calculates the content_type of each file.
-  # https://registry.terraform.io/modules/hashicorp/dir/template/latest
-  source   = "hashicorp/dir/template"
-  base_dir = local.build_folder
-}
-
-resource "aws_s3_object" "static_files" {
-  # Loads all files to the s3 bucket
-  for_each     = module.template_files.files
-  bucket       = data.aws_ssm_parameter.s3_bucket_id.value
-  key          = each.key
-  content_type = each.value.content_type
-  source       = each.value.source_path
-  content      = each.value.content
-  etag         = each.value.digests.md5
-}
-
-resource "terraform_data" "clear_cloudfront_cache" {
-  depends_on       = [aws_s3_object.static_files]
-  triggers_replace = [timestamp()] # Triggers every time
-
-  provisioner "local-exec" {
-    command = "aws cloudfront create-invalidation --distribution-id ${data.aws_ssm_parameter.cloudfront_distribution_id.value} --paths '/*'"
   }
 }

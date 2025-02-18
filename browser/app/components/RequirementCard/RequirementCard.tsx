@@ -11,6 +11,15 @@ import { Autocomplete } from "@react-google-maps/api";
 import { IconTrash } from "@tabler/icons-react";
 import { useState } from "react";
 
+export type Requirement = {
+  id: string;
+  duration: number;
+  travelType: string;
+  address: string | null;
+  lat: number | null;
+  lng: number | null;
+};
+
 function TextSelector({
   data,
   defaultValue,
@@ -32,16 +41,19 @@ function TextSelector({
   );
 }
 export function RequirementCard({
-  address,
+  defaultRequirement,
   onDelete,
+  onChange,
 }: {
-  id: number;
-  address: string;
-  onDelete: () => void;
+  defaultRequirement: Requirement;
+  onDelete: (id: string) => void;
+  onChange: (req: Requirement) => void;
 }) {
   const [autocomplete, setAutocomplete] =
     useState<google.maps.places.Autocomplete | null>(null);
-  const [inputValue, setInputValue] = useState(address);
+  const [inputValue, setInputValue] = useState("");
+  const [requirement, setRequirement] =
+    useState<Requirement>(defaultRequirement);
 
   const onLoad = (autocompleteInstance: google.maps.places.Autocomplete) => {
     setAutocomplete(autocompleteInstance);
@@ -50,8 +62,17 @@ export function RequirementCard({
   const onPlaceChanged = () => {
     if (autocomplete !== null) {
       const place = autocomplete.getPlace();
-      setInputValue(place.formatted_address || "");
-      console.log(place.formatted_address);
+      const newAddress = place.formatted_address || null;
+      setInputValue(newAddress || "");
+      setRequirement((prev) => {
+        const req = { ...prev };
+        req.address = newAddress;
+        if (place.geometry && place.geometry.location) {
+          req.lat = place.geometry.location.lat();
+          req.lng = place.geometry.location.lng();
+        }
+        return req;
+      });
     }
   };
   return (
@@ -70,7 +91,7 @@ export function RequirementCard({
           color: "gray",
           backgroundColor: "transparent",
         }}
-        onClick={onDelete}
+        onClick={() => onDelete(requirement.id)}
       >
         <IconTrash size={12} />
       </ActionIcon>
@@ -79,7 +100,7 @@ export function RequirementCard({
           Within
         </Text>
         <TextSelector
-          defaultValue={"30"}
+          defaultValue={requirement.duration.toString()}
           data={[
             { value: "5", label: "5 min" },
             { value: "10", label: "10 min" },
@@ -91,7 +112,7 @@ export function RequirementCard({
           width="80px"
         />
         <TextSelector
-          defaultValue={"drive"}
+          defaultValue={requirement.travelType}
           data={[
             { value: "walk", label: "walk" },
             { value: "cycle", label: "cycle" },

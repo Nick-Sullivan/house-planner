@@ -13,4 +13,4 @@ cargo run --bin openapi
 ```
 
 View the docs at
-http://localhost:3000/swagger-ui/
+http://localhost:3000/swagger/

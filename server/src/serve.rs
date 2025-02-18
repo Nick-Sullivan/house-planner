@@ -11,6 +11,7 @@ use houses::house_client::HouseClient;
 use hyper::Request;
 use std::error::Error;
 use std::sync::Arc;
+use tower_http::cors::{Any, CorsLayer};
 use tower_http::trace::TraceLayer;
 use tracing_subscriber;
 use utoipa_swagger_ui::SwaggerUi;
@@ -36,14 +37,20 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
             )
         });
 
+    let cors_layer = CorsLayer::new()
+        .allow_origin(Any)
+        .allow_methods(Any)
+        .allow_headers(Any);
+
     let (router, api) = endpoints::router::create_router().split_for_parts();
     let router = router.with_state(app_state.clone());
 
     let app = Router::new()
         .with_state(app_state)
         .merge(router)
-        .merge(SwaggerUi::new("/swagger-ui").url("/api-docs/openapi.json", api))
-        .layer(trace_layer);
+        .merge(SwaggerUi::new("/swagger").url("/api-docs/openapi.json", api))
+        .layer(trace_layer)
+        .layer(cors_layer);
 
     // One-shot when invoked from API Gateway
     #[cfg(feature = "api_gateway_trigger")]

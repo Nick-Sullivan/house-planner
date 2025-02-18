@@ -23,14 +23,9 @@ module "shared_locals" {
 }
 
 locals {
-  environment      = module.shared_locals.environment
   region           = module.shared_locals.region
-  prefix           = module.shared_locals.prefix
+  environment      = module.shared_locals.environment
   prefix_lower     = module.shared_locals.prefix_lower
   prefix_parameter = module.shared_locals.prefix_parameter
-  aws_account_id   = module.shared_locals.aws_account_id
-  root_dir         = module.shared_locals.root_dir
-  browser_dir      = module.shared_locals.browser_dir
-  server_dir       = module.shared_locals.server_dir
   tags             = module.shared_locals.tags
 }

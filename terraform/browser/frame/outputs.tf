@@ -5,12 +5,18 @@ resource "aws_ssm_parameter" "s3_bucket_id" {
   value = aws_s3_bucket.website.id
 }
 
-resource "aws_ssm_parameter" "cloudfront_distribution_id" {
-  name  = "${local.prefix_parameter}/CloudFront/DistributionId"
+resource "aws_ssm_parameter" "s3_bucket_name" {
+  name  = "${local.prefix_parameter}/S3/BucketName"
   type  = "String"
-  value = module.cloudfront.distribution_id
+  value = aws_s3_bucket.website.bucket
 }
 
-output "cloudfront_distribution_id" {
-  value = module.cloudfront.distribution_id
-}
+# resource "aws_ssm_parameter" "cloudfront_distribution_id" {
+#   name  = "${local.prefix_parameter}/CloudFront/DistributionId"
+#   type  = "String"
+#   value = module.cloudfront.distribution_id
+# }
+
+# output "cloudfront_distribution_id" {
+#   value = module.cloudfront.distribution_id
+# }
