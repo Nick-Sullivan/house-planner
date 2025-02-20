@@ -1,0 +1,32 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "5.56.1"
+    }
+  }
+  backend "s3" {
+    bucket = "nicks-terraform-states"
+    region = "ap-southeast-2"
+  }
+}
+
+provider "aws" {
+  region = local.region
+  default_tags {
+    tags = local.tags
+  }
+}
+
+module "shared_locals" {
+  source = "../../modules/shared_locals"
+}
+
+locals {
+  region           = module.shared_locals.region
+  environment      = module.shared_locals.environment
+  prefix           = module.shared_locals.prefix
+  prefix_lower     = module.shared_locals.prefix_lower
+  prefix_parameter = module.shared_locals.prefix_parameter
+  tags             = module.shared_locals.tags
+}

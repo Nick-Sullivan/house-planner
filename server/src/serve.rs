@@ -1,4 +1,5 @@
 #![allow(dead_code)]
+mod database;
 mod endpoints;
 mod houses;
 mod maps;
@@ -8,6 +9,7 @@ use axum::body::Body;
 use axum::Router;
 use endpoints::request::AppState;
 use houses::house_client::HouseClient;
+use database::dynamodb_client::DynamoDbClient;
 use hyper::Request;
 use std::error::Error;
 use std::sync::Arc;
@@ -23,9 +25,10 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
         .with_max_level(tracing::Level::INFO)
         .init();
 
+    let mut db_client = DynamoDbClient::new();
     let mut house_client = HouseClient::new();
     house_client.load_data()?;
-    let app_state = Arc::new(AppState { house_client });
+    let app_state = Arc::new(AppState { db_client, house_client });
 
     let trace_layer =
         TraceLayer::new_for_http().on_request(|request: &Request<Body>, _: &tracing::Span| {

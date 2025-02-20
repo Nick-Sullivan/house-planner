@@ -9,16 +9,14 @@ resource "aws_lambda_function" "api" {
   function_name = "${local.prefix}-API"
   role          = aws_iam_role.lambda_api.arn
   timeout       = 5
-  #   image_config {
-  #     entry_point = ["/ws_handler_cloud"]
-  #   }
   depends_on = [
     aws_cloudwatch_log_group.api,
     terraform_data.lambda_push,
   ]
   environment {
     variables = {
-      #   API_GATEWAY_URL = aws_apigatewayv2_stage.websocket.invoke_url,
+      REQUIREMENTS_TABLE_NAME=data.aws_ssm_parameter.requirements_table_name.insecure_value,
+      SPATIAL_DISTANCES_TABLE_NAME=data.aws_ssm_parameter.spatial_distances_table_name.insecure_value,
     }
   }
 }
