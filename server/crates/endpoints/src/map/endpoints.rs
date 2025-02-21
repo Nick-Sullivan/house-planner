@@ -6,7 +6,8 @@ use axum::http::StatusCode;
 use axum::Json;
 use axum_macros::debug_handler;
 use database::requirement_item::RequirementItem;
-use database::IDynamoDbClient;
+use database::spatial_distance_item::SpatialDistanceItem;
+use std::collections::HashMap;
 use std::sync::Arc;
 use utoipa_axum::router::OpenApiRouter;
 use utoipa_axum::routes;
@@ -40,23 +41,46 @@ pub async fn post_requirement(
     Json(request): Json<RequirementRequest>,
 ) -> Result<Json<RequirementResponse>, (StatusCode, Json<ErrorResponse>)> {
     // load the requirement from the database if it exists
-    // let requirement = RequirementItem::from_db(&request.requirement_id, &state.db_client)
-    //     .await
-    //     .map_err(map_error_to_response)?;
-    // if let Some(requirement) = requirement {
-    // If the input hasn't changed, return
-    // }
-    // // load all the tiles for this city
-    // let source_index = request.locations.first().unwrap().location.h3_index;
-    // let distances = SpatialDistanceItem::list_city_items_from_db(&request.city_code, vec![h3_index], state.db_client).await?;
-    // // for each tile i in the city
-    // //  for each location j in the requirement
-    // for distance in distances {
-    //     // load the duration from the database
-    //     // calculate the score
-    // }
-    // // calculate the mean score
-    // // save to the database
+    let db = &*state.db_client;
+    let requirement = RequirementItem::from_db(&request.requirement_id, db)
+        .await
+        .map_err(map_error_to_response)?;
+    if let Some(requirement) = requirement {
+        // If the input hasn't changed, return
+    }
+    // load all the tiles for this city
+    let tiles = SpatialDistanceItem::list_from_db(&request.city_code, db)
+        .await
+        .map_err(map_error_to_response)?;
+    let tiles_by_index: HashMap<(String, String), SpatialDistanceItem> = tiles
+        .clone()
+        .into_iter()
+        .map(|item| {
+            (
+                (item.source_index.clone(), item.destination_index.clone()),
+                item,
+            )
+        })
+        .collect();
+    for tile in tiles {
+        let mut duration = i32::MAX;
+        for location in &request.locations {
+            let source_index = tile.source_index.clone();
+            let destination_index = location.h3_index.clone();
+            let tile = tiles_by_index
+                .get(&(source_index, destination_index))
+                .ok_or_else(|| map_error_to_response("Tile not found"))?;
+            duration = duration
+                .min(tile.duration_drive)
+                .min(tile.duration_cycle)
+                .min(tile.duration_transit)
+                .min(tile.duration_walk);
+        }
+        let cost = 2.max(duration / request.tolerated_duration);
+        break;
+    }
+    // calculate the mean score
+    // save to the database
     let requirement = RequirementItem::new(&request.city_code, &request.requirement_id);
     state
         .db_client

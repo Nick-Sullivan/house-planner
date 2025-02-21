@@ -1,9 +1,13 @@
+use crate::spatial_distance_item::SpatialDistanceItem;
+
 use super::attribute_value_parser;
 use super::dynamodb_client_trait::IDynamoDbClient;
 use anyhow::Error;
+use async_trait::async_trait;
 use aws_config::meta::region::RegionProviderChain;
 use aws_config::{self, BehaviorVersion};
-use aws_sdk_dynamodb::types::{ItemResponse, TransactGetItem, TransactWriteItem};
+use aws_sdk_dynamodb::operation::query::QueryOutput;
+use aws_sdk_dynamodb::types::{AttributeValue, ItemResponse, TransactGetItem, TransactWriteItem};
 use aws_sdk_dynamodb::{config::Region, Client};
 use std::env;
 
@@ -25,6 +29,7 @@ impl DynamoDbClient {
     }
 }
 
+#[async_trait]
 impl IDynamoDbClient for DynamoDbClient {
     async fn read_single(&self, item: TransactGetItem) -> Result<Option<ItemResponse>, Error> {
         let result = self
@@ -52,5 +57,22 @@ impl IDynamoDbClient for DynamoDbClient {
 
     async fn write_single(&self, item: TransactWriteItem) -> Result<(), Error> {
         self.write(vec![item]).await
+    }
+
+    async fn query_spatial_distance_item(&self, city_code: &str) -> Result<QueryOutput, Error> {
+        // I tried to put this in the spatial distance item, but QueryInput can't be applied to
+        // a client.
+        // TODO, make this better
+        let query_output = self
+            .client
+            .query()
+            .table_name(SpatialDistanceItem::get_table_name()?)
+            .index_name("CityCodeIndex")
+            .key_condition_expression("#city_code = :city_code")
+            .expression_attribute_names("#city_code", "CityCode")
+            .expression_attribute_values(":city_code", AttributeValue::S(city_code.to_string()))
+            .send()
+            .await?;
+        Ok(query_output)
     }
 }

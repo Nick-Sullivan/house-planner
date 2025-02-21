@@ -1,9 +1,9 @@
-use database::DynamoDbClient;
+use database::dynamodb_client_trait::IDynamoDbClient;
 use houses::house_client::HouseClient;
 use serde::Deserialize;
 
 pub struct AppState {
-    pub db_client: DynamoDbClient,
+    pub db_client: Box<dyn IDynamoDbClient>,
     pub house_client: HouseClient,
 }
 

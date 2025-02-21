@@ -16,10 +16,6 @@ resource "aws_dynamodb_table" "spatial_distances" {
     name = "CityCode"
     type = "S"
   }
-  # attribute {
-  #   name = "Distances"
-  #   type = "S"
-  # }
   global_secondary_index {
     name            = "CityCodeIndex"
     hash_key        = "CityCode"
@@ -45,22 +41,6 @@ resource "aws_dynamodb_table" "requirements" {
     hash_key        = "CityCode"
     projection_type = "ALL"
   }
-  # attribute {
-  #   name = "CreationDate"
-  #   type = "S"
-  # }
-  # attribute {
-  #   name = "RequestParams"
-  #   type = "S"
-  # }
-  # attribute {
-  #   name = "SpatialResult"
-  #   type = "S"
-  # }
-  # attribute {
-  #   name = "TimeToLive"
-  #   type = "N"
-  # }
   ttl {
     attribute_name = "TimeToLive"
     enabled        = true

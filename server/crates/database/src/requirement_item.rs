@@ -1,5 +1,5 @@
 use super::attribute_value_parser::parse_attribute_value;
-use super::{DynamoDbClient, IDynamoDbClient};
+use super::dynamodb_client_trait::IDynamoDbClient;
 use anyhow::Error;
 use aws_sdk_dynamodb::types::{AttributeValue, Get, Put, TransactGetItem, TransactWriteItem};
 use std::{collections::HashMap, env};
@@ -20,7 +20,7 @@ impl RequirementItem {
 
     pub async fn from_db(
         requirement_id: &Uuid,
-        db: &DynamoDbClient,
+        db: &dyn IDynamoDbClient,
     ) -> Result<Option<Self>, Error> {
         let transaction = Self::get(&requirement_id.to_string())?;
         let output = match db.read_single(transaction).await? {
@@ -35,7 +35,7 @@ impl RequirementItem {
     pub fn from_map(hash_map: &HashMap<String, AttributeValue>) -> Result<Self, Error> {
         let city_code = parse_attribute_value::<String>(hash_map.get("CityCode"))?;
         let requirement_id = parse_attribute_value::<Uuid>(hash_map.get("RequirementId"))?;
-        let item = RequirementItem {
+        let item = Self {
             city_code,
             requirement_id,
         };

@@ -5,7 +5,7 @@
             "name": "API Script",
             "type": "lldb",
             "request": "launch",
-            "program": "${workspaceFolder}/server/target/debug/script",
+            "program": "${workspaceFolder}/server/target/debug/populate_distances",
             "args": [],
             "cwd": "${workspaceFolder}",
             "stopOnEntry": false,

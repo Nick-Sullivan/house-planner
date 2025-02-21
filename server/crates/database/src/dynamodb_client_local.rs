@@ -1,6 +1,8 @@
 use super::attribute_value_parser::{self, parse_attribute_value};
 use super::dynamodb_client_trait::IDynamoDbClient;
 use anyhow::Error;
+use async_trait::async_trait;
+use aws_sdk_dynamodb::operation::query::QueryOutput;
 use aws_sdk_dynamodb::operation::transact_get_items::builders::TransactGetItemsOutputBuilder;
 use aws_sdk_dynamodb::types::{
     AttributeValue, Delete, ItemResponse, Put, TransactGetItem, TransactWriteItem,
@@ -136,6 +138,7 @@ impl DynamoDbClient {
     }
 }
 
+#[async_trait]
 impl IDynamoDbClient for DynamoDbClient {
     async fn read_single(&self, item: TransactGetItem) -> Result<Option<ItemResponse>, Error> {
         let get = item.get.ok_or(anyhow::anyhow!("Only Gets are supported"))?;
@@ -174,5 +177,19 @@ impl IDynamoDbClient for DynamoDbClient {
             return Err(anyhow::anyhow!("Only Put/Delete is supported"));
         }
         Ok(())
+    }
+
+    async fn query_spatial_distance_item(&self, city_code: &str) -> Result<QueryOutput, Error> {
+        let table = self.spatial_distances_table.read().unwrap();
+        let mut items = Vec::new();
+        for (_key, item) in table.iter() {
+            if let Some(AttributeValue::S(code)) = item.hash_map.get("CityCode") {
+                if code == city_code {
+                    items.push(item.hash_map.clone());
+                }
+            }
+        }
+        let query_output = QueryOutput::builder().set_items(Some(items)).build();
+        Ok(query_output)
     }
 }

@@ -21,47 +21,47 @@ pub struct Location {
     pub lng: f64,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug)]
 pub struct DirectionsResponse {
     pub routes: Vec<Route>,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug)]
 pub struct Route {
     pub overview_polyline: OverviewPolyline,
     pub legs: Vec<Leg>,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug)]
 pub struct OverviewPolyline {
     pub points: String,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug)]
 pub struct Leg {
     pub duration: Duration,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug)]
 pub struct Duration {
     pub text: String,
-    // pub value: i64,
+    pub value: i32,
 }
 
 pub enum TravelMode {
     Driving,
-    // Walking,
-    // Bicycling,
-    // Transit,
+    Walking,
+    Bicycling,
+    Transit,
 }
 
 impl TravelMode {
     pub fn as_str(&self) -> &str {
         match self {
             TravelMode::Driving => "driving",
-            // TravelMode::Walking => "walking",
-            // TravelMode::Bicycling => "bicycling",
-            // TravelMode::Transit => "transit",
+            TravelMode::Walking => "walking",
+            TravelMode::Bicycling => "bicycling",
+            TravelMode::Transit => "transit",
         }
     }
 }

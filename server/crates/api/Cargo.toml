@@ -19,5 +19,5 @@ utoipa-swagger-ui = { version = "9.0", features = ["axum"] }
 
 [features]
 default = ["local"]
-cloud = ["database/cloud"]
-local = ["database/local"]
+cloud = []
+local = []

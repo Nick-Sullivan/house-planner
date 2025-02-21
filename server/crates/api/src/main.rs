@@ -1,6 +1,9 @@
 use axum::body::Body;
 use axum::Router;
-use database::DynamoDbClient;
+#[cfg(feature = "cloud")]
+use database::dynamodb_client_cloud::DynamoDbClient;
+#[cfg(feature = "local")]
+use database::dynamodb_client_local::DynamoDbClient;
 use dotenv::from_path;
 use endpoints::request::AppState;
 use houses::house_client::HouseClient;
@@ -22,7 +25,7 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
         .with_max_level(tracing::Level::INFO)
         .init();
 
-    let db_client = DynamoDbClient::new().await;
+    let db_client = Box::new(DynamoDbClient::new().await);
     let mut house_client = HouseClient::new();
     house_client.load_data()?;
     let app_state = Arc::new(AppState {

@@ -1,0 +1,15 @@
+[package]
+name = "populate_distances"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+database.workspace = true
+maps.workspace = true
+anyhow = "1.0"
+dotenv = "0.15"
+geo = "0.29"
+geojson = "0.24"
+h3o = { version = "0.7.1", features = ["geo"] }
+serde_json = "1.0"
+tokio = { version = "1.43", features = ["full"] }
