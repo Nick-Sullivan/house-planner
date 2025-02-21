@@ -1,7 +1,3 @@
-#![allow(dead_code)]
-mod endpoints;
-mod houses;
-
 use std::fs::File;
 use std::io::Write;
 

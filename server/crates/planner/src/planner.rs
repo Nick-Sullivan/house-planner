@@ -1,7 +1,8 @@
 use super::models::TargetLocation;
-use crate::maps::maps_client::GoogleMapsClient;
-use crate::{houses::models::House, maps::models::TravelMode};
 use anyhow::{Context, Result};
+use houses::models::House;
+use maps::maps_client::GoogleMapsClient;
+use maps::models::TravelMode;
 
 pub struct Planner {
     maps_client: GoogleMapsClient,

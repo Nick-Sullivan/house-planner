@@ -1,0 +1,16 @@
+[package]
+name = "database"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0"
+aws-config = "1.5.16"
+aws-sdk-dynamodb = "1.6.5"
+chrono = "0.4.38"
+trait-variant = "0.1.2"
+uuid = { version = "1.13", features = ["v7"] }
+
+[features]
+cloud = []
+local = []

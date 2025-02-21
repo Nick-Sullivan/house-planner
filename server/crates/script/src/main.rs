@@ -1,8 +1,3 @@
-#![allow(dead_code)]
-mod houses;
-mod maps;
-mod planner;
-
 use anyhow::{Context, Result};
 use dotenv::dotenv;
 use houses::house_client::HouseClient;

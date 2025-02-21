@@ -1,17 +1,16 @@
-use crate::IDynamoDbClient;
+use super::attribute_value_parser;
+use super::dynamodb_client_trait::IDynamoDbClient;
+use anyhow::Error;
 use aws_config::meta::region::RegionProviderChain;
 use aws_config::{self, BehaviorVersion};
 use aws_sdk_dynamodb::types::{ItemResponse, TransactGetItem, TransactWriteItem};
 use aws_sdk_dynamodb::{config::Region, Client};
-use domain::errors::LogicError;
-use domain::utils;
 use std::env;
 
 pub struct DynamoDbClient {
     client: Client,
 }
 
-#[cfg_attr(feature = "in_memory", allow(unused))]
 impl DynamoDbClient {
     pub async fn new() -> Self {
         let region_name = env::var("AWS_REGION").unwrap_or_else(|_| "".to_string());
@@ -27,35 +26,31 @@ impl DynamoDbClient {
 }
 
 impl IDynamoDbClient for DynamoDbClient {
-    async fn read_single(&self, item: TransactGetItem) -> Result<ItemResponse, LogicError> {
+    async fn read_single(&self, item: TransactGetItem) -> Result<Option<ItemResponse>, Error> {
         let result = self
             .client
             .transact_get_items()
             .transact_items(item)
             .send()
-            .await
-            .map_err(|e| LogicError::GetItemError(e.to_string()))?;
-        let items = result
-            .responses
-            .ok_or(LogicError::GetItemError("No response".to_string()))?;
-        let item = utils::single(items).map_err(|e| LogicError::GetItemError(e.to_string()))?;
-        Ok(item)
+            .await?;
+        let items = result.responses.ok_or(anyhow::anyhow!("No response"))?;
+        if items.is_empty() {
+            return Ok(None);
+        }
+        let item = attribute_value_parser::single(items)?;
+        Ok(Some(item))
     }
 
-    async fn write(&self, items: Vec<TransactWriteItem>) -> Result<(), LogicError> {
-        let result = self
-            .client
+    async fn write(&self, items: Vec<TransactWriteItem>) -> Result<(), Error> {
+        self.client
             .transact_write_items()
             .set_transact_items(Some(items))
             .send()
-            .await;
-        match result {
-            Ok(_) => Ok(()),
-            Err(e) => Err(LogicError::UpdateItemError(e.to_string())),
-        }
+            .await?;
+        Ok(())
     }
 
-    async fn write_single(&self, item: TransactWriteItem) -> Result<(), LogicError> {
+    async fn write_single(&self, item: TransactWriteItem) -> Result<(), Error> {
         self.write(vec![item]).await
     }
 }

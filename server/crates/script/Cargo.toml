@@ -1,0 +1,13 @@
+[package]
+name = "script"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+houses.workspace = true
+maps.workspace = true
+planner.workspace = true
+anyhow = "1.0"
+dotenv = "0.15"
+serde_json = "1.0"
+tokio = { version = "1.43", features = ["full"] }

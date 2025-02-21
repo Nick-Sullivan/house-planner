@@ -1,4 +1,4 @@
-use crate::maps::models::{Location, TravelMode};
+use maps::models::{Location, TravelMode};
 
 pub struct TargetLocation {
     pub address: String,

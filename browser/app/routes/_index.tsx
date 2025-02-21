@@ -20,9 +20,6 @@ export const clientLoader = async ({ request, params }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
   const page = url.searchParams.get(pageParam);
   const apiUrl = import.meta.env.VITE_API_URL;
-  // const config = new Configuration({
-  //   basePath: "https://x9b98yw9z7.execute-api.eu-west-2.amazonaws.com/v1",
-  // });
   const config = new Configuration({ basePath: apiUrl });
   const api = new HouseApi(config);
   const housesResponse = await api.getHouses({

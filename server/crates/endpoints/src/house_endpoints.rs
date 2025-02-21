@@ -1,4 +1,4 @@
-use crate::houses::models::House;
+use houses::models::House;
 use super::response::{ErrorResponse, PaginatedResponse};
 use super::request::{PaginationParams, AppState};
 use axum::extract::{State, Query, Path};

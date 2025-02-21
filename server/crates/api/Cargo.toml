@@ -1,0 +1,22 @@
+[package]
+name = "api"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+database.workspace = true
+endpoints.workspace = true
+houses.workspace = true
+
+axum ="0.8.1"
+hyper = "1.5.1"
+tokio = { version = "1.43", features = ["full"] }
+tower-http = {version="0.6.2", features = ["cors", "trace"]}
+tracing = "0.1.41"
+tracing-subscriber = { version = "0.3", features = ["json"] }
+utoipa-swagger-ui = { version = "9.0", features = ["axum"] }
+
+[features]
+default = ["local"]
+cloud = ["database/cloud"]
+local = ["database/local"]

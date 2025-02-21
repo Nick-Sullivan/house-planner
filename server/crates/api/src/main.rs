@@ -1,15 +1,8 @@
-#![allow(dead_code)]
-mod database;
-mod endpoints;
-mod houses;
-mod maps;
-mod planner;
-
 use axum::body::Body;
 use axum::Router;
+use database::DynamoDbClient;
 use endpoints::request::AppState;
 use houses::house_client::HouseClient;
-use database::dynamodb_client::DynamoDbClient;
 use hyper::Request;
 use std::error::Error;
 use std::sync::Arc;
@@ -25,10 +18,13 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
         .with_max_level(tracing::Level::INFO)
         .init();
 
-    let mut db_client = DynamoDbClient::new();
+    let db_client = DynamoDbClient::new().await;
     let mut house_client = HouseClient::new();
     house_client.load_data()?;
-    let app_state = Arc::new(AppState { db_client, house_client });
+    let app_state = Arc::new(AppState {
+        db_client,
+        house_client,
+    });
 
     let trace_layer =
         TraceLayer::new_for_http().on_request(|request: &Request<Body>, _: &tracing::Span| {
@@ -56,7 +52,7 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
         .layer(cors_layer);
 
     // One-shot when invoked from API Gateway
-    #[cfg(feature = "api_gateway_trigger")]
+    #[cfg(feature = "cloud")]
     {
         let lambda_app = tower::ServiceBuilder::new()
             .layer(axum_aws_lambda::LambdaLayer::default())
@@ -65,7 +61,7 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
     }
 
     // Run a server that listens for requests for local development
-    #[cfg(feature = "local_trigger")]
+    #[cfg(feature = "local")]
     {
         let addr = std::net::SocketAddr::from(([127, 0, 0, 1], 3000));
         let listener = tokio::net::TcpListener::bind(addr).await.unwrap();

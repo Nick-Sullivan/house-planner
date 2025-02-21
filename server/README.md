@@ -1,11 +1,11 @@
-Build and run the server:
+Build and run the API server:
 
 ```bash
 cargo build
-cargo run --bin serve
+cargo run --bin api
 ```
 
-Update openapi.json for automated frontend client:
+Script to openapi.json for automated frontend client:
 
 ```bash
 cargo build
