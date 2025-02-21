@@ -1,5 +1,5 @@
 use anyhow::{Context, Result};
-use dotenv::dotenv;
+use dotenv::from_path;
 use houses::house_client::HouseClient;
 use maps::maps_client::GoogleMapsClient;
 use maps::models::TravelMode;
@@ -8,7 +8,8 @@ use std::env;
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    dotenv().ok();
+    let env_path = env::current_dir()?.join("server/.env");
+    from_path(env_path).ok();
     let maps_api_key =
         env::var("GOOGLE_MAPS_API_KEY").context("GOOGLE_MAPS_API_KEY must be set")?;
     let house_client = HouseClient::new();

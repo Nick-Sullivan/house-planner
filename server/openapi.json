@@ -113,6 +113,46 @@
           }
         }
       }
+    },
+    "/maps/requirement": {
+      "post": {
+        "tags": [
+          "map"
+        ],
+        "operationId": "post_requirement",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequirementRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequirementResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -159,6 +199,22 @@
           },
           "url": {
             "type": "string"
+          }
+        }
+      },
+      "Location": {
+        "type": "object",
+        "required": [
+          "id",
+          "h3_index"
+        ],
+        "properties": {
+          "h3_index": {
+            "type": "string"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -226,6 +282,54 @@
             "minimum": 0
           }
         }
+      },
+      "RequirementRequest": {
+        "type": "object",
+        "required": [
+          "requirement_id",
+          "country_code",
+          "city_code",
+          "travel_mode",
+          "locations",
+          "tolerated_duration"
+        ],
+        "properties": {
+          "city_code": {
+            "type": "string"
+          },
+          "country_code": {
+            "type": "string"
+          },
+          "locations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Location"
+            }
+          },
+          "requirement_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "tolerated_duration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "travel_mode": {
+            "$ref": "#/components/schemas/TravelMode"
+          }
+        }
+      },
+      "RequirementResponse": {
+        "type": "object"
+      },
+      "TravelMode": {
+        "type": "string",
+        "enum": [
+          "Driving",
+          "Walking",
+          "Bicycling",
+          "PublicTransport"
+        ]
       }
     }
   },
@@ -233,6 +337,10 @@
     {
       "name": "house",
       "description": "House endpoints"
+    },
+    {
+      "name": "map",
+      "description": "Map endpoints"
     }
   ]
 }

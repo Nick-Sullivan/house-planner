@@ -1,39 +1,16 @@
-use houses::models::House;
-use super::response::{ErrorResponse, PaginatedResponse};
-use super::request::{PaginationParams, AppState};
+use crate::response::{ErrorResponse, PaginatedResponse};
+use crate::request::{PaginationParams, AppState};
 use axum::extract::{State, Query, Path};
 use axum::http::StatusCode;
 use axum::Json;
 use std::sync::Arc;
 use utoipa_axum::router::OpenApiRouter;
-
-pub const HOUSE_TAG: &str = "house";
+use super::models::{HouseResponse, HOUSE_TAG};
 
 pub fn router() -> OpenApiRouter<Arc<AppState>> {
     OpenApiRouter::new()
     .routes(utoipa_axum::routes!(get_houses))
     .routes(utoipa_axum::routes!(get_house_by_id))
-}
-
-#[derive(utoipa::ToSchema, serde::Serialize)]
-pub struct HouseResponse {
-    pub id: i32,
-    pub address: String,
-    pub url: String,
-    pub lat: Option<f64>,
-    pub lon: Option<f64>,
-}
-
-impl From<House> for HouseResponse {
-    fn from(house: House) -> Self {
-        HouseResponse {
-            id: house.id,
-            address: house.address,
-            url: house.url,
-            lat: house.lat,
-            lon: house.lon,
-        }
-    }
 }
 
 #[utoipa::path(

@@ -1,9 +1,11 @@
 use axum::body::Body;
 use axum::Router;
 use database::DynamoDbClient;
+use dotenv::from_path;
 use endpoints::request::AppState;
 use houses::house_client::HouseClient;
 use hyper::Request;
+use std::env;
 use std::error::Error;
 use std::sync::Arc;
 use tower_http::cors::{Any, CorsLayer};
@@ -13,6 +15,8 @@ use utoipa_swagger_ui::SwaggerUi;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
+    let env_path = env::current_dir()?.join("server/.env");
+    from_path(env_path).ok();
     tracing_subscriber::fmt()
         .json()
         .with_max_level(tracing::Level::INFO)

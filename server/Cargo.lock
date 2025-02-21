@@ -53,6 +53,7 @@ version = "0.1.0"
 dependencies = [
  "axum 0.8.1",
  "database",
+ "dotenv",
  "endpoints",
  "houses",
  "hyper 1.6.0",
@@ -583,6 +584,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "axum-macros"
+version = "0.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "604fde5e028fea851ce1d8570bbdc034bec850d157f7569d10f347d06808c05c"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "backtrace"
 version = "0.3.74"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -841,12 +853,14 @@ dependencies = [
  "anyhow",
  "axum 0.8.1",
  "axum-aws-lambda",
+ "axum-macros",
  "database",
  "houses",
  "serde",
  "serde_json",
  "utoipa",
  "utoipa-axum",
+ "uuid",
 ]
 
 [[package]]
@@ -2872,6 +2886,7 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn",
+ "uuid",
 ]
 
 [[package]]
@@ -2899,6 +2914,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "93d59ca99a559661b96bf898d8fce28ed87935fd2bea9f05983c1464dd6c71b1"
 dependencies = [
  "getrandom 0.3.1",
+ "serde",
 ]
 
 [[package]]

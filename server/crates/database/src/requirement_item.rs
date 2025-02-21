@@ -18,8 +18,11 @@ impl RequirementItem {
         }
     }
 
-    pub async fn from_db(requirement_id: &str, db: &DynamoDbClient) -> Result<Option<Self>, Error> {
-        let transaction = Self::get(requirement_id)?;
+    pub async fn from_db(
+        requirement_id: &Uuid,
+        db: &DynamoDbClient,
+    ) -> Result<Option<Self>, Error> {
+        let transaction = Self::get(&requirement_id.to_string())?;
         let output = match db.read_single(transaction).await? {
             Some(output) => output,
             None => return Ok(None),
@@ -39,14 +42,15 @@ impl RequirementItem {
         Ok(item)
     }
 
-    fn get_table_name() -> String {
-        env::var("REQUIREMENTS_TABLE_NAME").unwrap_or_else(|_| "".to_string())
+    fn get_table_name() -> Result<String, Error> {
+        let name: String = env::var("REQUIREMENTS_TABLE_NAME")?;
+        Ok(name)
     }
 
     pub fn get(requirement_id: &str) -> Result<TransactGetItem, Error> {
         // TODO handle NULL
         let item = Get::builder()
-            .table_name(Self::get_table_name())
+            .table_name(Self::get_table_name()?)
             .key(
                 "RequirementId",
                 AttributeValue::S(requirement_id.to_string()),
@@ -58,7 +62,7 @@ impl RequirementItem {
 
     pub fn save(&self) -> Result<TransactWriteItem, Error> {
         let put_item = Put::builder()
-            .table_name(Self::get_table_name())
+            .table_name(Self::get_table_name()?)
             .item("CityCode", AttributeValue::S(self.city_code.clone()))
             .item(
                 "RequirementId",
@@ -71,7 +75,7 @@ impl RequirementItem {
 
     pub fn delete(&self) -> Result<TransactWriteItem, Error> {
         let delete_item = aws_sdk_dynamodb::types::Delete::builder()
-            .table_name(Self::get_table_name())
+            .table_name(Self::get_table_name()?)
             .key(
                 "RequirementId",
                 AttributeValue::S(self.requirement_id.to_string()),

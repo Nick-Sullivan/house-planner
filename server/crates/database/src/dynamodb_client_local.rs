@@ -13,33 +13,37 @@ pub struct FakeItem {
 }
 
 pub struct DynamoDbClient {
-    game_table: RwLock<HashMap<String, FakeItem>>,
-    websocket_table: RwLock<HashMap<String, FakeItem>>,
+    requirements_table: RwLock<HashMap<String, FakeItem>>,
+    spatial_distances_table: RwLock<HashMap<String, FakeItem>>,
 }
 
 impl DynamoDbClient {
     pub async fn new() -> Self {
-        let game_table = RwLock::new(HashMap::new());
-        let websocket_table = RwLock::new(HashMap::new());
+        let requirements_table = RwLock::new(HashMap::new());
+        let spatial_distances_table = RwLock::new(HashMap::new());
         DynamoDbClient {
-            game_table,
-            websocket_table,
+            requirements_table,
+            spatial_distances_table,
         }
     }
 
     fn get_table(&self, table_name: &str) -> &RwLock<HashMap<String, FakeItem>> {
-        match table_name {
-            "GAME" => &self.game_table,
-            "WEBSOCKET" => &self.websocket_table,
-            _ => panic!("Unrecognised table {:?}", table_name),
+        if table_name.ends_with("Requirements") {
+            &self.requirements_table
+        } else if table_name.ends_with("SpatialDistances") {
+            &self.spatial_distances_table
+        } else {
+            panic!("Unrecognised table {:?}", table_name);
         }
     }
 
     fn get_primary_key(&self, table_name: &str) -> &str {
-        match table_name {
-            "GAME" => "id",
-            "WEBSOCKET" => "connection_id",
-            _ => panic!("Unrecognised table"),
+        if table_name.ends_with("Requirements") {
+            "RequirementId"
+        } else if table_name.ends_with("SpatialDistances") {
+            "SourceIndex"
+        } else {
+            panic!("Unrecognised table {:?}", table_name);
         }
     }
 

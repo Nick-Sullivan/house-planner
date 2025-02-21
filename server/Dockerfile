@@ -16,7 +16,7 @@ RUN cargo fetch
 COPY . . 
 RUN cargo build \
         --no-default-features \
-        --features api_gateway_trigger \
+        --features cloud \
         --release \
         --bin serve \
         --target x86_64-unknown-linux-musl \
