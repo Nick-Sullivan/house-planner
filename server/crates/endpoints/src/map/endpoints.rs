@@ -45,7 +45,7 @@ pub async fn post_requirement(
     let requirement = RequirementItem::from_db(&request.requirement_id, db)
         .await
         .map_err(map_error_to_response)?;
-    if let Some(requirement) = requirement {
+    if let Some(_requirement) = requirement {
         // If the input hasn't changed, return
     }
     // load all the tiles for this city
@@ -76,7 +76,7 @@ pub async fn post_requirement(
                 .min(tile.duration_transit)
                 .min(tile.duration_walk);
         }
-        let cost = 2.max(duration / request.tolerated_duration);
+        let _cost = 2.max(duration / request.tolerated_duration);
         break;
     }
     // calculate the mean score

@@ -1,19 +1,18 @@
 import { Center, Divider, Pagination, ScrollArea, Tabs } from "@mantine/core";
-import { useSearchParams } from "react-router";
 import type { PaginatedResponseHouseResponse } from "~/client";
-import { idParam } from "~/utils/pagination";
 import { HouseCard } from "../HouseCard/HouseCard";
 
 export function HouseListPanel({
   houseResponse,
+  selectedHouseId,
   onIdChange,
   onPageChange,
 }: {
   houseResponse: PaginatedResponseHouseResponse;
+  selectedHouseId: number | null;
   onIdChange: (id: number) => void;
   onPageChange: (id: number) => void;
 }) {
-  const [searchParams, setSearchParams] = useSearchParams();
   return (
     <Tabs.Panel
       value="houses"
@@ -30,7 +29,7 @@ export function HouseListPanel({
           <HouseCard
             key={house.id}
             house={house}
-            active={searchParams.get(idParam) === house.id.toString()}
+            active={selectedHouseId?.toString() === house.id.toString()}
             onClick={onIdChange}
           />
         ))}
