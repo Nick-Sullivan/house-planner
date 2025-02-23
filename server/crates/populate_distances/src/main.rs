@@ -20,7 +20,7 @@ async fn main() -> Result<()> {
     let maps_api_key =
         env::var("GOOGLE_MAPS_API_KEY").context("GOOGLE_MAPS_API_KEY must be set")?;
     let maps_client = GoogleMapsClient::new(maps_api_key);
-    let db_client = DynamoDbClient::new().await;
+    let db_client = DynamoDbClient::new().await?;
     let existing_items = SpatialDistanceItem::list_from_db(city_code, &db_client)
         .await
         .context("Failed to list items")?;

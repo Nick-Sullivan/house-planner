@@ -1,9 +1,16 @@
 apis/HouseApi.ts
+apis/MapApi.ts
 apis/index.ts
 index.ts
 models/ErrorResponse.ts
 models/HouseResponse.ts
+models/Location.ts
+models/MapRequest.ts
+models/MapResponse.ts
+models/MapTileResponse.ts
 models/PaginatedResponseHouseResponse.ts
 models/PaginatedResponseHouseResponseItemsInner.ts
+models/RequirementRequest.ts
+models/TravelMode.ts
 models/index.ts
 runtime.ts

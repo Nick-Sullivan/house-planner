@@ -5,6 +5,7 @@ members = ["crates/*"]
 [workspace.dependencies]
 database = { path = "./crates/database" }
 endpoints = { path = "./crates/endpoints" }
+h3_mapper = { path = "./crates/h3_mapper" }
 houses = { path = "./crates/houses" }
 maps = { path = "./crates/maps" }
 planner = { path = "./crates/planner" }

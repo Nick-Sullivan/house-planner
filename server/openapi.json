@@ -114,6 +114,46 @@
         }
       }
     },
+    "/maps/map": {
+      "post": {
+        "tags": [
+          "map"
+        ],
+        "operationId": "get_map",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MapRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/maps/requirement": {
       "post": {
         "tags": [
@@ -215,6 +255,50 @@
           "id": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "MapRequest": {
+        "type": "object",
+        "required": [
+          "city_code",
+          "requirement_ids"
+        ],
+        "properties": {
+          "city_code": {
+            "type": "string"
+          },
+          "requirement_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "MapResponse": {
+        "type": "object",
+        "required": [
+          "tiles"
+        ],
+        "properties": {
+          "tiles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MapTileResponse"
+            }
+          }
+        }
+      },
+      "MapTileResponse": {
+        "type": "object",
+        "required": [
+          "h3_index"
+        ],
+        "properties": {
+          "h3_index": {
+            "type": "string"
           }
         }
       },

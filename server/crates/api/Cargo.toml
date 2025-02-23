@@ -7,11 +7,15 @@ edition = "2021"
 database.workspace = true
 endpoints.workspace = true
 houses.workspace = true
+h3_mapper.workspace = true
 
 axum ="0.8.1"
+axum-aws-lambda="0.10"
 dotenv = "0.15"
 hyper = "1.5.1"
+lambda_http="0.14"
 tokio = { version = "1.43", features = ["full"] }
+tower = "0.5.2"
 tower-http = {version="0.6.2", features = ["cors", "trace"]}
 tracing = "0.1.41"
 tracing-subscriber = { version = "0.3", features = ["json"] }

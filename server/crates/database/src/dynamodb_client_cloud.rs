@@ -16,8 +16,8 @@ pub struct DynamoDbClient {
 }
 
 impl DynamoDbClient {
-    pub async fn new() -> Self {
-        let region_name = env::var("AWS_REGION").unwrap_or_else(|_| "".to_string());
+    pub async fn new() -> Result<Self, Error> {
+        let region_name = env::var("AWS_REGION")?;
         let region_provider =
             RegionProviderChain::first_try(Region::new(region_name)).or_default_provider();
         let config = aws_config::defaults(BehaviorVersion::latest())
@@ -25,7 +25,7 @@ impl DynamoDbClient {
             .load()
             .await;
         let client = Client::new(&config);
-        DynamoDbClient { client }
+        Ok(DynamoDbClient { client })
     }
 }
 

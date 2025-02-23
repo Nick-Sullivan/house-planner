@@ -6,6 +6,7 @@ use database::dynamodb_client_cloud::DynamoDbClient;
 use database::dynamodb_client_local::DynamoDbClient;
 use dotenv::from_path;
 use endpoints::request::AppState;
+use h3_mapper::h3_client::H3Client;
 use houses::house_client::HouseClient;
 use hyper::Request;
 use std::env;
@@ -25,12 +26,14 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
         .with_max_level(tracing::Level::INFO)
         .init();
 
-    let db_client = Box::new(DynamoDbClient::new().await);
+    let db_client = Box::new(DynamoDbClient::new().await?);
+    let h3_client = H3Client::new();
     let mut house_client = HouseClient::new();
     house_client.load_data()?;
     let app_state = Arc::new(AppState {
         db_client,
         house_client,
+        h3_client,
     });
 
     let trace_layer =

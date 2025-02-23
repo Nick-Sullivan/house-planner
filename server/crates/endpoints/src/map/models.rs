@@ -29,7 +29,6 @@ pub struct RequirementRequest {
 
 #[derive(ToSchema, Deserialize)]
 pub struct MapRequest {
-    pub country_code: String,
     pub city_code: String,
     pub requirement_ids: Vec<Uuid>,
 }
@@ -49,9 +48,9 @@ pub struct RequirementScoreResponse {
 
 #[derive(ToSchema, Serialize)]
 pub struct MapTileResponse {
-    pub h3_index: i32,
-    pub mean_score: i32,
-    pub requirement_scores: Vec<RequirementScoreResponse>,
+    pub h3_index: String,
+    // pub mean_score: i32,
+    // pub requirement_scores: Vec<RequirementScoreResponse>,
 }
 
 #[derive(ToSchema, Serialize)]

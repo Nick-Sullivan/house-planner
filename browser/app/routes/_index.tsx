@@ -1,6 +1,6 @@
 import { Tabs } from "@mantine/core";
 import { GoogleMap, Marker, Polygon } from "@react-google-maps/api";
-// import { Map, Marker, useMap } from "@vis.gl/react-google-maps";
+import { AdvancedMarker } from "@vis.gl/react-google-maps";
 import * as h3 from "h3-js";
 import { Suspense, useEffect, useRef, useState } from "react";
 import {
@@ -9,7 +9,13 @@ import {
   useSearchParams,
   type LoaderFunctionArgs,
 } from "react-router";
-import { Configuration, HouseApi, type HouseResponse } from "~/client";
+import {
+  Configuration,
+  HouseApi,
+  MapApi,
+  type HouseResponse,
+  type MapResponse,
+} from "~/client";
 import { HouseListPanel } from "~/components/HouseListPanel/HouseListPanel";
 import LoadingSpinner from "~/components/LoadingSpinner/LoadingSpinner";
 import { RequirementsPanel } from "~/components/RequirementsPanel/RequirementsPanel";
@@ -24,12 +30,17 @@ export const clientLoader = async ({ request, params }: LoaderFunctionArgs) => {
   const page = url.searchParams.get(pageParam);
   const apiUrl = import.meta.env.VITE_API_URL;
   const config = new Configuration({ basePath: apiUrl });
-  const api = new HouseApi(config);
-  const housesResponse = api.getHouses({
+  const houseApi = new HouseApi(config);
+  const mapApi = new MapApi(config);
+  const housesResponse = houseApi.getHouses({
     page: page ? parseInt(page) : undefined,
     pageSize: 50,
   });
-  return { housesResponse };
+  const mapResponse = await mapApi.getMap({
+    mapRequest: { cityCode: "Adelaide", requirementIds: [] },
+  });
+  console.log(mapResponse);
+  return { housesResponse, mapResponse };
 };
 
 export function meta({}: Route.MetaArgs) {
@@ -46,28 +57,35 @@ const lookupHouse = (
   return houses.find((house) => house.id === id) || null;
 };
 
-const generateH3Grid = () => {
-  const polygon = [
-    [-34.85490824066172, 138.51536049346163],
-    [-34.84255603861368, 138.6595633990527],
-    [-34.95834949048342, 138.6873056569005],
-    [-34.96855376947172, 138.5194630253865],
-    // [138.51536049346163, -34.85490824066172],
-  ];
-  const hexagons = h3.polygonToCells(polygon, 7);
-  const boundaries = hexagons.map((hex) =>
-    h3.cellToBoundary(hex).map(([lat, lng]) => ({ lat, lng }))
+// const generateH3Grid = () => {
+//   const polygon = [
+//     [-34.85490824066172, 138.51536049346163],
+//     [-34.84255603861368, 138.6595633990527],
+//     [-34.95834949048342, 138.6873056569005],
+//     [-34.96855376947172, 138.5194630253865],
+//     // [138.51536049346163, -34.85490824066172],
+//   ];
+//   const hexagons = h3.polygonToCells(polygon, 7);
+//   const boundaries = hexagons.map((hex) =>
+//     h3.cellToBoundary(hex).map(([lat, lng]) => ({ lat, lng }))
+//   );
+//   return boundaries;
+// };
+
+const generateH3Grid = (mapResponse: MapResponse) => {
+  const boundaries = mapResponse.tiles.map((tile) =>
+    h3.cellToBoundary(tile.h3Index).map(([lat, lng]) => ({ lat, lng }))
   );
   return boundaries;
 };
 
 export default function Home() {
-  const { housesResponse } = useLoaderData<typeof clientLoader>();
+  const { housesResponse, mapResponse } = useLoaderData<typeof clientLoader>();
   const [_, setSearchParams] = useSearchParams();
   const [selectedHouse, setSelectedHouse] = useState<HouseResponse | null>();
   const [activeTab, setActiveTab] = useState<String | null>("requirements");
   const mapRef = useRef<google.maps.Map | null>(null);
-  const h3Grid = generateH3Grid();
+  const h3Grid = generateH3Grid(mapResponse);
   useEffect(() => {
     if (selectedHouse && mapRef.current) {
       mapRef.current.panTo({
@@ -160,6 +178,12 @@ export default function Home() {
             <Await resolve={housesResponse}>
               {(housesResponse) =>
                 housesResponse.items.map((house) => (
+                  // <AdvancedMarker
+                  //   key={house.id}
+                  //   position={{ lat: house.lat!, lng: house.lon! }}
+                  //   // opacity={selectedHouse?.id === house.id ? 1 : 0.3}
+                  // />
+
                   <Marker
                     key={house.id}
                     position={{ lat: house.lat!, lng: house.lon! }}

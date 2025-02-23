@@ -1,4 +1,6 @@
-use super::models::{RequirementRequest, RequirementResponse, MAP_TAG};
+use super::models::{
+    MapRequest, MapResponse, MapTileResponse, RequirementRequest, RequirementResponse, MAP_TAG,
+};
 use crate::request::AppState;
 use crate::response::ErrorResponse;
 use axum::extract::State;
@@ -13,7 +15,9 @@ use utoipa_axum::router::OpenApiRouter;
 use utoipa_axum::routes;
 
 pub fn router() -> OpenApiRouter<Arc<AppState>> {
-    OpenApiRouter::new().routes(routes!(post_requirement))
+    OpenApiRouter::new()
+        .routes(routes!(post_requirement))
+        .routes(routes!(get_map))
 }
 
 fn map_error_to_response(error: impl ToString) -> (StatusCode, Json<ErrorResponse>) {
@@ -109,23 +113,51 @@ pub async fn post_requirement(
 //     Ok(StatusCode::OK)
 // }
 
-// #[utoipa::path(
-//     get,
-//     path = "",
-//     tag = MAP_TAG,
-//     request_body = MapRequest,
-//     responses(
-//         (status = OK, body = MapResponse),
-//         (status = INTERNAL_SERVER_ERROR, body = ErrorResponse, description = "Internal server error")
-//     )
-// )]
-// pub async fn get_map(
-//     State(state): State<Arc<AppState>>,
-//     Json(map_request): Json<MapRequest>,
-// ) -> Result<Json<MapResponse>, (StatusCode, Json<ErrorResponse>)> {
-//     // Load the requirements from the database
-//     // Verify they belong to the same location
-//     // for each tile, combine the scores
-//     // return the map
-//     MapResponse { tiles: vec![] }
-// }
+#[utoipa::path(
+    post,
+    path = "/map",
+    tag = MAP_TAG,
+    request_body = MapRequest,
+    responses(
+        (status = OK, body = MapResponse),
+        (status = INTERNAL_SERVER_ERROR, body = ErrorResponse, description = "Internal server error")
+    )
+)]
+pub async fn get_map(
+    State(state): State<Arc<AppState>>,
+    Json(request): Json<MapRequest>,
+) -> Result<Json<MapResponse>, (StatusCode, Json<ErrorResponse>)> {
+    // let db = &*state.db_client;
+
+    // If there are no requirements, get all the h3 indices and return
+    if request.requirement_ids.is_empty() {
+        let indices = state
+            .h3_client
+            .get_indices_for_city(&request.city_code)
+            .map_err(map_error_to_response)?;
+        let tile_responses: Vec<MapTileResponse> = indices
+            .into_iter()
+            .map(|index| MapTileResponse {
+                h3_index: index.to_string(),
+            })
+            .collect();
+        return Ok(Json(MapResponse {
+            tiles: tile_responses,
+        }));
+    }
+
+    // Load the requirements from the database
+    // Verify they belong to the same location
+    // let tiles = SpatialDistanceItem::list_from_db(&request.city_code, db)
+    //     .await
+    //     .map_err(map_error_to_response)?;
+    // let tile_responses: Vec<MapTileResponse> = tiles
+    //     .into_iter()
+    //     .map(|tile| MapTileResponse {
+    //         h3_index: tile.source_index,
+    //     })
+    //     .collect();
+    // for each tile, combine the scores
+    // return the map
+    Ok(Json(MapResponse { tiles: vec![] }))
+}

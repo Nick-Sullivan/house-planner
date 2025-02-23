@@ -1,0 +1,12 @@
+[package]
+name = "h3_mapper"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0"
+geo = "0.29"
+geojson = "0.24"
+h3o = { version = "0.7.1", features = ["geo"] }
+serde_json = "1.0"
+tokio = { version = "1.43", features = ["full"] }

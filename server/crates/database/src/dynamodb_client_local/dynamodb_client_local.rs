@@ -1,5 +1,5 @@
-use super::attribute_value_parser::{self, parse_attribute_value};
-use super::dynamodb_client_trait::IDynamoDbClient;
+use super::super::attribute_value_parser::{self, parse_attribute_value};
+use super::super::dynamodb_client_trait::IDynamoDbClient;
 use anyhow::Error;
 use async_trait::async_trait;
 use aws_sdk_dynamodb::operation::query::QueryOutput;
@@ -7,26 +7,77 @@ use aws_sdk_dynamodb::operation::transact_get_items::builders::TransactGetItemsO
 use aws_sdk_dynamodb::types::{
     AttributeValue, Delete, ItemResponse, Put, TransactGetItem, TransactWriteItem,
 };
+use csv::ReaderBuilder;
 use std::collections::HashMap;
 use std::sync::RwLock;
+
+const KEY_JOIN_STR: &str = ":";
 
 pub struct FakeItem {
     pub hash_map: HashMap<String, AttributeValue>,
 }
 
+type FakeTable = HashMap<String, FakeItem>;
+
 pub struct DynamoDbClient {
-    requirements_table: RwLock<HashMap<String, FakeItem>>,
-    spatial_distances_table: RwLock<HashMap<String, FakeItem>>,
+    requirements_table: RwLock<FakeTable>,
+    spatial_distances_table: RwLock<FakeTable>,
 }
 
 impl DynamoDbClient {
-    pub async fn new() -> Self {
+    pub async fn new() -> Result<Self, Error> {
         let requirements_table = RwLock::new(HashMap::new());
-        let spatial_distances_table = RwLock::new(HashMap::new());
-        DynamoDbClient {
+        let spatial_distances_items = DynamoDbClient::load_spatial_distances_data()?;
+        let spatial_distances_table = RwLock::new(spatial_distances_items);
+        Ok(DynamoDbClient {
             requirements_table,
             spatial_distances_table,
+        })
+    }
+
+    fn load_spatial_distances_data() -> Result<FakeTable, Error> {
+        let csv_data = include_str!("spatial-distances.csv");
+        let mut reader = ReaderBuilder::new().from_reader(csv_data.as_bytes());
+        let mut items = HashMap::new();
+        for result in reader.records() {
+            let record = result?;
+            let source_index = record[0].to_string();
+            let destination_index = record[1].to_string();
+            let city_code = record[2].to_string();
+            let duration_cycle = record[3].to_string();
+            let duration_drive = record[4].to_string();
+            let duration_transit = record[5].to_string();
+            let duration_walk = record[6].to_string();
+            let item = FakeItem {
+                hash_map: HashMap::from([
+                    (
+                        "SourceIndex".to_string(),
+                        AttributeValue::S(source_index.clone()),
+                    ),
+                    (
+                        "DestinationIndex".to_string(),
+                        AttributeValue::S(destination_index.clone()),
+                    ),
+                    ("CityCode".to_string(), AttributeValue::S(city_code)),
+                    (
+                        "DurationCycle".to_string(),
+                        AttributeValue::N(duration_cycle),
+                    ),
+                    (
+                        "DurationDrive".to_string(),
+                        AttributeValue::N(duration_drive),
+                    ),
+                    (
+                        "DurationTransit".to_string(),
+                        AttributeValue::N(duration_transit),
+                    ),
+                    ("DurationWalk".to_string(), AttributeValue::N(duration_walk)),
+                ]),
+            };
+            let key = format!("{}{}{}", source_index, KEY_JOIN_STR, destination_index);
+            items.insert(key, item);
         }
+        Ok(items)
     }
 
     fn get_table(&self, table_name: &str) -> &RwLock<HashMap<String, FakeItem>> {
@@ -39,20 +90,33 @@ impl DynamoDbClient {
         }
     }
 
-    fn get_primary_key(&self, table_name: &str) -> &str {
+    fn get_primary_key_columns(&self, table_name: &str) -> (&str, Option<&str>) {
         if table_name.ends_with("Requirements") {
-            "RequirementId"
+            ("RequirementId", None)
         } else if table_name.ends_with("SpatialDistances") {
-            "SourceIndex"
+            ("SourceIndex", Some("DestinationIndex"))
         } else {
             panic!("Unrecognised table {:?}", table_name);
         }
     }
 
+    fn get_primary_key(partition_key: &str, sort_key: Option<&str>) -> String {
+        let primary_key = match sort_key {
+            None => partition_key,
+            Some(sort_key) => &format!("{}{}{}", partition_key, KEY_JOIN_STR, sort_key),
+        };
+        primary_key.to_string()
+    }
+
     fn write_put(&self, put: Put) -> Result<(), Error> {
         let table = self.get_table(&put.table_name);
-        let primary_key_column = self.get_primary_key(&put.table_name);
-        let primary_key = parse_attribute_value::<String>(put.item.get(primary_key_column))?;
+        let (partition_column, sort_column) = self.get_primary_key_columns(&put.table_name);
+        let partition_key = parse_attribute_value::<String>(put.item.get(partition_column))?;
+        let sort_key = match sort_column {
+            None => None,
+            Some(col) => Some(parse_attribute_value::<String>(put.item.get(col))?),
+        };
+        let primary_key = Self::get_primary_key(&partition_key, sort_key.as_deref());
         let item = FakeItem {
             hash_map: put.item.clone(),
         };
@@ -67,8 +131,13 @@ impl DynamoDbClient {
 
     fn write_delete(&self, delete: Delete) -> Result<(), Error> {
         let table = self.get_table(&delete.table_name);
-        let primary_key_column = self.get_primary_key(&delete.table_name);
-        let primary_key = parse_attribute_value::<String>(delete.key.get(primary_key_column))?;
+        let (partition_column, sort_column) = self.get_primary_key_columns(&delete.table_name);
+        let partition_key = parse_attribute_value::<String>(delete.key.get(partition_column))?;
+        let sort_key = match sort_column {
+            None => None,
+            Some(col) => Some(parse_attribute_value::<String>(delete.key.get(col))?),
+        };
+        let primary_key = Self::get_primary_key(&partition_key, sort_key.as_deref());
         let mut hash_map = table.write().unwrap();
         if delete.condition_expression.is_some() {
             let existing_item = hash_map.get(&primary_key);
@@ -143,9 +212,14 @@ impl IDynamoDbClient for DynamoDbClient {
     async fn read_single(&self, item: TransactGetItem) -> Result<Option<ItemResponse>, Error> {
         let get = item.get.ok_or(anyhow::anyhow!("Only Gets are supported"))?;
         let table = self.get_table(&get.table_name);
-        let primary_key_column = self.get_primary_key(&get.table_name);
         let hash_map = table.read().unwrap();
-        let primary_key = parse_attribute_value::<String>(get.key.get(primary_key_column))?;
+        let (partition_column, sort_column) = self.get_primary_key_columns(&get.table_name);
+        let partition_key = parse_attribute_value::<String>(get.key.get(partition_column))?;
+        let sort_key = match sort_column {
+            None => None,
+            Some(col) => Some(parse_attribute_value::<String>(get.key.get(col))?),
+        };
+        let primary_key = Self::get_primary_key(&partition_key, sort_key.as_deref());
         let item = match hash_map.get(&primary_key) {
             Some(item) => item,
             None => return Ok(None),
