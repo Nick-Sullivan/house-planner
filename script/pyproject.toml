@@ -1,0 +1,26 @@
+[project]
+name = "openstreetmaps"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Nick Sullivan", email = "nicholas.sullivan@bacto.bio" }
+]
+requires-python = ">=3.9"
+dependencies = [
+    "contextily==1.6.2",
+    "h3==4.2.1",
+    "matplotlib==3.9.4",
+    "mplcursors==0.6",
+    "osm2geojson==0.2.5",
+    "pyperclip==1.9.0",
+    "requests==2.32.3",
+    "shapely==2.0.7",
+]
+
+[project.scripts]
+openstreetmaps = "openstreetmaps:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
