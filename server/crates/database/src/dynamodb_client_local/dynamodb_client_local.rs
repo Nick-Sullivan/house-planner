@@ -36,7 +36,7 @@ impl DynamoDbClient {
     }
 
     fn load_spatial_distances_data() -> Result<FakeTable, Error> {
-        let csv_data = include_str!("spatial-distances.csv");
+        let csv_data = include_str!("spatial_distances.csv");
         let mut reader = ReaderBuilder::new().from_reader(csv_data.as_bytes());
         let mut items = HashMap::new();
         for result in reader.records() {
@@ -44,10 +44,10 @@ impl DynamoDbClient {
             let source_index = record[0].to_string();
             let destination_index = record[1].to_string();
             let city_code = record[2].to_string();
-            let duration_cycle = record[3].to_string();
-            let duration_drive = record[4].to_string();
-            let duration_transit = record[5].to_string();
-            let duration_walk = record[6].to_string();
+            let duration_cycle = (record[3].parse::<f64>()?.round() as i32).to_string();
+            let duration_drive = (record[4].parse::<f64>()?.round() as i32).to_string();
+            let duration_transit = (record[5].parse::<f64>()?.round() as i32).to_string();
+            let duration_walk = (record[6].parse::<f64>()?.round() as i32).to_string();
             let item = FakeItem {
                 hash_map: HashMap::from([
                     (
@@ -253,12 +253,26 @@ impl IDynamoDbClient for DynamoDbClient {
         Ok(())
     }
 
-    async fn query_spatial_distance_item(&self, city_code: &str) -> Result<QueryOutput, Error> {
+    async fn query_by_city(&self, city_code: &str) -> Result<QueryOutput, Error> {
         let table = self.spatial_distances_table.read().unwrap();
         let mut items = Vec::new();
         for (_key, item) in table.iter() {
             if let Some(AttributeValue::S(code)) = item.hash_map.get("CityCode") {
                 if code == city_code {
+                    items.push(item.hash_map.clone());
+                }
+            }
+        }
+        let query_output = QueryOutput::builder().set_items(Some(items)).build();
+        Ok(query_output)
+    }
+
+    async fn query_by_source_index(&self, source_index: &str) -> Result<QueryOutput, Error> {
+        let table = self.spatial_distances_table.read().unwrap();
+        let mut items = Vec::new();
+        for (_key, item) in table.iter() {
+            if let Some(AttributeValue::S(code)) = item.hash_map.get("SourceIndex") {
+                if code == source_index {
                     items.push(item.hash_map.clone());
                 }
             }

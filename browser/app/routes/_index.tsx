@@ -1,8 +1,5 @@
 import { Tabs } from "@mantine/core";
-import { GoogleMap, Marker, Polygon } from "@react-google-maps/api";
-import { AdvancedMarker } from "@vis.gl/react-google-maps";
-import * as h3 from "h3-js";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import {
   Await,
   useLoaderData,
@@ -14,24 +11,28 @@ import {
   HouseApi,
   MapApi,
   type HouseResponse,
-  type MapResponse,
+  type MapTileResponse,
 } from "~/client";
+import BaseMap from "~/components/BaseMap/BaseMap";
 import { HouseListPanel } from "~/components/HouseListPanel/HouseListPanel";
+import HouseMap from "~/components/HouseMap/HouseMap";
 import LoadingSpinner from "~/components/LoadingSpinner/LoadingSpinner";
+import { MapTextBox } from "~/components/MapTextBox/MapTextBox";
+import RequirementsMap from "~/components/RequirementsMap/RequirementsMap";
 import { RequirementsPanel } from "~/components/RequirementsPanel/RequirementsPanel";
 import { TwoColumnLayout } from "~/components/TwoColumnLayout/TwoColumnLayout";
-import { idParam, pageParam, searchParam } from "~/utils/pagination";
+import { houseApi, mapApi } from "~/utils/apiClient";
+import { idParam, pageParam, searchParam } from "~/utils/constants";
+import {
+  isCompletedRequirement,
+  requirementToRequest,
+  type Requirement,
+} from "~/utils/requirementUtils";
 import type { Route } from "../+types/root";
-
-const ADELAIDE_CENTRE = { lat: -34.92866, lng: 138.59863 };
 
 export const clientLoader = async ({ request, params }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
   const page = url.searchParams.get(pageParam);
-  const apiUrl = import.meta.env.VITE_API_URL;
-  const config = new Configuration({ basePath: apiUrl });
-  const houseApi = new HouseApi(config);
-  const mapApi = new MapApi(config);
   const housesResponse = houseApi.getHouses({
     page: page ? parseInt(page) : undefined,
     pageSize: 50,
@@ -39,7 +40,6 @@ export const clientLoader = async ({ request, params }: LoaderFunctionArgs) => {
   const mapResponse = await mapApi.getMap({
     mapRequest: { cityCode: "Adelaide", requirementIds: [] },
   });
-  console.log(mapResponse);
   return { housesResponse, mapResponse };
 };
 
@@ -52,48 +52,22 @@ export function meta({}: Route.MetaArgs) {
 
 const lookupHouse = (
   houses: HouseResponse[],
-  id: number | null
+  id: number | null,
 ): HouseResponse | null => {
   return houses.find((house) => house.id === id) || null;
-};
-
-// const generateH3Grid = () => {
-//   const polygon = [
-//     [-34.85490824066172, 138.51536049346163],
-//     [-34.84255603861368, 138.6595633990527],
-//     [-34.95834949048342, 138.6873056569005],
-//     [-34.96855376947172, 138.5194630253865],
-//     // [138.51536049346163, -34.85490824066172],
-//   ];
-//   const hexagons = h3.polygonToCells(polygon, 7);
-//   const boundaries = hexagons.map((hex) =>
-//     h3.cellToBoundary(hex).map(([lat, lng]) => ({ lat, lng }))
-//   );
-//   return boundaries;
-// };
-
-const generateH3Grid = (mapResponse: MapResponse) => {
-  const boundaries = mapResponse.tiles.map((tile) =>
-    h3.cellToBoundary(tile.h3Index).map(([lat, lng]) => ({ lat, lng }))
-  );
-  return boundaries;
 };
 
 export default function Home() {
   const { housesResponse, mapResponse } = useLoaderData<typeof clientLoader>();
   const [_, setSearchParams] = useSearchParams();
-  const [selectedHouse, setSelectedHouse] = useState<HouseResponse | null>();
-  const [activeTab, setActiveTab] = useState<String | null>("requirements");
+  const [selectedHouse, setSelectedHouse] = useState<HouseResponse | null>(
+    null,
+  );
+  const [activeTab, setActiveTab] = useState<string | null>("requirements");
+  const [requirements, setRequirements] = useState<Requirement[]>([]);
+  const [map, setMap] = useState(mapResponse);
+  const [hoveredTile, setHoveredTile] = useState<MapTileResponse | null>(null);
   const mapRef = useRef<google.maps.Map | null>(null);
-  const h3Grid = generateH3Grid(mapResponse);
-  useEffect(() => {
-    if (selectedHouse && mapRef.current) {
-      mapRef.current.panTo({
-        lat: selectedHouse.lat!,
-        lng: selectedHouse.lon!,
-      });
-    }
-  }, [selectedHouse]);
 
   const onSearchChange = (value: string) => {
     setSearchParams((prev) => {
@@ -121,6 +95,57 @@ export default function Home() {
     });
   };
 
+  const onRequirementChange = async (req: Requirement) => {
+    console.log("Updating requirement");
+    if (isCompletedRequirement(req)) {
+      console.log("POSTing requirement");
+      const reqRequest = requirementToRequest(req);
+      await mapApi.postRequirement({ requirementRequest: reqRequest });
+    }
+    setRequirements((prevRequirements) => {
+      const existingRequirement = prevRequirements.find((r) => r.id === req.id);
+      if (existingRequirement) {
+        return prevRequirements.map((r) => (r.id === req.id ? req : r));
+      } else {
+        return [...prevRequirements, req];
+      }
+    });
+  };
+
+  const onRequirementDelete = (id: string) => {
+    console.log("Deleting requirement");
+    console.log("DELETING requirement");
+    const existingRequirement = requirements.find((r) => r.id === id);
+    if (!existingRequirement) {
+      return;
+    }
+    setRequirements((prevRequirements) =>
+      prevRequirements.filter((r) => r.id !== id),
+    );
+    // TODO delete from backend
+  };
+
+  const completedRequirements = useMemo(
+    () => requirements.filter(isCompletedRequirement),
+    [requirements],
+  );
+
+  useEffect(() => {
+    console.log("Getting a new map");
+    mapApi
+      .getMap({
+        mapRequest: {
+          cityCode: "Adelaide",
+          requirementIds: completedRequirements.map((r) => r.id),
+        },
+      })
+      .then((mapResponse) => {
+        console.log("Got a new map");
+        console.log(mapResponse);
+        setMap(mapResponse);
+      });
+  }, [completedRequirements]);
+
   return (
     <TwoColumnLayout
       leftPanel={
@@ -129,7 +154,11 @@ export default function Home() {
             <Tabs.Tab value="requirements">Requirements</Tabs.Tab>
             <Tabs.Tab value="houses">Houses</Tabs.Tab>
           </Tabs.List>
-          <RequirementsPanel />
+          <RequirementsPanel
+            requirements={requirements}
+            onChange={onRequirementChange}
+            onDelete={onRequirementDelete}
+          />
           <Suspense fallback={<LoadingSpinner />}>
             <Await resolve={housesResponse}>
               {(housesResponse) => (
@@ -145,56 +174,22 @@ export default function Home() {
         </Tabs>
       }
     >
-      <GoogleMap
-        key="map"
-        mapContainerStyle={{ width: "100%", height: "100%" }}
-        center={ADELAIDE_CENTRE}
-        zoom={14}
-        options={{
-          gestureHandling: "greedy",
-          disableDefaultUI: true,
-        }}
-        onLoad={(map) => {
-          mapRef.current = map;
-        }}
-      >
-        {h3Grid.map((hex, index) => {
-          return (
-            <Polygon
-              key={index}
-              paths={hex}
-              options={{
-                fillColor: "#FF0000",
-                fillOpacity: 0.2,
-                strokeColor: "#FF0000",
-                strokeOpacity: 0.5,
-                strokeWeight: 2,
-              }}
-            />
-          );
-        })}
-        {activeTab === "houses" && (
-          <Suspense>
-            <Await resolve={housesResponse}>
-              {(housesResponse) =>
-                housesResponse.items.map((house) => (
-                  // <AdvancedMarker
-                  //   key={house.id}
-                  //   position={{ lat: house.lat!, lng: house.lon! }}
-                  //   // opacity={selectedHouse?.id === house.id ? 1 : 0.3}
-                  // />
-
-                  <Marker
-                    key={house.id}
-                    position={{ lat: house.lat!, lng: house.lon! }}
-                    opacity={selectedHouse?.id === house.id ? 1 : 0.3}
-                  />
-                ))
-              }
-            </Await>
-          </Suspense>
+      <BaseMap mapRef={mapRef} map={map} onTileHover={setHoveredTile}>
+        {activeTab === "requirements" ? (
+          <RequirementsMap
+            mapRef={mapRef}
+            requirements={requirements}
+            selectedRequirement={null}
+          />
+        ) : (
+          <HouseMap
+            mapRef={mapRef}
+            housesResponse={housesResponse}
+            selectedHouse={selectedHouse}
+          />
         )}
-      </GoogleMap>
+      </BaseMap>
+      <MapTextBox tile={hoveredTile} requirements={requirements} />
     </TwoColumnLayout>
   );
 }

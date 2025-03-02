@@ -897,6 +897,8 @@ dependencies = [
  "aws-sdk-dynamodb",
  "chrono",
  "csv",
+ "serde",
+ "serde_json",
  "uuid",
 ]
 
@@ -1290,6 +1292,7 @@ name = "h3_mapper"
 version = "0.1.0"
 dependencies = [
  "anyhow",
+ "csv",
  "geo",
  "geojson",
  "h3o",
@@ -2264,6 +2267,7 @@ dependencies = [
  "dotenv",
  "geo",
  "geojson",
+ "h3_mapper",
  "h3o",
  "maps",
  "serde_json",

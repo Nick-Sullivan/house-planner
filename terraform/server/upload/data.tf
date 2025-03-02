@@ -11,6 +11,15 @@ data "aws_ssm_parameter" "spatial_distances_table_name" {
   name = "${local.prefix_parameter}/DynamoDB/SpatialDistancesTable/Name"
 }
 
+data "aws_ssm_parameter" "spatial_distances_table_arn" {
+  name = "${local.prefix_parameter}/DynamoDB/SpatialDistancesTable/Arn"
+}
+
 data "aws_ssm_parameter" "requirements_table_name" {
   name = "${local.prefix_parameter}/DynamoDB/RequirementsTable/Name"
 }
+
+data "aws_ssm_parameter" "requirements_table_arn" {
+  name = "${local.prefix_parameter}/DynamoDB/RequirementsTable/Arn"
+}
+

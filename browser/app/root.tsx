@@ -12,6 +12,7 @@ import {
 } from "react-router";
 import type { Route } from "./+types/root";
 import "./app.css";
+import { MapProvider } from "./components/MapContext/MapContext";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -50,7 +51,9 @@ export default function App() {
     <LoadScript googleMapsApiKey={apiKey} libraries={["places"]}>
       <APIProvider apiKey={apiKey}>
         <MantineProvider defaultColorScheme="light">
-          <Outlet />
+          <MapProvider>
+            <Outlet />
+          </MapProvider>
         </MantineProvider>
       </APIProvider>
     </LoadScript>

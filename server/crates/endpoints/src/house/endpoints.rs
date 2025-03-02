@@ -6,7 +6,6 @@ use axum::Json;
 use std::sync::Arc;
 use utoipa_axum::router::OpenApiRouter;
 use super::models::{HouseResponse, HOUSE_TAG};
-use tokio::time::{sleep, Duration};
 
 pub fn router() -> OpenApiRouter<Arc<AppState>> {
     OpenApiRouter::new()
@@ -31,7 +30,6 @@ pub async fn get_houses(
     State(state): State<Arc<AppState>>,
     Query(pagination): Query<PaginationParams>,
 ) -> Result<Json<PaginatedResponse<HouseResponse>>, (StatusCode, Json<ErrorResponse>)> {
-    sleep(Duration::from_secs(10)).await;
     let page = pagination.page.unwrap_or(1);
     let page_size = pagination.page_size.unwrap_or(10);
     let num_houses = state.house_client.get_num_houses();

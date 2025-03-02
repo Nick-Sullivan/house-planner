@@ -4,6 +4,7 @@ use axum::Router;
 use database::dynamodb_client_cloud::DynamoDbClient;
 #[cfg(feature = "local")]
 use database::dynamodb_client_local::DynamoDbClient;
+// use database::dynamodb_client_cloud::DynamoDbClient;
 use dotenv::from_path;
 use endpoints::request::AppState;
 use h3_mapper::h3_client::H3Client;
@@ -19,7 +20,7 @@ use utoipa_swagger_ui::SwaggerUi;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
-    let env_path = env::current_dir()?.join("server/.env");
+    let env_path = env::current_dir()?.join(".env");
     from_path(env_path).ok();
     tracing_subscriber::fmt()
         .json()

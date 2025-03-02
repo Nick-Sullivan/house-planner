@@ -1,3 +1,11 @@
+Create a .env with secrets
+
+```bash
+AWS_REGION="eu-west-2"
+REQUIREMENTS_TABLE_NAME="HousePlanner-Dev-Requirements"
+SPATIAL_DISTANCES_TABLE_NAME="HousePlanner-Dev-SpatialDistances"
+```
+
 Build and run the API server:
 
 ```bash

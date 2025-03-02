@@ -68,11 +68,25 @@ impl SpatialDistanceItem {
         Ok(transaction_item)
     }
 
-    pub async fn list_from_db(
+    pub async fn list_by_city_from_db(
         city_code: &str,
         db: &dyn IDynamoDbClient,
     ) -> Result<Vec<Self>, Error> {
-        let query_output = db.query_spatial_distance_item(city_code).await?;
+        let query_output = db.query_by_city(city_code).await?;
+        let items = query_output.items.unwrap_or_default();
+        let mut results = Vec::new();
+        for item in items {
+            let spatial_distance_item = Self::from_map(&item)?;
+            results.push(spatial_distance_item);
+        }
+        Ok(results)
+    }
+
+    pub async fn list_by_source_from_db(
+        source_index: &str,
+        db: &dyn IDynamoDbClient,
+    ) -> Result<Vec<Self>, Error> {
+        let query_output = db.query_by_source_index(source_index).await?;
         let items = query_output.items.unwrap_or_default();
         let mut results = Vec::new();
         for item in items {

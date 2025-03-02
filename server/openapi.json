@@ -114,7 +114,7 @@
         }
       }
     },
-    "/maps/map": {
+    "/maps": {
       "post": {
         "tags": [
           "map"
@@ -154,7 +154,7 @@
         }
       }
     },
-    "/maps/requirement": {
+    "/maps/requirements": {
       "post": {
         "tags": [
           "map"
@@ -246,15 +246,29 @@
         "type": "object",
         "required": [
           "id",
-          "h3_index"
+          "address",
+          "h3_index",
+          "lat",
+          "lng"
         ],
         "properties": {
+          "address": {
+            "type": "string"
+          },
           "h3_index": {
             "type": "string"
           },
           "id": {
             "type": "integer",
             "format": "int32"
+          },
+          "lat": {
+            "type": "number",
+            "format": "double"
+          },
+          "lng": {
+            "type": "number",
+            "format": "double"
           }
         }
       },
@@ -294,11 +308,23 @@
       "MapTileResponse": {
         "type": "object",
         "required": [
-          "h3_index"
+          "h3_index",
+          "mean_score",
+          "requirement_scores"
         ],
         "properties": {
           "h3_index": {
             "type": "string"
+          },
+          "mean_score": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "requirement_scores": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RequirementScoreResponse"
+            }
           }
         }
       },
@@ -371,7 +397,6 @@
         "type": "object",
         "required": [
           "requirement_id",
-          "country_code",
           "city_code",
           "travel_mode",
           "locations",
@@ -379,9 +404,6 @@
         ],
         "properties": {
           "city_code": {
-            "type": "string"
-          },
-          "country_code": {
             "type": "string"
           },
           "locations": {
@@ -405,6 +427,23 @@
       },
       "RequirementResponse": {
         "type": "object"
+      },
+      "RequirementScoreResponse": {
+        "type": "object",
+        "required": [
+          "requirement_id",
+          "score"
+        ],
+        "properties": {
+          "requirement_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "score": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
       },
       "TravelMode": {
         "type": "string",

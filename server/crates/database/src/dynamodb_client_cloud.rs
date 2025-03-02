@@ -43,6 +43,9 @@ impl IDynamoDbClient for DynamoDbClient {
             return Ok(None);
         }
         let item = attribute_value_parser::single(items)?;
+        if item.item.is_none() {
+            return Ok(None);
+        }
         Ok(Some(item))
     }
 
@@ -59,7 +62,7 @@ impl IDynamoDbClient for DynamoDbClient {
         self.write(vec![item]).await
     }
 
-    async fn query_spatial_distance_item(&self, city_code: &str) -> Result<QueryOutput, Error> {
+    async fn query_by_city(&self, city_code: &str) -> Result<QueryOutput, Error> {
         // I tried to put this in the spatial distance item, but QueryInput can't be applied to
         // a client.
         // TODO, make this better
@@ -71,6 +74,22 @@ impl IDynamoDbClient for DynamoDbClient {
             .key_condition_expression("#city_code = :city_code")
             .expression_attribute_names("#city_code", "CityCode")
             .expression_attribute_values(":city_code", AttributeValue::S(city_code.to_string()))
+            .send()
+            .await?;
+        Ok(query_output)
+    }
+
+    async fn query_by_source_index(&self, source_index: &str) -> Result<QueryOutput, Error> {
+        let query_output = self
+            .client
+            .query()
+            .table_name(SpatialDistanceItem::get_table_name()?)
+            .key_condition_expression("#source_index = :source_index")
+            .expression_attribute_names("#source_index", "SourceIndex")
+            .expression_attribute_values(
+                ":source_index",
+                AttributeValue::S(source_index.to_string()),
+            )
             .send()
             .await?;
         Ok(query_output)

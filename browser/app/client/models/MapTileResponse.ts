@@ -13,6 +13,14 @@
  */
 
 import { mapValues } from '../runtime';
+import type { RequirementScoreResponse } from './RequirementScoreResponse';
+import {
+    RequirementScoreResponseFromJSON,
+    RequirementScoreResponseFromJSONTyped,
+    RequirementScoreResponseToJSON,
+    RequirementScoreResponseToJSONTyped,
+} from './RequirementScoreResponse';
+
 /**
  * 
  * @export
@@ -25,6 +33,18 @@ export interface MapTileResponse {
      * @memberof MapTileResponse
      */
     h3Index: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof MapTileResponse
+     */
+    meanScore: number;
+    /**
+     * 
+     * @type {Array<RequirementScoreResponse>}
+     * @memberof MapTileResponse
+     */
+    requirementScores: Array<RequirementScoreResponse>;
 }
 
 /**
@@ -32,6 +52,8 @@ export interface MapTileResponse {
  */
 export function instanceOfMapTileResponse(value: object): value is MapTileResponse {
     if (!('h3Index' in value) || value['h3Index'] === undefined) return false;
+    if (!('meanScore' in value) || value['meanScore'] === undefined) return false;
+    if (!('requirementScores' in value) || value['requirementScores'] === undefined) return false;
     return true;
 }
 
@@ -46,6 +68,8 @@ export function MapTileResponseFromJSONTyped(json: any, ignoreDiscriminator: boo
     return {
         
         'h3Index': json['h3_index'],
+        'meanScore': json['mean_score'],
+        'requirementScores': ((json['requirement_scores'] as Array<any>).map(RequirementScoreResponseFromJSON)),
     };
 }
 
@@ -61,6 +85,8 @@ export function MapTileResponseToJSONTyped(value?: MapTileResponse | null, ignor
     return {
         
         'h3_index': value['h3Index'],
+        'mean_score': value['meanScore'],
+        'requirement_scores': ((value['requirementScores'] as Array<any>).map(RequirementScoreResponseToJSON)),
     };
 }
 

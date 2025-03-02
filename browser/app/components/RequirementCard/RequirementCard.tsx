@@ -9,25 +9,23 @@ import {
 } from "@mantine/core";
 import { Autocomplete } from "@react-google-maps/api";
 import { IconTrash } from "@tabler/icons-react";
-import { useState } from "react";
-
-export type Requirement = {
-  id: string;
-  duration: number;
-  travelType: string;
-  address: string | null;
-  lat: number | null;
-  lng: number | null;
-};
+import * as h3 from "h3-js";
+import { set } from "radash";
+import { useEffect, useState } from "react";
+import { TravelMode } from "~/client";
+import { h3IndexLevel } from "~/utils/constants";
+import type { Requirement } from "~/utils/requirementUtils";
 
 function TextSelector({
   data,
   defaultValue,
   width,
+  onChange,
 }: {
   data: ComboboxData;
   defaultValue: string;
   width: string;
+  onChange: (value: string | null) => void;
 }) {
   return (
     <Select
@@ -37,44 +35,56 @@ function TextSelector({
       data={data}
       allowDeselect={false}
       styles={{ input: { width: width } }}
+      onChange={onChange}
     />
   );
 }
+
 export function RequirementCard({
-  defaultRequirement,
+  requirement,
   onDelete,
   onChange,
 }: {
-  defaultRequirement: Requirement;
+  requirement: Requirement;
   onDelete: (id: string) => void;
   onChange: (req: Requirement) => void;
 }) {
   const [autocomplete, setAutocomplete] =
     useState<google.maps.places.Autocomplete | null>(null);
-  const [inputValue, setInputValue] = useState("");
-  const [requirement, setRequirement] =
-    useState<Requirement>(defaultRequirement);
-
+  const [addressText, setAddressText] = useState(
+    requirement.location?.address || "",
+  );
   const onLoad = (autocompleteInstance: google.maps.places.Autocomplete) => {
     setAutocomplete(autocompleteInstance);
   };
-
   const onPlaceChanged = () => {
-    if (autocomplete !== null) {
-      const place = autocomplete.getPlace();
-      const newAddress = place.formatted_address || null;
-      setInputValue(newAddress || "");
-      setRequirement((prev) => {
-        const req = { ...prev };
-        req.address = newAddress;
-        if (place.geometry && place.geometry.location) {
-          req.lat = place.geometry.location.lat();
-          req.lng = place.geometry.location.lng();
-        }
-        return req;
-      });
+    if (autocomplete === null) {
+      return;
     }
+    const place = autocomplete.getPlace();
+    const newAddress = place.formatted_address || null;
+    const isValid = newAddress && place.geometry && place.geometry.location;
+    setAddressText(newAddress || "");
+    let location = null;
+    if (isValid) {
+      const geoLoc = place.geometry!.location!;
+      const h3Index = h3.latLngToCell(geoLoc.lat(), geoLoc.lng(), h3IndexLevel);
+      location = {
+        address: newAddress,
+        h3Index: h3Index,
+        lat: geoLoc.lat(),
+        lng: geoLoc.lng(),
+      };
+    }
+    onChange({ ...requirement, location: location });
   };
+  const onDurationChanged = (value: number) => {
+    onChange({ ...requirement, duration: value });
+  };
+  const onTravelTypeChanged = (value: TravelMode) => {
+    onChange({ ...requirement, travelType: value });
+  };
+
   return (
     <Card
       shadow="xs"
@@ -110,16 +120,18 @@ export function RequirementCard({
             { value: "60", label: "60 min" },
           ]}
           width="80px"
+          onChange={(value) => onDurationChanged(parseInt(value!, 10))}
         />
         <TextSelector
           defaultValue={requirement.travelType}
           data={[
-            { value: "walk", label: "walk" },
-            { value: "cycle", label: "cycle" },
-            { value: "drive", label: "drive" },
-            { value: "public_transport", label: "public tranport" },
+            { value: TravelMode.Walking, label: "walk" },
+            { value: TravelMode.Bicycling, label: "cycle" },
+            { value: TravelMode.Driving, label: "drive" },
+            { value: TravelMode.PublicTransport, label: "public tranport" },
           ]}
           width="130px"
+          onChange={(value) => onTravelTypeChanged(value! as TravelMode)}
         />
       </Group>
       <Autocomplete
@@ -127,12 +139,17 @@ export function RequirementCard({
         onPlaceChanged={onPlaceChanged}
         options={{
           componentRestrictions: { country: "au" },
+          bounds: new google.maps.LatLngBounds(
+            new google.maps.LatLng(-38.0625, 129.0019),
+            new google.maps.LatLng(-25.9966, 141.0021),
+          ),
+          strictBounds: true,
         }}
       >
         <TextInput
           placeholder="Enter address"
-          value={inputValue}
-          onChange={(event) => setInputValue(event.currentTarget.value)}
+          value={addressText}
+          onChange={(event) => setAddressText(event.currentTarget.value)}
         />
       </Autocomplete>
     </Card>

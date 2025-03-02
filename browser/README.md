@@ -17,3 +17,10 @@ In the `.env` file, add
 VITE_GOOGLE_MAPS_API_KEY=<redacted>
 VITE_API_URL=<provided by the server upload>
 ```
+
+## Updating packages
+
+```bash
+ncu
+ncu -u
+```

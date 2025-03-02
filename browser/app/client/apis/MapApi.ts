@@ -61,7 +61,7 @@ export class MapApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         const response = await this.request({
-            path: `/maps/map`,
+            path: `/maps`,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -95,7 +95,7 @@ export class MapApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         const response = await this.request({
-            path: `/maps/requirement`,
+            path: `/maps/requirements`,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,

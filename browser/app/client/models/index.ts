@@ -9,4 +9,5 @@ export * from './MapTileResponse';
 export * from './PaginatedResponseHouseResponse';
 export * from './PaginatedResponseHouseResponseItemsInner';
 export * from './RequirementRequest';
+export * from './RequirementScoreResponse';
 export * from './TravelMode';

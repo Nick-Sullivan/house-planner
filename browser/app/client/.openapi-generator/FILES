@@ -11,6 +11,7 @@ models/MapTileResponse.ts
 models/PaginatedResponseHouseResponse.ts
 models/PaginatedResponseHouseResponseItemsInner.ts
 models/RequirementRequest.ts
+models/RequirementScoreResponse.ts
 models/TravelMode.ts
 models/index.ts
 runtime.ts

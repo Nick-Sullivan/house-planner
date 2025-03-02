@@ -5,6 +5,7 @@ edition = "2021"
 
 [dependencies]
 database.workspace = true
+h3_mapper.workspace = true
 maps.workspace = true
 anyhow = "1.0"
 dotenv = "0.15"

@@ -2,22 +2,23 @@ use super::attribute_value_parser::parse_attribute_value;
 use super::dynamodb_client_trait::IDynamoDbClient;
 use anyhow::Error;
 use aws_sdk_dynamodb::types::{AttributeValue, Get, Put, TransactGetItem, TransactWriteItem};
+use serde::{Deserialize, Serialize};
 use std::{collections::HashMap, env};
 use uuid::Uuid;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct MapTile {
+    pub h3_index: String,
+    pub score: i32,
+}
 
 pub struct RequirementItem {
     pub city_code: String,
     pub requirement_id: Uuid,
+    pub map_tiles: Vec<MapTile>,
 }
 
 impl RequirementItem {
-    pub fn new(city_code: &str, requirement_id: &Uuid) -> Self {
-        RequirementItem {
-            city_code: city_code.to_string(),
-            requirement_id: requirement_id.clone(),
-        }
-    }
-
     pub async fn from_db(
         requirement_id: &Uuid,
         db: &dyn IDynamoDbClient,
@@ -35,9 +36,12 @@ impl RequirementItem {
     pub fn from_map(hash_map: &HashMap<String, AttributeValue>) -> Result<Self, Error> {
         let city_code = parse_attribute_value::<String>(hash_map.get("CityCode"))?;
         let requirement_id = parse_attribute_value::<Uuid>(hash_map.get("RequirementId"))?;
+        let map_tiles_str = parse_attribute_value::<String>(hash_map.get("MapTiles"))?;
+        let map_tiles = RequirementItem::deserialise_map_tiles(&map_tiles_str)?;
         let item = Self {
             city_code,
             requirement_id,
+            map_tiles,
         };
         Ok(item)
     }
@@ -48,7 +52,6 @@ impl RequirementItem {
     }
 
     pub fn get(requirement_id: &str) -> Result<TransactGetItem, Error> {
-        // TODO handle NULL
         let item = Get::builder()
             .table_name(Self::get_table_name()?)
             .key(
@@ -61,6 +64,7 @@ impl RequirementItem {
     }
 
     pub fn save(&self) -> Result<TransactWriteItem, Error> {
+        // TODO - TimeToLive
         let put_item = Put::builder()
             .table_name(Self::get_table_name()?)
             .item("CityCode", AttributeValue::S(self.city_code.clone()))
@@ -68,6 +72,7 @@ impl RequirementItem {
                 "RequirementId",
                 AttributeValue::S(self.requirement_id.to_string()),
             )
+            .item("MapTiles", AttributeValue::S(self.serialise_map_tiles()?))
             .build()?;
         let transaction_item = TransactWriteItem::builder().put(put_item).build();
         Ok(transaction_item)
@@ -83,5 +88,13 @@ impl RequirementItem {
             .build()?;
         let transaction_item = TransactWriteItem::builder().delete(delete_item).build();
         Ok(transaction_item)
+    }
+
+    pub fn deserialise_map_tiles(json_str: &str) -> Result<Vec<MapTile>, Error> {
+        Ok(serde_json::from_str(json_str)?)
+    }
+
+    pub fn serialise_map_tiles(&self) -> Result<String, Error> {
+        Ok(serde_json::to_string(&self.map_tiles)?)
     }
 }

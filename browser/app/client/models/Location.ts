@@ -24,6 +24,12 @@ export interface Location {
      * @type {string}
      * @memberof Location
      */
+    address: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Location
+     */
     h3Index: string;
     /**
      * 
@@ -31,14 +37,29 @@ export interface Location {
      * @memberof Location
      */
     id: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Location
+     */
+    lat: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Location
+     */
+    lng: number;
 }
 
 /**
  * Check if a given object implements the Location interface.
  */
 export function instanceOfLocation(value: object): value is Location {
+    if (!('address' in value) || value['address'] === undefined) return false;
     if (!('h3Index' in value) || value['h3Index'] === undefined) return false;
     if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('lat' in value) || value['lat'] === undefined) return false;
+    if (!('lng' in value) || value['lng'] === undefined) return false;
     return true;
 }
 
@@ -52,8 +73,11 @@ export function LocationFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     }
     return {
         
+        'address': json['address'],
         'h3Index': json['h3_index'],
         'id': json['id'],
+        'lat': json['lat'],
+        'lng': json['lng'],
     };
 }
 
@@ -68,8 +92,11 @@ export function LocationToJSONTyped(value?: Location | null, ignoreDiscriminator
 
     return {
         
+        'address': value['address'],
         'h3_index': value['h3Index'],
         'id': value['id'],
+        'lat': value['lat'],
+        'lng': value['lng'],
     };
 }
 

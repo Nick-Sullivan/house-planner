@@ -42,12 +42,6 @@ export interface RequirementRequest {
     cityCode: string;
     /**
      * 
-     * @type {string}
-     * @memberof RequirementRequest
-     */
-    countryCode: string;
-    /**
-     * 
      * @type {Array<Location>}
      * @memberof RequirementRequest
      */
@@ -79,7 +73,6 @@ export interface RequirementRequest {
  */
 export function instanceOfRequirementRequest(value: object): value is RequirementRequest {
     if (!('cityCode' in value) || value['cityCode'] === undefined) return false;
-    if (!('countryCode' in value) || value['countryCode'] === undefined) return false;
     if (!('locations' in value) || value['locations'] === undefined) return false;
     if (!('requirementId' in value) || value['requirementId'] === undefined) return false;
     if (!('toleratedDuration' in value) || value['toleratedDuration'] === undefined) return false;
@@ -98,7 +91,6 @@ export function RequirementRequestFromJSONTyped(json: any, ignoreDiscriminator: 
     return {
         
         'cityCode': json['city_code'],
-        'countryCode': json['country_code'],
         'locations': ((json['locations'] as Array<any>).map(LocationFromJSON)),
         'requirementId': json['requirement_id'],
         'toleratedDuration': json['tolerated_duration'],
@@ -118,7 +110,6 @@ export function RequirementRequestToJSONTyped(value?: RequirementRequest | null,
     return {
         
         'city_code': value['cityCode'],
-        'country_code': value['countryCode'],
         'locations': ((value['locations'] as Array<any>).map(LocationToJSON)),
         'requirement_id': value['requirementId'],
         'tolerated_duration': value['toleratedDuration'],

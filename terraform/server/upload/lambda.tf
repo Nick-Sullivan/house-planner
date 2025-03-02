@@ -15,8 +15,8 @@ resource "aws_lambda_function" "api" {
   ]
   environment {
     variables = {
-      REQUIREMENTS_TABLE_NAME=data.aws_ssm_parameter.requirements_table_name.insecure_value,
-      SPATIAL_DISTANCES_TABLE_NAME=data.aws_ssm_parameter.spatial_distances_table_name.insecure_value,
+      REQUIREMENTS_TABLE_NAME      = data.aws_ssm_parameter.requirements_table_name.insecure_value,
+      SPATIAL_DISTANCES_TABLE_NAME = data.aws_ssm_parameter.spatial_distances_table_name.insecure_value,
     }
   }
 }
@@ -25,6 +25,10 @@ resource "aws_iam_role" "lambda_api" {
   name               = "${local.prefix}-API"
   description        = "Allows Lambda run"
   assume_role_policy = data.aws_iam_policy_document.lambda_assume_role.json
+  inline_policy {
+    name   = "DynamoWriteAccess"
+    policy = data.aws_iam_policy_document.access_dynamodb.json
+  }
 }
 
 resource "aws_iam_role_policy_attachment" "execute_api_lambda" {
@@ -43,3 +47,22 @@ data "aws_iam_policy_document" "lambda_assume_role" {
   }
 }
 
+
+data "aws_iam_policy_document" "access_dynamodb" {
+  statement {
+    actions = [
+      # "dynamodb:ConditionCheckItem",
+      "dynamodb:DeleteItem",
+      "dynamodb:GetItem",
+      "dynamodb:PutItem",
+      "dynamodb:Query",
+      # "dynamodb:Scan",
+      "dynamodb:UpdateItem",
+    ]
+    effect = "Allow"
+    resources = [
+      data.aws_ssm_parameter.requirements_table_arn.insecure_value,
+      data.aws_ssm_parameter.spatial_distances_table_arn.insecure_value,
+    ]
+  }
+}

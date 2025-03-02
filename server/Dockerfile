@@ -1,31 +1,27 @@
-FROM rust:1.83 AS builder
+# Use a pre-configured image specifically for Rust with musl
+FROM clux/muslrust:1.83.0-stable AS planner
 WORKDIR /app
+RUN cargo install cargo-chef
+COPY . .
+RUN cargo chef prepare --recipe-path recipe.json
 
-# Install system dependencies
-RUN apt-get update \
-    && apt-get install -y musl-tools musl libssl-dev pkg-config \
-    && rm -rf /var/lib/apt/lists/* \
-    && rustup target add x86_64-unknown-linux-musl
-ENV OPENSSL_DIR=/usr
+FROM clux/muslrust:1.83.0-stable AS builder
+WORKDIR /app
+RUN cargo install cargo-chef
+COPY --from=planner /app/recipe.json recipe.json
+RUN cargo chef cook --release --target x86_64-unknown-linux-musl --recipe-path recipe.json --no-default-features --features cloud
 
-# Cache external dependencies
-COPY Cargo.toml Cargo.lock ./
-RUN cargo fetch
-
-# Build the project
-COPY . . 
+COPY . .
 RUN cargo build \
-        --no-default-features \
-        --features cloud \
-        --release \
-        --bin serve \
-        --target x86_64-unknown-linux-musl \
-    && strip target/x86_64-unknown-linux-musl/release/serve
-    
+    --no-default-features \
+    --features cloud \
+    --release \
+    --bin api \
+    --target x86_64-unknown-linux-musl \
+    && strip target/x86_64-unknown-linux-musl/release/api
+
 # Create an AWS Lambda compatible image
 FROM public.ecr.aws/lambda/provided:al2
-COPY --from=builder /app/target/x86_64-unknown-linux-musl/release/serve /serve
-
+COPY --from=builder /app/target/x86_64-unknown-linux-musl/release/api /api
 ENV AWS_LAMBDA_HTTP_IGNORE_STAGE_IN_PATH=true
-
-ENTRYPOINT ["/serve"]
+ENTRYPOINT ["/api"]
