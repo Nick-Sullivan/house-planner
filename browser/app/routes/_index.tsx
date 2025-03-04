@@ -1,49 +1,18 @@
 import { Tabs } from "@mantine/core";
-import { Suspense, useEffect, useMemo, useRef, useState } from "react";
-import {
-  Await,
-  useLoaderData,
-  useSearchParams,
-  type LoaderFunctionArgs,
-} from "react-router";
-import {
-  Configuration,
-  HouseApi,
-  MapApi,
-  type HouseResponse,
-  type MapResponse,
-  type MapTileResponse,
-} from "~/client";
+import { useEffect, useRef, useState } from "react";
+import { useSearchParams } from "react-router";
+import { type MapTileResponse } from "~/client";
 import BaseMap from "~/components/BaseMap/BaseMap";
 import { HouseListPanel } from "~/components/HouseListPanel/HouseListPanel";
 import HouseMap from "~/components/HouseMap/HouseMap";
-import LoadingSpinner from "~/components/LoadingSpinner/LoadingSpinner";
 import { MapTextBox } from "~/components/MapTextBox/MapTextBox";
 import RequirementsMap from "~/components/RequirementsMap/RequirementsMap";
 import { RequirementsPanel } from "~/components/RequirementsPanel/RequirementsPanel";
 import { TwoColumnLayout } from "~/components/TwoColumnLayout/TwoColumnLayout";
-import { houseApi, mapApi } from "~/utils/apiClient";
-import { idParam, pageParam, searchParam } from "~/utils/constants";
-import {
-  isCompletedRequirement,
-  requirementToRequest,
-  type Requirement,
-} from "~/utils/requirementUtils";
+import { useHouses } from "~/hooks/useHouses";
+import { useRequirements } from "~/hooks/useRequirements";
+import { idParam } from "~/utils/constants";
 import type { Route } from "../+types/root";
-
-export const clientLoader = async ({ request, params }: LoaderFunctionArgs) => {
-  const url = new URL(request.url);
-  const page = url.searchParams.get(pageParam);
-  const housesResponse = houseApi.getHouses({
-    // page: page ? parseInt(page) : undefined,
-    // pageSize: 50,
-    limit: 10,
-  });
-  const mapResponse = mapApi.getMap({
-    mapRequest: { cityCode: "Adelaide", requirementIds: [] },
-  });
-  return { housesResponse, mapResponse };
-};
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -52,100 +21,30 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-const lookupHouse = (
-  houses: HouseResponse[],
-  address: string | null,
-): HouseResponse | null => {
-  return houses.find((house) => house.address === address) || null;
-};
-
 export default function Home() {
-  const { housesResponse, mapResponse } = useLoaderData<typeof clientLoader>();
   const [_, setSearchParams] = useSearchParams();
-  const [selectedHouse, setSelectedHouse] = useState<HouseResponse | null>(
+  const [activeTab, setActiveTab] = useState<string | null>("requirements");
+  const { housesData, selectedHouse, loadMore, selectHouse, handleTileSelect } =
+    useHouses();
+  const [hoveredTile, setHoveredTile] = useState<MapTileResponse | null>(null);
+  const [selectedTile, setSelectedTile] = useState<MapTileResponse | null>(
     null,
   );
-  const [activeTab, setActiveTab] = useState<string | null>("requirements");
-  const [requirements, setRequirements] = useState<Requirement[]>([]);
-  const [map, setMap] = useState<MapResponse | null>(null);
-  const [hoveredTile, setHoveredTile] = useState<MapTileResponse | null>(null);
+  const { requirements, map, onRequirementChange, onRequirementDelete } =
+    useRequirements();
   const mapRef = useRef<google.maps.Map | null>(null);
-
-  const onSearchChange = (value: string) => {
-    setSearchParams((prev) => {
-      prev.set(searchParam, value);
-      prev.set(pageParam, "1");
-      return prev;
-    });
-  };
-
-  // const onPageChange = (newPage: number) => {
-  //   setSearchParams((prev) => {
-  //     prev.set(pageParam, `${newPage}`);
-  //     return prev;
-  //   });
-  // };
 
   const onAddressChange = (address: string) => {
     setSearchParams((prev) => {
       prev.set(idParam, `${address}`);
       return prev;
     });
-    housesResponse.then((response) => {
-      const house = lookupHouse(response.items, address);
-      setSelectedHouse(house);
-    });
+    selectHouse(address);
   };
-
-  const onRequirementChange = async (req: Requirement) => {
-    if (isCompletedRequirement(req)) {
-      const reqRequest = requirementToRequest(req);
-      await mapApi.postRequirement({ requirementRequest: reqRequest });
-    }
-    setRequirements((prevRequirements) => {
-      const existingRequirement = prevRequirements.find((r) => r.id === req.id);
-      if (existingRequirement) {
-        return prevRequirements.map((r) => (r.id === req.id ? req : r));
-      } else {
-        return [...prevRequirements, req];
-      }
-    });
-  };
-
-  const onRequirementDelete = (id: string) => {
-    const existingRequirement = requirements.find((r) => r.id === id);
-    if (!existingRequirement) {
-      return;
-    }
-    setRequirements((prevRequirements) =>
-      prevRequirements.filter((r) => r.id !== id),
-    );
-    // TODO delete from backend
-  };
-
-  const completedRequirements = useMemo(
-    () => requirements.filter(isCompletedRequirement),
-    [requirements],
-  );
 
   useEffect(() => {
-    mapApi
-      .getMap({
-        mapRequest: {
-          cityCode: "Adelaide",
-          requirementIds: completedRequirements.map((r) => r.id),
-        },
-      })
-      .then((mapResponse) => {
-        setMap(mapResponse);
-      });
-  }, [completedRequirements]);
-
-  useEffect(() => {
-    mapResponse.then((response) => {
-      setMap(response);
-    });
-  }, [mapResponse]);
+    handleTileSelect(selectedTile);
+  }, [selectedTile]);
 
   return (
     <TwoColumnLayout
@@ -160,22 +59,21 @@ export default function Home() {
             onChange={onRequirementChange}
             onDelete={onRequirementDelete}
           />
-          <Suspense fallback={<LoadingSpinner />}>
-            <Await resolve={housesResponse}>
-              {(housesResponse) => (
-                <HouseListPanel
-                  houseResponse={housesResponse}
-                  selectedHouseAddress={selectedHouse?.address || null}
-                  onAddressChange={onAddressChange}
-                  // onPageChange={onPageChange}
-                />
-              )}
-            </Await>
-          </Suspense>
+          <HouseListPanel
+            houses={housesData}
+            selectedHouseAddress={selectedHouse?.address || null}
+            onAddressChange={onAddressChange}
+            onLoadMore={() => loadMore(selectedTile)}
+          />
         </Tabs>
       }
     >
-      <BaseMap mapRef={mapRef} map={map} onTileHover={setHoveredTile}>
+      <BaseMap
+        mapRef={mapRef}
+        map={map}
+        onTileHover={setHoveredTile}
+        onTileClick={setSelectedTile}
+      >
         {activeTab === "requirements" ? (
           <RequirementsMap
             mapRef={mapRef}
@@ -185,7 +83,7 @@ export default function Home() {
         ) : (
           <HouseMap
             mapRef={mapRef}
-            housesResponse={housesResponse}
+            houses={housesData}
             selectedHouse={selectedHouse}
           />
         )}

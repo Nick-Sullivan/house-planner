@@ -1,16 +1,16 @@
-import React, { Suspense, useEffect } from "react";
-import { Await } from "react-router";
-import type { HouseResponse, PaginatedResponseHouseResponse } from "~/client";
+import React, { useEffect } from "react";
+import type { HouseResponse } from "~/client";
+import type { HousesState } from "~/hooks/useHouses";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import { useMap } from "../MapContext/MapContext";
 
 const HouseMap = ({
   mapRef,
-  housesResponse,
+  houses,
   selectedHouse,
 }: {
   mapRef: React.RefObject<google.maps.Map | null>;
-  housesResponse: Promise<PaginatedResponseHouseResponse>;
+  houses: HousesState;
   selectedHouse: HouseResponse | null;
 }) => {
   const leafletComponents = useMap();
@@ -28,19 +28,13 @@ const HouseMap = ({
   }
   return (
     <>
-      <Suspense>
-        <Await resolve={housesResponse}>
-          {(housesResponse) =>
-            housesResponse.items.map((house: any) => (
-              <leafletComponents.Marker
-                key={house.id}
-                position={[house.lat!, house.lon!]}
-                opacity={selectedHouse?.id === house.id ? 1 : 0.3}
-              />
-            ))
-          }
-        </Await>
-      </Suspense>
+      {houses.items.map((house: HouseResponse) => (
+        <leafletComponents.Marker
+          key={house.address}
+          position={[house.lat!, house.lon!]}
+          opacity={selectedHouse?.address === house.address ? 1 : 0.3}
+        />
+      ))}
     </>
   );
 };

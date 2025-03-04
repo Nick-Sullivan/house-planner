@@ -56,6 +56,5 @@ pub struct PaginatedDbRequest<T> {
 
 pub struct PaginatedDbResponse<T> {
     pub items: Vec<T>,
-    pub count: i32,
     pub last_evaluated_key: Option<DbKey>,
 }

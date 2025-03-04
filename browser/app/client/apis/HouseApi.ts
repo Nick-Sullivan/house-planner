@@ -28,6 +28,8 @@ import {
 export interface GetHousesRequest {
     limit?: number;
     lastEvaluatedKey?: string;
+    cityCode?: string;
+    h3Index?: string;
 }
 
 /**
@@ -46,6 +48,14 @@ export class HouseApi extends runtime.BaseAPI {
 
         if (requestParameters['lastEvaluatedKey'] != null) {
             queryParameters['last_evaluated_key'] = requestParameters['lastEvaluatedKey'];
+        }
+
+        if (requestParameters['cityCode'] != null) {
+            queryParameters['city_code'] = requestParameters['cityCode'];
+        }
+
+        if (requestParameters['h3Index'] != null) {
+            queryParameters['h3_index'] = requestParameters['h3Index'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};

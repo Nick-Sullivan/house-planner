@@ -45,27 +45,34 @@ export default function BaseMap({
   mapRef,
   children,
   onTileHover,
+  onTileClick,
 }: {
   map: MapResponse | null;
   mapRef: React.RefObject<google.maps.Map | null>;
   children: React.ReactNode;
-  onTileHover: (tile: MapTileResponse | null) => void;
+  onTileHover?: (tile: MapTileResponse | null) => void;
+  onTileClick?: (tile: MapTileResponse) => void;
 }) {
   const leafletComponents = useMap();
   const [hoveredTile, setHoveredTile] = useState<string | null>(null);
-
+  const [selectedTile, setSelectedTile] = useState<string | null>(null);
   if (!leafletComponents) {
     return <LoadingSpinner />;
   }
 
-  const handleMouseOver = (index: number, tile: MapTileResponse) => {
+  const handleMouseOver = (tile: MapTileResponse) => {
     setHoveredTile(tile.h3Index);
-    onTileHover(tile);
+    onTileHover?.(tile);
   };
 
-  const handleMouseOut = (index: number) => {
+  const handleMouseOut = () => {
     setHoveredTile(null);
-    onTileHover(null);
+    onTileHover?.(null);
+  };
+
+  const handleTileClick = (tile: MapTileResponse) => {
+    setSelectedTile(tile.h3Index);
+    onTileClick?.(tile);
   };
 
   return (
@@ -86,11 +93,17 @@ export default function BaseMap({
             pathOptions={{
               fillColor: getTileColor(tile.meanScore),
               fillOpacity: getTileOpacity(tile.meanScore),
-              weight: tile.h3Index === hoveredTile ? 3 : 0,
+              weight:
+                tile.h3Index === selectedTile
+                  ? 5
+                  : tile.h3Index === hoveredTile
+                    ? 3
+                    : 0,
             }}
             eventHandlers={{
-              mouseover: () => handleMouseOver(index, tile),
-              mouseout: () => handleMouseOut(index),
+              mouseover: () => handleMouseOver(tile),
+              mouseout: () => handleMouseOut(),
+              click: () => handleTileClick(tile),
             }}
           />
         ))}

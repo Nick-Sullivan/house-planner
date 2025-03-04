@@ -35,6 +35,24 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "city_code",
+            "in": "query",
+            "description": "City code to filter houses",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "h3_index",
+            "in": "query",
+            "description": "H3 geospatial index to filter houses",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {

@@ -1,6 +1,7 @@
 use super::attribute_value_parser::parse_attribute_value;
-use super::paginated_models::{PaginatedDbRequest, PaginatedDbResponse};
+use super::paginated_models::PaginatedDbResponse;
 use crate::dynamodb_client_trait::IDynamoDbClient;
+use crate::paginated_models::DbKey;
 use anyhow::{Error, Ok};
 use aws_sdk_dynamodb::{
     operation::query::QueryInput,
@@ -45,24 +46,11 @@ impl HouseItem {
 
     pub async fn list_by_h3_index_from_db(
         h3_index: &str,
-        db: &dyn IDynamoDbClient,
-    ) -> Result<Vec<Self>, Error> {
-        let query_input = Self::query_by_h3_index(h3_index)?;
-        let query_output = db.query(query_input).await?;
-        let items = query_output.items.unwrap_or_default();
-        let mut results = Vec::new();
-        for item in items {
-            let spatial_distance_item = Self::from_map(&item)?;
-            results.push(spatial_distance_item);
-        }
-        Ok(results)
-    }
-
-    pub async fn list_by_city_from_db(
-        request: PaginatedDbRequest<String>,
+        limit: Option<i32>,
+        last_evaluated_key: Option<DbKey>,
         db: &dyn IDynamoDbClient,
     ) -> Result<PaginatedDbResponse<Self>, Error> {
-        let query_input = Self::query_by_city(request)?;
+        let query_input = Self::query_by_h3_index(h3_index, limit, last_evaluated_key)?;
         let query_output = db.query(query_input).await?;
         let items = query_output.items.unwrap_or_default();
         let mut results = Vec::new();
@@ -72,7 +60,26 @@ impl HouseItem {
         }
         Ok(PaginatedDbResponse {
             items: results,
-            count: query_output.count,
+            last_evaluated_key: query_output.last_evaluated_key,
+        })
+    }
+
+    pub async fn list_by_city_from_db(
+        city: &str,
+        limit: Option<i32>,
+        last_evaluated_key: Option<DbKey>,
+        db: &dyn IDynamoDbClient,
+    ) -> Result<PaginatedDbResponse<Self>, Error> {
+        let query_input = Self::query_by_city(city, limit, last_evaluated_key)?;
+        let query_output = db.query(query_input).await?;
+        let items = query_output.items.unwrap_or_default();
+        let mut results = Vec::new();
+        for item in items {
+            let spatial_distance_item = Self::from_map(&item)?;
+            results.push(spatial_distance_item);
+        }
+        Ok(PaginatedDbResponse {
+            items: results,
             last_evaluated_key: query_output.last_evaluated_key,
         })
     }
@@ -93,28 +100,40 @@ impl HouseItem {
         Ok(transaction_item)
     }
 
-    fn query_by_city(request: PaginatedDbRequest<String>) -> Result<QueryInput, Error> {
+    fn query_by_city(
+        city: &str,
+        limit: Option<i32>,
+        last_evaluated_key: Option<DbKey>,
+    ) -> Result<QueryInput, Error> {
         let mut builder = QueryInput::builder()
             .table_name(Self::get_table_name()?)
             .index_name("CityCodeIndex")
             .key_condition_expression("#city_code = :city_code")
             .expression_attribute_names("#city_code", "CityCode")
-            .expression_attribute_values(":city_code", AttributeValue::S(request.value.to_string()))
-            .set_exclusive_start_key(request.last_evaluated_key);
-        if let Some(limit) = request.limit {
+            .expression_attribute_values(":city_code", AttributeValue::S(city.to_string()))
+            .set_exclusive_start_key(last_evaluated_key);
+        if let Some(limit) = limit {
             builder = builder.limit(limit);
         }
         let query_input = builder.build()?;
         Ok(query_input)
     }
 
-    fn query_by_h3_index(h3_index: &str) -> Result<QueryInput, Error> {
-        let query_input = QueryInput::builder()
+    fn query_by_h3_index(
+        h3_index: &str,
+        limit: Option<i32>,
+        last_evaluated_key: Option<DbKey>,
+    ) -> Result<QueryInput, Error> {
+        let mut builder = QueryInput::builder()
             .table_name(Self::get_table_name()?)
             .key_condition_expression("#h3_index = :h3_index")
             .expression_attribute_names("#h3_index", "H3Index")
             .expression_attribute_values(":h3_index", AttributeValue::S(h3_index.to_string()))
-            .build()?;
+            .set_exclusive_start_key(last_evaluated_key);
+        if let Some(limit) = limit {
+            builder = builder.limit(limit);
+        }
+        let query_input = builder.build()?;
         Ok(query_input)
     }
 }

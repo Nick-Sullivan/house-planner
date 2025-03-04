@@ -1,18 +1,38 @@
-import { Center, Divider, Pagination, ScrollArea, Tabs } from "@mantine/core";
-import type { PaginatedResponseHouseResponse } from "~/client";
+import { ScrollArea, Tabs } from "@mantine/core";
+import { useCallback } from "react";
+import type { HousesState } from "~/hooks/useHouses";
 import { HouseCard } from "../HouseCard/HouseCard";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 export function HouseListPanel({
-  houseResponse,
+  houses,
   selectedHouseAddress,
   onAddressChange,
-  // onPageChange,
+  onLoadMore,
 }: {
-  houseResponse: PaginatedResponseHouseResponse;
+  houses: HousesState;
   selectedHouseAddress: string | null;
   onAddressChange: (id: string) => void;
-  // onPageChange: (id: number) => void;
+  onLoadMore?: () => void;
 }) {
+  const lastItemRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (!node || !houses.hasMore || houses.isLoading || !onLoadMore) return;
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting && houses.hasMore) {
+            onLoadMore();
+            observer.disconnect();
+          }
+        },
+        { threshold: 0.1 },
+      );
+      observer.observe(node);
+      return () => observer.disconnect();
+    },
+    [houses.hasMore, houses.isLoading, onLoadMore],
+  );
+
   return (
     <Tabs.Panel
       value="houses"
@@ -23,29 +43,23 @@ export function HouseListPanel({
         flex: 1,
       }}
     >
-      {/* <SearchBox searchParam={searchParam} onChange={onSearchChange} /> */}
       <ScrollArea scrollbars="y" style={{ flex: 1 }}>
-        {houseResponse.items.map((house) => (
-          <HouseCard
-            key={house.address}
-            house={house}
-            active={
-              selectedHouseAddress?.toString() === house.address.toString()
-            }
-            onClick={onAddressChange}
-          />
-        ))}
+        {houses.items.map((house, index) => {
+          const isLast = index === houses.items.length - 1;
+          return (
+            <HouseCard
+              key={house.address}
+              ref={isLast ? lastItemRef : undefined}
+              house={house}
+              active={
+                selectedHouseAddress?.toString() === house.address.toString()
+              }
+              onClick={onAddressChange}
+            />
+          );
+        })}
+        {houses.isLoading && <LoadingSpinner />}
       </ScrollArea>
-      {/* <Divider my="xs" variant="dotted" />
-      <Center>
-        <Pagination
-          color="blue.4"
-          size="xs"
-          value={houseResponse.currentPage}
-          total={houseResponse.totalPages}
-          onChange={onPageChange}
-        />
-      </Center> */}
     </Tabs.Panel>
   );
 }

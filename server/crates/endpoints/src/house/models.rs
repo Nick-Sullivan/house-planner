@@ -1,4 +1,5 @@
 use database::house_item::HouseItem;
+use serde::Deserialize;
 
 pub const HOUSE_TAG: &str = "house";
 
@@ -21,4 +22,10 @@ impl From<HouseItem> for HouseResponse {
             lon: house.lng,
         }
     }
+}
+
+#[derive(Debug, Deserialize)]
+pub struct HouseRequestFilter {
+    pub city_code: Option<String>,
+    pub h3_index: Option<String>,
 }
