@@ -46,7 +46,7 @@ export default function BaseMap({
   children,
   onTileHover,
 }: {
-  map: MapResponse;
+  map: MapResponse | null;
   mapRef: React.RefObject<google.maps.Map | null>;
   children: React.ReactNode;
   onTileHover: (tile: MapTileResponse | null) => void;
@@ -72,27 +72,28 @@ export default function BaseMap({
     <leafletComponents.MapContainer
       center={ADELAIDE_CENTRE}
       zoom={12}
-      style={{ width: "99%", height: "100%" }}
+      style={{ width: "100%", height: "100%" }}
       ref={mapRef}
     >
       <leafletComponents.TileLayer url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png" />
-      {map.tiles.map((tile: MapTileResponse, index: number) => (
-        <leafletComponents.Polygon
-          key={index}
-          positions={h3
-            .cellToBoundary(tile.h3Index)
-            .map(([lat, lng]: [number, number]) => [lat, lng])}
-          pathOptions={{
-            fillColor: getTileColor(tile.meanScore),
-            fillOpacity: getTileOpacity(tile.meanScore),
-            weight: tile.h3Index === hoveredTile ? 3 : 0,
-          }}
-          eventHandlers={{
-            mouseover: () => handleMouseOver(index, tile),
-            mouseout: () => handleMouseOut(index),
-          }}
-        />
-      ))}
+      {map &&
+        map.tiles.map((tile: MapTileResponse, index: number) => (
+          <leafletComponents.Polygon
+            key={index}
+            positions={h3
+              .cellToBoundary(tile.h3Index)
+              .map(([lat, lng]: [number, number]) => [lat, lng])}
+            pathOptions={{
+              fillColor: getTileColor(tile.meanScore),
+              fillOpacity: getTileOpacity(tile.meanScore),
+              weight: tile.h3Index === hoveredTile ? 3 : 0,
+            }}
+            eventHandlers={{
+              mouseover: () => handleMouseOver(index, tile),
+              mouseout: () => handleMouseOut(index),
+            }}
+          />
+        ))}
       {children}
     </leafletComponents.MapContainer>
   );

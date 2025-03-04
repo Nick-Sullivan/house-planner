@@ -11,10 +11,12 @@ import { Autocomplete } from "@react-google-maps/api";
 import { IconTrash } from "@tabler/icons-react";
 import * as h3 from "h3-js";
 import { set } from "radash";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { TravelMode } from "~/client";
 import { h3IndexLevel } from "~/utils/constants";
 import type { Requirement } from "~/utils/requirementUtils";
+
+const AUTOCOMPLETE_DEBOUNCE_MS = 500;
 
 function TextSelector({
   data,
@@ -54,6 +56,8 @@ export function RequirementCard({
   const [addressText, setAddressText] = useState(
     requirement.location?.address || "",
   );
+  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
+
   const onLoad = (autocompleteInstance: google.maps.places.Autocomplete) => {
     setAutocomplete(autocompleteInstance);
   };
@@ -83,6 +87,18 @@ export function RequirementCard({
   };
   const onTravelTypeChanged = (value: TravelMode) => {
     onChange({ ...requirement, travelType: value });
+  };
+  const handleInputChange = (value: string) => {
+    setAddressText(value);
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current);
+    }
+    debounceTimerRef.current = setTimeout(() => {
+      if (autocomplete) {
+        // This will trigger the autocomplete to update its predictions
+        autocomplete.setFields(["formatted_address", "geometry", "place_id"]);
+      }
+    }, AUTOCOMPLETE_DEBOUNCE_MS);
   };
 
   return (
@@ -149,7 +165,7 @@ export function RequirementCard({
         <TextInput
           placeholder="Enter address"
           value={addressText}
-          onChange={(event) => setAddressText(event.currentTarget.value)}
+          onChange={(event) => handleInputChange(event.currentTarget.value)}
         />
       </Autocomplete>
     </Card>

@@ -53,6 +53,17 @@ impl AttributeValueParser for i32 {
     }
 }
 
+impl AttributeValueParser for f64 {
+    fn parse(value: Option<&AttributeValue>) -> Result<Self, Error> {
+        let value = value.ok_or(anyhow::anyhow!("Key not found"))?;
+        let result = value
+            .as_s()
+            .map_err(|_| anyhow::anyhow!("Expected number"))?
+            .parse::<f64>()
+            .map_err(|_| anyhow::anyhow!("Could not parse number"))?;
+        Ok(result)
+    }
+}
 impl AttributeValueParser for bool {
     fn parse(value: Option<&AttributeValue>) -> Result<Self, Error> {
         let value = value.ok_or(anyhow::anyhow!("Key not found"))?;

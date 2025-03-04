@@ -2,7 +2,7 @@ use super::super::attribute_value_parser::{self, parse_attribute_value};
 use super::super::dynamodb_client_trait::IDynamoDbClient;
 use anyhow::Error;
 use async_trait::async_trait;
-use aws_sdk_dynamodb::operation::query::QueryOutput;
+use aws_sdk_dynamodb::operation::query::{QueryInput, QueryOutput};
 use aws_sdk_dynamodb::operation::transact_get_items::builders::TransactGetItemsOutputBuilder;
 use aws_sdk_dynamodb::types::{
     AttributeValue, Delete, ItemResponse, Put, TransactGetItem, TransactWriteItem,
@@ -22,6 +22,7 @@ type FakeTable = HashMap<String, FakeItem>;
 pub struct DynamoDbClient {
     requirements_table: RwLock<FakeTable>,
     spatial_distances_table: RwLock<FakeTable>,
+    houses_table: RwLock<FakeTable>,
 }
 
 impl DynamoDbClient {
@@ -29,9 +30,12 @@ impl DynamoDbClient {
         let requirements_table = RwLock::new(HashMap::new());
         let spatial_distances_items = DynamoDbClient::load_spatial_distances_data()?;
         let spatial_distances_table = RwLock::new(spatial_distances_items);
+        let houses_items = DynamoDbClient::load_houses_data()?;
+        let houses_table = RwLock::new(houses_items);
         Ok(DynamoDbClient {
             requirements_table,
             spatial_distances_table,
+            houses_table,
         })
     }
 
@@ -80,11 +84,41 @@ impl DynamoDbClient {
         Ok(items)
     }
 
+    fn load_houses_data() -> Result<FakeTable, Error> {
+        let csv_data = include_str!("houses.csv");
+        let mut reader = ReaderBuilder::new().from_reader(csv_data.as_bytes());
+        let mut items = HashMap::new();
+        for result in reader.records() {
+            let record = result?;
+            let h3_index = record[0].to_string();
+            let address = record[1].to_string();
+            let city_code = record[2].to_string();
+            let url = record[3].to_string();
+            let lat = (record[4].parse::<f64>()?).to_string();
+            let lng = (record[5].parse::<f64>()?).to_string();
+            let item = FakeItem {
+                hash_map: HashMap::from([
+                    ("H3Index".to_string(), AttributeValue::S(h3_index.clone())),
+                    ("Address".to_string(), AttributeValue::S(address.clone())),
+                    ("CityCode".to_string(), AttributeValue::S(city_code)),
+                    ("Url".to_string(), AttributeValue::S(url)),
+                    ("Lat".to_string(), AttributeValue::S(lat)),
+                    ("Lng".to_string(), AttributeValue::S(lng)),
+                ]),
+            };
+            let key = format!("{}{}{}", h3_index, KEY_JOIN_STR, address);
+            items.insert(key, item);
+        }
+        Ok(items)
+    }
+
     fn get_table(&self, table_name: &str) -> &RwLock<HashMap<String, FakeItem>> {
         if table_name.ends_with("Requirements") {
             &self.requirements_table
         } else if table_name.ends_with("SpatialDistances") {
             &self.spatial_distances_table
+        } else if table_name.ends_with("Houses") {
+            &self.houses_table
         } else {
             panic!("Unrecognised table {:?}", table_name);
         }
@@ -253,26 +287,39 @@ impl IDynamoDbClient for DynamoDbClient {
         Ok(())
     }
 
-    async fn query_by_city(&self, city_code: &str) -> Result<QueryOutput, Error> {
-        let table = self.spatial_distances_table.read().unwrap();
-        let mut items = Vec::new();
-        for (_key, item) in table.iter() {
-            if let Some(AttributeValue::S(code)) = item.hash_map.get("CityCode") {
-                if code == city_code {
-                    items.push(item.hash_map.clone());
-                }
-            }
+    async fn query(&self, query: QueryInput) -> Result<QueryOutput, Error> {
+        let table_name = query.table_name.ok_or(anyhow::anyhow!("No table name"))?;
+        let table = self.get_table(&table_name);
+        let table_data = table.read().unwrap();
+        let key_condition = query
+            .key_condition_expression
+            .as_deref()
+            .ok_or(anyhow::anyhow!("No key condition expression"))?;
+        let attr_names = query
+            .expression_attribute_names
+            .as_ref()
+            .ok_or(anyhow::anyhow!("No expression attribute names"))?;
+        let attr_values = query
+            .expression_attribute_values
+            .as_ref()
+            .ok_or(anyhow::anyhow!("No expression attribute values"))?;
+        let parts: Vec<&str> = key_condition.split('=').collect();
+        if parts.len() != 2 {
+            return Err(anyhow::anyhow!("Unsupported key condition format"));
         }
-        let query_output = QueryOutput::builder().set_items(Some(items)).build();
-        Ok(query_output)
-    }
-
-    async fn query_by_source_index(&self, source_index: &str) -> Result<QueryOutput, Error> {
-        let table = self.spatial_distances_table.read().unwrap();
+        let field_key = parts[0].trim();
+        let value_key = parts[1].trim();
+        let field_name = attr_names.get(field_key).ok_or(anyhow::anyhow!(
+            "Field name not found in expression attributes"
+        ))?;
+        let value = attr_values
+            .get(value_key)
+            .ok_or(anyhow::anyhow!("Value not found in expression attributes"))?;
+        let value = parse_attribute_value::<String>(Some(value))?;
         let mut items = Vec::new();
-        for (_key, item) in table.iter() {
-            if let Some(AttributeValue::S(code)) = item.hash_map.get("SourceIndex") {
-                if code == source_index {
+        for (_key, item) in table_data.iter() {
+            if let Some(AttributeValue::S(code)) = item.hash_map.get(field_name) {
+                if code == &value {
                     items.push(item.hash_map.clone());
                 }
             }

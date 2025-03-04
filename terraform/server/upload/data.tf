@@ -23,3 +23,10 @@ data "aws_ssm_parameter" "requirements_table_arn" {
   name = "${local.prefix_parameter}/DynamoDB/RequirementsTable/Arn"
 }
 
+data "aws_ssm_parameter" "houses_table_name" {
+  name = "${local.prefix_parameter}/DynamoDB/HousesTable/Name"
+}
+
+data "aws_ssm_parameter" "houses_table_arn" {
+  name = "${local.prefix_parameter}/DynamoDB/HousesTable/Arn"
+}

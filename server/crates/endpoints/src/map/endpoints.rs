@@ -2,8 +2,8 @@ use super::models::{
     MapRequest, MapResponse, MapTileResponse, RequirementRequest, RequirementResponse,
     RequirementScoreResponse, TravelMode, MAP_TAG,
 };
-use crate::request::AppState;
-use crate::response::ErrorResponse;
+use crate::errors::{map_error_to_response, ErrorResponse};
+use crate::state::AppState;
 use anyhow::Error;
 use axum::extract::State;
 use axum::http::StatusCode;
@@ -20,16 +20,6 @@ pub fn router() -> OpenApiRouter<Arc<AppState>> {
     OpenApiRouter::new()
         .routes(routes!(post_requirement))
         .routes(routes!(get_map))
-}
-
-fn map_error_to_response(error: impl ToString) -> (StatusCode, Json<ErrorResponse>) {
-    println!("Error: {}", error.to_string());
-    (
-        StatusCode::INTERNAL_SERVER_ERROR,
-        Json(ErrorResponse {
-            error: error.to_string(),
-        }),
-    )
 }
 
 #[utoipa::path(
@@ -117,25 +107,6 @@ pub async fn post_requirement(
         .map_err(map_error_to_response)?;
     Ok(Json(RequirementResponse {}))
 }
-
-// #[utoipa::path(
-//     delete,
-//     path = "requirement/{requirement_id}",
-//     tag = MAP_TAG,
-//     params(
-//         ("requirement_id" = Uuid, Path, description = "ID of the requirement to delete")
-//     ),
-//     responses(
-//         (status = OK, description = "Requirement deleted successfully"),
-//         (status = INTERNAL_SERVER_ERROR, body = ErrorResponse, description = "Internal server error")
-//     )
-// )]
-// pub async fn delete_requirement(
-//     State(state): State<Arc<AppState>>,
-//     Json(recommendation_request): Json<RecommendationRequest>,
-// ) -> Result<StatusCode, (StatusCode, Json<ErrorResponse>)> {
-//     Ok(StatusCode::OK)
-// }
 
 #[utoipa::path(
     post,

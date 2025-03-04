@@ -46,3 +46,32 @@ resource "aws_dynamodb_table" "requirements" {
     enabled        = true
   }
 }
+
+resource "aws_dynamodb_table" "houses" {
+  name         = "${local.prefix}-Houses"
+  billing_mode = "PAY_PER_REQUEST"
+  hash_key     = "H3Index"
+  range_key    = "Address"
+  attribute {
+    name = "H3Index"
+    type = "S"
+  }
+  attribute {
+    name = "Address"
+    type = "S"
+  }
+  attribute {
+    name = "CityCode"
+    type = "S"
+  }
+  global_secondary_index {
+    name            = "CityCodeIndex"
+    hash_key        = "CityCode"
+    range_key       = "H3Index"
+    projection_type = "ALL"
+  }
+  ttl {
+    attribute_name = "TimeToLive"
+    enabled        = true
+  }
+}

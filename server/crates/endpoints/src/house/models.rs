@@ -1,24 +1,24 @@
-use houses::models::House;
+use database::house_item::HouseItem;
 
 pub const HOUSE_TAG: &str = "house";
 
 #[derive(utoipa::ToSchema, serde::Serialize)]
 pub struct HouseResponse {
-    pub id: i32,
+    pub h3_index: String,
     pub address: String,
     pub url: String,
-    pub lat: Option<f64>,
-    pub lon: Option<f64>,
+    pub lat: f64,
+    pub lon: f64,
 }
 
-impl From<House> for HouseResponse {
-    fn from(house: House) -> Self {
+impl From<HouseItem> for HouseResponse {
+    fn from(house: HouseItem) -> Self {
         HouseResponse {
-            id: house.id,
+            h3_index: house.h3_index,
             address: house.address,
             url: house.url,
             lat: house.lat,
-            lon: house.lon,
+            lon: house.lng,
         }
     }
 }

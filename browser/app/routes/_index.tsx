@@ -11,6 +11,7 @@ import {
   HouseApi,
   MapApi,
   type HouseResponse,
+  type MapResponse,
   type MapTileResponse,
 } from "~/client";
 import BaseMap from "~/components/BaseMap/BaseMap";
@@ -34,10 +35,11 @@ export const clientLoader = async ({ request, params }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
   const page = url.searchParams.get(pageParam);
   const housesResponse = houseApi.getHouses({
-    page: page ? parseInt(page) : undefined,
-    pageSize: 50,
+    // page: page ? parseInt(page) : undefined,
+    // pageSize: 50,
+    limit: 10,
   });
-  const mapResponse = await mapApi.getMap({
+  const mapResponse = mapApi.getMap({
     mapRequest: { cityCode: "Adelaide", requirementIds: [] },
   });
   return { housesResponse, mapResponse };
@@ -52,9 +54,9 @@ export function meta({}: Route.MetaArgs) {
 
 const lookupHouse = (
   houses: HouseResponse[],
-  id: number | null,
+  address: string | null,
 ): HouseResponse | null => {
-  return houses.find((house) => house.id === id) || null;
+  return houses.find((house) => house.address === address) || null;
 };
 
 export default function Home() {
@@ -65,7 +67,7 @@ export default function Home() {
   );
   const [activeTab, setActiveTab] = useState<string | null>("requirements");
   const [requirements, setRequirements] = useState<Requirement[]>([]);
-  const [map, setMap] = useState(mapResponse);
+  const [map, setMap] = useState<MapResponse | null>(null);
   const [hoveredTile, setHoveredTile] = useState<MapTileResponse | null>(null);
   const mapRef = useRef<google.maps.Map | null>(null);
 
@@ -77,28 +79,26 @@ export default function Home() {
     });
   };
 
-  const onPageChange = (newPage: number) => {
-    setSearchParams((prev) => {
-      prev.set(pageParam, `${newPage}`);
-      return prev;
-    });
-  };
+  // const onPageChange = (newPage: number) => {
+  //   setSearchParams((prev) => {
+  //     prev.set(pageParam, `${newPage}`);
+  //     return prev;
+  //   });
+  // };
 
-  const onIdChange = (id: number) => {
+  const onAddressChange = (address: string) => {
     setSearchParams((prev) => {
-      prev.set(idParam, `${id}`);
+      prev.set(idParam, `${address}`);
       return prev;
     });
     housesResponse.then((response) => {
-      const house = lookupHouse(response.items, id);
+      const house = lookupHouse(response.items, address);
       setSelectedHouse(house);
     });
   };
 
   const onRequirementChange = async (req: Requirement) => {
-    console.log("Updating requirement");
     if (isCompletedRequirement(req)) {
-      console.log("POSTing requirement");
       const reqRequest = requirementToRequest(req);
       await mapApi.postRequirement({ requirementRequest: reqRequest });
     }
@@ -113,8 +113,6 @@ export default function Home() {
   };
 
   const onRequirementDelete = (id: string) => {
-    console.log("Deleting requirement");
-    console.log("DELETING requirement");
     const existingRequirement = requirements.find((r) => r.id === id);
     if (!existingRequirement) {
       return;
@@ -131,7 +129,6 @@ export default function Home() {
   );
 
   useEffect(() => {
-    console.log("Getting a new map");
     mapApi
       .getMap({
         mapRequest: {
@@ -140,11 +137,15 @@ export default function Home() {
         },
       })
       .then((mapResponse) => {
-        console.log("Got a new map");
-        console.log(mapResponse);
         setMap(mapResponse);
       });
   }, [completedRequirements]);
+
+  useEffect(() => {
+    mapResponse.then((response) => {
+      setMap(response);
+    });
+  }, [mapResponse]);
 
   return (
     <TwoColumnLayout
@@ -164,9 +165,9 @@ export default function Home() {
               {(housesResponse) => (
                 <HouseListPanel
                   houseResponse={housesResponse}
-                  selectedHouseId={selectedHouse?.id || null}
-                  onIdChange={onIdChange}
-                  onPageChange={onPageChange}
+                  selectedHouseAddress={selectedHouse?.address || null}
+                  onAddressChange={onAddressChange}
+                  // onPageChange={onPageChange}
                 />
               )}
             </Await>

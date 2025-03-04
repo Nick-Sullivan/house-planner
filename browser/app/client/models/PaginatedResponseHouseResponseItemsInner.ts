@@ -27,22 +27,22 @@ export interface PaginatedResponseHouseResponseItemsInner {
     address: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof PaginatedResponseHouseResponseItemsInner
      */
-    id: number;
+    h3Index: string;
     /**
      * 
      * @type {number}
      * @memberof PaginatedResponseHouseResponseItemsInner
      */
-    lat?: number | null;
+    lat: number;
     /**
      * 
      * @type {number}
      * @memberof PaginatedResponseHouseResponseItemsInner
      */
-    lon?: number | null;
+    lon: number;
     /**
      * 
      * @type {string}
@@ -56,7 +56,9 @@ export interface PaginatedResponseHouseResponseItemsInner {
  */
 export function instanceOfPaginatedResponseHouseResponseItemsInner(value: object): value is PaginatedResponseHouseResponseItemsInner {
     if (!('address' in value) || value['address'] === undefined) return false;
-    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('h3Index' in value) || value['h3Index'] === undefined) return false;
+    if (!('lat' in value) || value['lat'] === undefined) return false;
+    if (!('lon' in value) || value['lon'] === undefined) return false;
     if (!('url' in value) || value['url'] === undefined) return false;
     return true;
 }
@@ -72,9 +74,9 @@ export function PaginatedResponseHouseResponseItemsInnerFromJSONTyped(json: any,
     return {
         
         'address': json['address'],
-        'id': json['id'],
-        'lat': json['lat'] == null ? undefined : json['lat'],
-        'lon': json['lon'] == null ? undefined : json['lon'],
+        'h3Index': json['h3_index'],
+        'lat': json['lat'],
+        'lon': json['lon'],
         'url': json['url'],
     };
 }
@@ -91,7 +93,7 @@ export function PaginatedResponseHouseResponseItemsInnerToJSONTyped(value?: Pagi
     return {
         
         'address': value['address'],
-        'id': value['id'],
+        'h3_index': value['h3Index'],
         'lat': value['lat'],
         'lon': value['lon'],
         'url': value['url'],

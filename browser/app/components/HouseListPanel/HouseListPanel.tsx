@@ -4,14 +4,14 @@ import { HouseCard } from "../HouseCard/HouseCard";
 
 export function HouseListPanel({
   houseResponse,
-  selectedHouseId,
-  onIdChange,
-  onPageChange,
+  selectedHouseAddress,
+  onAddressChange,
+  // onPageChange,
 }: {
   houseResponse: PaginatedResponseHouseResponse;
-  selectedHouseId: number | null;
-  onIdChange: (id: number) => void;
-  onPageChange: (id: number) => void;
+  selectedHouseAddress: string | null;
+  onAddressChange: (id: string) => void;
+  // onPageChange: (id: number) => void;
 }) {
   return (
     <Tabs.Panel
@@ -27,14 +27,16 @@ export function HouseListPanel({
       <ScrollArea scrollbars="y" style={{ flex: 1 }}>
         {houseResponse.items.map((house) => (
           <HouseCard
-            key={house.id}
+            key={house.address}
             house={house}
-            active={selectedHouseId?.toString() === house.id.toString()}
-            onClick={onIdChange}
+            active={
+              selectedHouseAddress?.toString() === house.address.toString()
+            }
+            onClick={onAddressChange}
           />
         ))}
       </ScrollArea>
-      <Divider my="xs" variant="dotted" />
+      {/* <Divider my="xs" variant="dotted" />
       <Center>
         <Pagination
           color="blue.4"
@@ -43,7 +45,7 @@ export function HouseListPanel({
           total={houseResponse.totalPages}
           onChange={onPageChange}
         />
-      </Center>
+      </Center> */}
     </Tabs.Panel>
   );
 }

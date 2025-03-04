@@ -18,23 +18,22 @@
         "operationId": "get_houses",
         "parameters": [
           {
-            "name": "page",
+            "name": "limit",
             "in": "query",
-            "description": "Page number",
+            "description": "Maximum number of items to return",
             "required": false,
             "schema": {
               "type": "integer",
-              "minimum": 0
+              "format": "int32"
             }
           },
           {
-            "name": "page_size",
+            "name": "last_evaluated_key",
             "in": "query",
-            "description": "Number of items per page",
+            "description": "Last evaluated key from previous response",
             "required": false,
             "schema": {
-              "type": "integer",
-              "minimum": 0
+              "type": "string"
             }
           }
         ],
@@ -45,58 +44,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PaginatedResponse_HouseResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/houses/{id}": {
-      "get": {
-        "tags": [
-          "house"
-        ],
-        "operationId": "get_house_by_id",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "House ID",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HouseResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "House not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -211,30 +158,25 @@
       "HouseResponse": {
         "type": "object",
         "required": [
-          "id",
+          "h3_index",
           "address",
-          "url"
+          "url",
+          "lat",
+          "lon"
         ],
         "properties": {
           "address": {
             "type": "string"
           },
-          "id": {
-            "type": "integer",
-            "format": "int32"
+          "h3_index": {
+            "type": "string"
           },
           "lat": {
-            "type": [
-              "number",
-              "null"
-            ],
+            "type": "number",
             "format": "double"
           },
           "lon": {
-            "type": [
-              "number",
-              "null"
-            ],
+            "type": "number",
             "format": "double"
           },
           "url": {
@@ -331,46 +273,33 @@
       "PaginatedResponse_HouseResponse": {
         "type": "object",
         "required": [
-          "items",
-          "total_items",
-          "total_pages",
-          "current_page",
-          "page_size"
+          "items"
         ],
         "properties": {
-          "current_page": {
-            "type": "integer",
-            "minimum": 0
-          },
           "items": {
             "type": "array",
             "items": {
               "type": "object",
               "required": [
-                "id",
+                "h3_index",
                 "address",
-                "url"
+                "url",
+                "lat",
+                "lon"
               ],
               "properties": {
                 "address": {
                   "type": "string"
                 },
-                "id": {
-                  "type": "integer",
-                  "format": "int32"
+                "h3_index": {
+                  "type": "string"
                 },
                 "lat": {
-                  "type": [
-                    "number",
-                    "null"
-                  ],
+                  "type": "number",
                   "format": "double"
                 },
                 "lon": {
-                  "type": [
-                    "number",
-                    "null"
-                  ],
+                  "type": "number",
                   "format": "double"
                 },
                 "url": {
@@ -379,17 +308,11 @@
               }
             }
           },
-          "page_size": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "total_items": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "total_pages": {
-            "type": "integer",
-            "minimum": 0
+          "last_evaluated_key": {
+            "type": [
+              "string",
+              "null"
+            ]
           }
         }
       },

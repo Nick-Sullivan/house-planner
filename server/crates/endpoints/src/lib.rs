@@ -1,5 +1,6 @@
+pub mod errors;
 pub mod house;
 pub mod map;
-pub mod request;
-pub mod response;
+pub mod pagination;
 pub mod router;
+pub mod state;

@@ -16,25 +16,18 @@
 import * as runtime from '../runtime';
 import type {
   ErrorResponse,
-  HouseResponse,
   PaginatedResponseHouseResponse,
 } from '../models/index';
 import {
     ErrorResponseFromJSON,
     ErrorResponseToJSON,
-    HouseResponseFromJSON,
-    HouseResponseToJSON,
     PaginatedResponseHouseResponseFromJSON,
     PaginatedResponseHouseResponseToJSON,
 } from '../models/index';
 
-export interface GetHouseByIdRequest {
-    id: number;
-}
-
 export interface GetHousesRequest {
-    page?: number;
-    pageSize?: number;
+    limit?: number;
+    lastEvaluatedKey?: string;
 }
 
 /**
@@ -44,46 +37,15 @@ export class HouseApi extends runtime.BaseAPI {
 
     /**
      */
-    async getHouseByIdRaw(requestParameters: GetHouseByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<HouseResponse>> {
-        if (requestParameters['id'] == null) {
-            throw new runtime.RequiredError(
-                'id',
-                'Required parameter "id" was null or undefined when calling getHouseById().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        const response = await this.request({
-            path: `/houses/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => HouseResponseFromJSON(jsonValue));
-    }
-
-    /**
-     */
-    async getHouseById(requestParameters: GetHouseByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<HouseResponse> {
-        const response = await this.getHouseByIdRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     */
     async getHousesRaw(requestParameters: GetHousesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PaginatedResponseHouseResponse>> {
         const queryParameters: any = {};
 
-        if (requestParameters['page'] != null) {
-            queryParameters['page'] = requestParameters['page'];
+        if (requestParameters['limit'] != null) {
+            queryParameters['limit'] = requestParameters['limit'];
         }
 
-        if (requestParameters['pageSize'] != null) {
-            queryParameters['page_size'] = requestParameters['pageSize'];
+        if (requestParameters['lastEvaluatedKey'] != null) {
+            queryParameters['last_evaluated_key'] = requestParameters['lastEvaluatedKey'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};

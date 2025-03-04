@@ -17,6 +17,7 @@ resource "aws_lambda_function" "api" {
     variables = {
       REQUIREMENTS_TABLE_NAME      = data.aws_ssm_parameter.requirements_table_name.insecure_value,
       SPATIAL_DISTANCES_TABLE_NAME = data.aws_ssm_parameter.spatial_distances_table_name.insecure_value,
+      HOUSES_TABLE_NAME            = data.aws_ssm_parameter.houses_table_name.insecure_value,
     }
   }
 }
@@ -63,6 +64,7 @@ data "aws_iam_policy_document" "access_dynamodb" {
     resources = [
       data.aws_ssm_parameter.requirements_table_arn.insecure_value,
       data.aws_ssm_parameter.spatial_distances_table_arn.insecure_value,
+      data.aws_ssm_parameter.houses_table_arn.insecure_value,
     ]
   }
 }

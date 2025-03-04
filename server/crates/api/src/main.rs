@@ -3,10 +3,10 @@ use axum::Router;
 #[cfg(feature = "cloud")]
 use database::dynamodb_client_cloud::DynamoDbClient;
 #[cfg(feature = "local")]
-use database::dynamodb_client_local::DynamoDbClient;
-// use database::dynamodb_client_cloud::DynamoDbClient;
+use database::dynamodb_client_cloud::DynamoDbClient;
+// use database::dynamodb_client_local::DynamoDbClient;
 use dotenv::from_path;
-use endpoints::request::AppState;
+use endpoints::state::AppState;
 use h3_mapper::h3_client::H3Client;
 use houses::house_client::HouseClient;
 use hyper::Request;

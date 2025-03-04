@@ -8,7 +8,7 @@ export function HouseCard({
 }: {
   house: HouseResponse;
   active: boolean;
-  onClick: (id: number) => void;
+  onClick: (address: string) => void;
 }) {
   return (
     <Card
@@ -17,7 +17,7 @@ export function HouseCard({
       m="xs"
       radius="md"
       withBorder={active}
-      onClick={() => onClick(house.id)}
+      onClick={() => onClick(house.address)}
       style={{ cursor: "pointer", borderWidth: "3px" }}
     >
       {house.address}

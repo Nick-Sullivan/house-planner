@@ -2,6 +2,7 @@ use super::attribute_value_parser::parse_attribute_value;
 use super::dynamodb_client_trait::IDynamoDbClient;
 use anyhow::Error;
 use aws_sdk_dynamodb::types::{AttributeValue, Get, Put, TransactGetItem, TransactWriteItem};
+use chrono::{Duration, Utc};
 use serde::{Deserialize, Serialize};
 use std::{collections::HashMap, env};
 use uuid::Uuid;
@@ -64,7 +65,7 @@ impl RequirementItem {
     }
 
     pub fn save(&self) -> Result<TransactWriteItem, Error> {
-        // TODO - TimeToLive
+        let ttl_timestamp = (Utc::now() + Duration::days(1)).timestamp();
         let put_item = Put::builder()
             .table_name(Self::get_table_name()?)
             .item("CityCode", AttributeValue::S(self.city_code.clone()))
@@ -73,6 +74,7 @@ impl RequirementItem {
                 AttributeValue::S(self.requirement_id.to_string()),
             )
             .item("MapTiles", AttributeValue::S(self.serialise_map_tiles()?))
+            .item("TimeToLive", AttributeValue::N(ttl_timestamp.to_string()))
             .build()?;
         let transaction_item = TransactWriteItem::builder().put(put_item).build();
         Ok(transaction_item)

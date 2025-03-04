@@ -12,7 +12,12 @@ export function TwoColumnLayout({
     <Grid
       h="100%"
       styles={{
-        inner: { height: "100%" },
+        inner: {
+          height: "100%",
+          width: "100%",
+          margin: "0",
+          boxSizing: "border-box",
+        },
       }}
     >
       <Grid.Col
@@ -34,7 +39,7 @@ export function TwoColumnLayout({
           height: "100%",
           overflowY: "auto",
           // borderLeft: `1px solid var(--mantine-color-gray-3)`,
-          backgroundColor: "red",
+          // backgroundColor: "red",
         }}
       >
         {children}

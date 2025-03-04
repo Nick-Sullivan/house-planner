@@ -895,6 +895,7 @@ dependencies = [
  "async-trait",
  "aws-config",
  "aws-sdk-dynamodb",
+ "base64 0.22.1",
  "chrono",
  "csv",
  "serde",

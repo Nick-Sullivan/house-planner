@@ -29,45 +29,23 @@ import {
 export interface PaginatedResponseHouseResponse {
     /**
      * 
-     * @type {number}
-     * @memberof PaginatedResponseHouseResponse
-     */
-    currentPage: number;
-    /**
-     * 
      * @type {Array<PaginatedResponseHouseResponseItemsInner>}
      * @memberof PaginatedResponseHouseResponse
      */
     items: Array<PaginatedResponseHouseResponseItemsInner>;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof PaginatedResponseHouseResponse
      */
-    pageSize: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PaginatedResponseHouseResponse
-     */
-    totalItems: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PaginatedResponseHouseResponse
-     */
-    totalPages: number;
+    lastEvaluatedKey?: string | null;
 }
 
 /**
  * Check if a given object implements the PaginatedResponseHouseResponse interface.
  */
 export function instanceOfPaginatedResponseHouseResponse(value: object): value is PaginatedResponseHouseResponse {
-    if (!('currentPage' in value) || value['currentPage'] === undefined) return false;
     if (!('items' in value) || value['items'] === undefined) return false;
-    if (!('pageSize' in value) || value['pageSize'] === undefined) return false;
-    if (!('totalItems' in value) || value['totalItems'] === undefined) return false;
-    if (!('totalPages' in value) || value['totalPages'] === undefined) return false;
     return true;
 }
 
@@ -81,11 +59,8 @@ export function PaginatedResponseHouseResponseFromJSONTyped(json: any, ignoreDis
     }
     return {
         
-        'currentPage': json['current_page'],
         'items': ((json['items'] as Array<any>).map(PaginatedResponseHouseResponseItemsInnerFromJSON)),
-        'pageSize': json['page_size'],
-        'totalItems': json['total_items'],
-        'totalPages': json['total_pages'],
+        'lastEvaluatedKey': json['last_evaluated_key'] == null ? undefined : json['last_evaluated_key'],
     };
 }
 
@@ -100,11 +75,8 @@ export function PaginatedResponseHouseResponseToJSONTyped(value?: PaginatedRespo
 
     return {
         
-        'current_page': value['currentPage'],
         'items': ((value['items'] as Array<any>).map(PaginatedResponseHouseResponseItemsInnerToJSON)),
-        'page_size': value['pageSize'],
-        'total_items': value['totalItems'],
-        'total_pages': value['totalPages'],
+        'last_evaluated_key': value['lastEvaluatedKey'],
     };
 }
 

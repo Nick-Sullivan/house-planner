@@ -6,4 +6,5 @@ fn main() {
     let openapi_json = serde_json::to_string_pretty(&api).unwrap();
     let mut file = File::create("openapi.json").unwrap();
     file.write_all(openapi_json.as_bytes()).unwrap();
+    println!("OpenAPI JSON written to openapi.json");
 }

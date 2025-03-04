@@ -1,7 +1,10 @@
 use super::attribute_value_parser::parse_attribute_value;
 use crate::dynamodb_client_trait::IDynamoDbClient;
 use anyhow::{Error, Ok};
-use aws_sdk_dynamodb::types::{AttributeValue, Get, Put, TransactGetItem, TransactWriteItem};
+use aws_sdk_dynamodb::{
+    operation::query::QueryInput,
+    types::{AttributeValue, Get, Put, TransactGetItem, TransactWriteItem},
+};
 use std::{collections::HashMap, env};
 use uuid::Uuid;
 
@@ -72,7 +75,8 @@ impl SpatialDistanceItem {
         city_code: &str,
         db: &dyn IDynamoDbClient,
     ) -> Result<Vec<Self>, Error> {
-        let query_output = db.query_by_city(city_code).await?;
+        let query_input = Self::query_by_city(city_code)?;
+        let query_output = db.query(query_input).await?;
         let items = query_output.items.unwrap_or_default();
         let mut results = Vec::new();
         for item in items {
@@ -86,7 +90,8 @@ impl SpatialDistanceItem {
         source_index: &str,
         db: &dyn IDynamoDbClient,
     ) -> Result<Vec<Self>, Error> {
-        let query_output = db.query_by_source_index(source_index).await?;
+        let query_input = Self::query_by_source_index(source_index)?;
+        let query_output = db.query(query_input).await?;
         let items = query_output.items.unwrap_or_default();
         let mut results = Vec::new();
         for item in items {
@@ -129,15 +134,27 @@ impl SpatialDistanceItem {
         Ok(transaction_item)
     }
 
-    // pub fn delete(&self) -> Result<TransactWriteItem, Error> {
-    //     let delete_item = aws_sdk_dynamodb::types::Delete::builder()
-    //         .table_name(Self::get_table_name()?)
-    //         .key(
-    //             "RequirementId",
-    //             AttributeValue::S(self.requirement_id.to_string()),
-    //         )
-    //         .build()?;
-    //     let transaction_item = TransactWriteItem::builder().delete(delete_item).build();
-    //     Ok(transaction_item)
-    // }
+    fn query_by_city(city_code: &str) -> Result<QueryInput, Error> {
+        let query_input = QueryInput::builder()
+            .table_name(Self::get_table_name()?)
+            .index_name("CityCodeIndex")
+            .key_condition_expression("#city_code = :city_code")
+            .expression_attribute_names("#city_code", "CityCode")
+            .expression_attribute_values(":city_code", AttributeValue::S(city_code.to_string()))
+            .build()?;
+        Ok(query_input)
+    }
+
+    fn query_by_source_index(source_index: &str) -> Result<QueryInput, Error> {
+        let query_input = QueryInput::builder()
+            .table_name(Self::get_table_name()?)
+            .key_condition_expression("#source_index = :source_index")
+            .expression_attribute_names("#source_index", "SourceIndex")
+            .expression_attribute_values(
+                ":source_index",
+                AttributeValue::S(source_index.to_string()),
+            )
+            .build()?;
+        Ok(query_input)
+    }
 }
