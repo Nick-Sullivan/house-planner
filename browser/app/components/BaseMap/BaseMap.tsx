@@ -1,6 +1,6 @@
 import * as h3 from "h3-js";
 import "leaflet/dist/leaflet.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { MapResponse, MapTileResponse } from "~/client";
 import LoadingSpinner from "~/components/LoadingSpinner/LoadingSpinner";
 import { useMap } from "~/components/MapContext/MapContext";
@@ -56,9 +56,6 @@ export default function BaseMap({
   const leafletComponents = useMap();
   const [hoveredTile, setHoveredTile] = useState<string | null>(null);
   const [selectedTile, setSelectedTile] = useState<string | null>(null);
-  if (!leafletComponents) {
-    return <LoadingSpinner />;
-  }
 
   const handleMouseOver = (tile: MapTileResponse) => {
     setHoveredTile(tile.h3Index);
@@ -74,6 +71,20 @@ export default function BaseMap({
     setSelectedTile(tile.h3Index);
     onTileClick?.(tile);
   };
+
+  useEffect(() => {
+    if (selectedTile && mapRef.current) {
+      const location = h3.cellToLatLng(selectedTile);
+      mapRef.current.panTo({
+        lat: location[0],
+        lng: location[1],
+      });
+    }
+  }, [selectedTile]);
+
+  if (!leafletComponents) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <leafletComponents.MapContainer

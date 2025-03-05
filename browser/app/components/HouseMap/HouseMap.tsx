@@ -14,14 +14,6 @@ const HouseMap = ({
   selectedHouse: HouseResponse | null;
 }) => {
   const leafletComponents = useMap();
-  useEffect(() => {
-    if (selectedHouse && mapRef.current) {
-      mapRef.current.panTo({
-        lat: selectedHouse.lat!,
-        lng: selectedHouse.lon!,
-      });
-    }
-  }, [selectedHouse]);
 
   if (!leafletComponents) {
     return <LoadingSpinner />;

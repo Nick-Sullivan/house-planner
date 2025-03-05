@@ -45,6 +45,42 @@ export interface PaginatedResponseHouseResponseItemsInner {
     lon: number;
     /**
      * 
+     * @type {number}
+     * @memberof PaginatedResponseHouseResponseItemsInner
+     */
+    numBathrooms: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PaginatedResponseHouseResponseItemsInner
+     */
+    numBedrooms: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PaginatedResponseHouseResponseItemsInner
+     */
+    numCarspaces: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PaginatedResponseHouseResponseItemsInner
+     */
+    priceLower: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PaginatedResponseHouseResponseItemsInner
+     */
+    priceUpper: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaginatedResponseHouseResponseItemsInner
+     */
+    propertyType: string;
+    /**
+     * 
      * @type {string}
      * @memberof PaginatedResponseHouseResponseItemsInner
      */
@@ -59,6 +95,12 @@ export function instanceOfPaginatedResponseHouseResponseItemsInner(value: object
     if (!('h3Index' in value) || value['h3Index'] === undefined) return false;
     if (!('lat' in value) || value['lat'] === undefined) return false;
     if (!('lon' in value) || value['lon'] === undefined) return false;
+    if (!('numBathrooms' in value) || value['numBathrooms'] === undefined) return false;
+    if (!('numBedrooms' in value) || value['numBedrooms'] === undefined) return false;
+    if (!('numCarspaces' in value) || value['numCarspaces'] === undefined) return false;
+    if (!('priceLower' in value) || value['priceLower'] === undefined) return false;
+    if (!('priceUpper' in value) || value['priceUpper'] === undefined) return false;
+    if (!('propertyType' in value) || value['propertyType'] === undefined) return false;
     if (!('url' in value) || value['url'] === undefined) return false;
     return true;
 }
@@ -77,6 +119,12 @@ export function PaginatedResponseHouseResponseItemsInnerFromJSONTyped(json: any,
         'h3Index': json['h3_index'],
         'lat': json['lat'],
         'lon': json['lon'],
+        'numBathrooms': json['num_bathrooms'],
+        'numBedrooms': json['num_bedrooms'],
+        'numCarspaces': json['num_carspaces'],
+        'priceLower': json['price_lower'],
+        'priceUpper': json['price_upper'],
+        'propertyType': json['property_type'],
         'url': json['url'],
     };
 }
@@ -96,6 +144,12 @@ export function PaginatedResponseHouseResponseItemsInnerToJSONTyped(value?: Pagi
         'h3_index': value['h3Index'],
         'lat': value['lat'],
         'lon': value['lon'],
+        'num_bathrooms': value['numBathrooms'],
+        'num_bedrooms': value['numBedrooms'],
+        'num_carspaces': value['numCarspaces'],
+        'price_lower': value['priceLower'],
+        'price_upper': value['priceUpper'],
+        'property_type': value['propertyType'],
         'url': value['url'],
     };
 }

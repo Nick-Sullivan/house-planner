@@ -11,6 +11,10 @@ resource "aws_ssm_parameter" "s3_bucket_name" {
   value = aws_s3_bucket.website.bucket
 }
 
+output "s3_bucket_url" {
+  value = aws_s3_bucket.website.website_endpoint
+}
+
 # resource "aws_ssm_parameter" "cloudfront_distribution_id" {
 #   name  = "${local.prefix_parameter}/CloudFront/DistributionId"
 #   type  = "String"

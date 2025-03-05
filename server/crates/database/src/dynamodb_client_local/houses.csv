@@ -1,380 +1,133 @@
-H3Index,Address,CityCode,URL,Lat,Lng
-87b91682effffff,"105/62 Hurtle Square, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147001240,-34.9333989,138.6071263
-87b91682effffff,"1202/271-281 Gouger Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147127436,-34.930968,138.5890954
-87b91682effffff,"803/193 Angas Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-144584696,-34.9299973,138.6082128
-87b91682effffff,"701/248 Flinders Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146218016,-34.9264543,138.6098768
-87b91682effffff,"11 Southcott Walk, Adelaide",Adelaide,https://www.realestate.com.au/property-townhouse-sa-adelaide-146763564,-34.9334091,138.6103977
-87b91682effffff,"307/160 Grote Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146997868,-34.9286066,138.5930912
-87b91682effffff,"3104/38 Rosina Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146854716,-34.924305,138.5957461
-87b91682effffff,"902/248 Flinders Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146994496,-34.926448,138.609758
-87b91682effffff,"18/21 Pulteney Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146987900,-34.9219452,138.6052963
-87b91682effffff,"601/278 South Terrace, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146987512,-34.9349234,138.6092689
-87b91682effffff,"602/278 South Terrace, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146987504,-34.9350539,138.6092767
-87b91682effffff,"133 GILBERT STREET, Adelaide",Adelaide,https://www.realestate.com.au/property-townhouse-sa-adelaide-146900048,-34.934664,138.5954732
-87b91682affffff,"306/304 Waymouth Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146985788,-34.9259754,138.5883833
-87b916823ffffff,"2/233 East Terrace, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147113024,-34.9323,138.617098
-87b91682effffff,"505 / 62-65 South Terrace, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146054164,-34.9356975,138.593011
-87b91682effffff,"2601/421 King William Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147108292,-34.9347939,138.5998816
-87b91682effffff,"607/211 Grenfell Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147100808,-34.9242689,138.6090741
-87b91682effffff,"1709/156 Wright Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147107344,-34.9313579,138.5944468
-87b91682effffff,"1001/39 Grenfell Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146966632,-34.924717,138.6013056
-87b91682effffff,"2002/68 Elizabeth Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147252156,-34.9270133,138.5921018
-87b91682effffff,"1002/242 Flinders Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147250984,-34.926452,138.6096374
-87b91682effffff,"1802/29 Angas Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147250396,-34.930197,138.6018888
-87b91682effffff,"1206/421 King William Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147098748,-34.93486499999999,138.6000844
-87b916805ffffff,"3401/19 Frome Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147245460,-34.9217717,138.6078214
-87b91682effffff,"105/62 Hurtle Square, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147001240,-34.9333989,138.6071263
-87b91682effffff,"1202/271-281 Gouger Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147127436,-34.930968,138.5890954
-87b91682effffff,"803/193 Angas Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-144584696,-34.9299973,138.6082128
-87b91682effffff,"701/248 Flinders Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146218016,-34.9264543,138.6098768
-87b91682effffff,"11 Southcott Walk, Adelaide",Adelaide,https://www.realestate.com.au/property-townhouse-sa-adelaide-146763564,-34.9334091,138.6103977
-87b91682effffff,"307/160 Grote Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146997868,-34.9286066,138.5930912
-87b91682effffff,"3104/38 Rosina Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146854716,-34.924305,138.5957461
-87b91682effffff,"902/248 Flinders Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146994496,-34.926448,138.609758
-87b91682effffff,"18/21 Pulteney Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146987900,-34.9219452,138.6052963
-87b91682effffff,"601/278 South Terrace, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146987512,-34.9349234,138.6092689
-87b91682effffff,"602/278 South Terrace, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146987504,-34.9350539,138.6092767
-87b91682effffff,"133 GILBERT STREET, Adelaide",Adelaide,https://www.realestate.com.au/property-townhouse-sa-adelaide-146900048,-34.934664,138.5954732
-87b91682affffff,"306/304 Waymouth Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146985788,-34.9259754,138.5883833
-87b916823ffffff,"2/233 East Terrace, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147113024,-34.9323,138.617098
-87b91682effffff,"505 / 62-65 South Terrace, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146054164,-34.9356975,138.593011
-87b91682effffff,"2601/421 King William Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147108292,-34.9347939,138.5998816
-87b91682effffff,"607/211 Grenfell Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147100808,-34.9242689,138.6090741
-87b91682effffff,"1709/156 Wright Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147107344,-34.9313579,138.5944468
-87b91682effffff,"1001/39 Grenfell Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146966632,-34.924717,138.6013056
-87b91682effffff,"2002/68 Elizabeth Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147252156,-34.9270133,138.5921018
-87b91682effffff,"1002/242 Flinders Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147250984,-34.926452,138.6096374
-87b91682effffff,"1802/29 Angas Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147250396,-34.930197,138.6018888
-87b91682effffff,"1206/421 King William Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147098748,-34.93486499999999,138.6000844
-87b916805ffffff,"3401/19 Frome Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147245460,-34.9217717,138.6078214
-87b91682effffff,"807/55-61 Hindmarsh Square, Adelaide",Adelaide,https://www.realestate.com.au/property-house-sa-adelaide-146755752,-34.9248614,138.6046403
-87b914591ffffff,"24A Vincent Street, Adelaide",Adelaide,https://www.realestate.com.au/property-house-sa-adelaide-146969336,-35.133401,138.4810734
-87b91682effffff,"24/261 Pirie Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146968876,-34.9255283,138.6098216
-87b91682effffff,"206/14 Gilbert Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147237852,-34.9342133,138.5996978
-87b91682effffff,"1301/297 Pirie Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146967396,-34.9254031,138.6106183
-87b91682effffff,"603/88 Frome Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146967388,-34.9242886,138.6083355
-87b91682effffff,"402/31 Frew Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146967372,-34.9319474,138.5987986
-87b916805ffffff,"3302/19 Frome Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146631452,-34.9217717,138.6078214
-87b91682effffff,"114 East Terrace, Adelaide",Adelaide,https://www.realestate.com.au/property-house-sa-adelaide-143886020,-34.926897,138.6133819
-87b91682effffff,"114 Gray Street, Adelaide",Adelaide,https://www.realestate.com.au/property-townhouse-sa-adelaide-146919188,-34.925951,138.5898041
-87b91682effffff,"16 Alfred Street, Adelaide",Adelaide,https://www.realestate.com.au/property-house-sa-adelaide-147235336,-34.9315006,138.5888071
-87b91682effffff,"10/29 Moore Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147235072,-34.9309469,138.6029254
-87b91682effffff,"207/211 Grenfell Street, Adelaide",Adelaide,https://www.realestate.com.au/property-house-sa-adelaide-147084144,-34.9242944,138.6087913
-87b91682effffff,"2108/17 Austin Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-145399896,-34.9221441,138.6049323
-87b91682effffff,"71 South Terrace, Adelaide",Adelaide,https://www.realestate.com.au/property-house-sa-adelaide-147228292,-34.9357676,138.5935871
-87b91682effffff,"302/21-39 Bentham Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146472932,-34.9270342,138.5976084
-87b91682effffff,"1206/297 Pirie Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147155120,-34.9258528,138.6106687
-87b91682affffff,"417/304 Waymouth Street, Adelaide",Adelaide,https://www.realestate.com.au/property-studio-sa-adelaide-147223620,-34.9258095,138.5884654
-87b91682effffff,"20-22 McLaren Street, Adelaide",Adelaide,https://www.realestate.com.au/property-house-sa-adelaide-147223576,-34.9315578,138.6093106
-87b91682effffff,"801/271-281 Gouger Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147223484,-34.9308758,138.5889413
-87b91682effffff,"66A Vinrace Street, Adelaide",Adelaide,https://www.realestate.com.au/property-house-sa-adelaide-147157432,-34.9352485,138.5911575
-87b91682effffff,"606/180 Franklin Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146955604,-34.9273249,138.5923927
-87b91682effffff,"10 Dimora Court, Adelaide",Adelaide,https://www.realestate.com.au/property-townhouse-sa-adelaide-147221336,-34.9270761,138.6126324
-87b91682effffff,"504/250 Flinders Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146745784,-34.9261668,138.6099585
-87b91682effffff,"2011/15 Austin Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-145461548,-34.9219419,138.6046856
-87b91682effffff,"608/18 Surflen Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147200452,-34.9318441,138.6025167
-87b91682effffff,"Penthouse/112 Carrington Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-145509724,-34.9311331,138.6042743
-87b91682effffff,"4/11 Winifred Street, Adelaide",Adelaide,https://www.realestate.com.au/property-unit-sa-adelaide-147214248,-34.9351556,138.5922347
-87b91682effffff,"619/61 Hindmarsh Square, Adelaide",Adelaide,https://www.realestate.com.au/property-serviced+apartment-sa-adelaide-143918348,-34.9247851,138.6045744
-87b91682effffff,"3 Angas Court, Adelaide",Adelaide,https://www.realestate.com.au/property-townhouse-sa-adelaide-147211708,-34.9289706,138.6133453
-87b91682effffff,"13a Halls Place, Adelaide",Adelaide,https://www.realestate.com.au/property-townhouse-sa-adelaide-147134360,-34.935525,138.5937323
-87b91682effffff,"27/41 Hurtle Square, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147027996,-34.9333762,138.6051987
-87b91682effffff,"5-9 Prospect Place, Adelaide",Adelaide,https://www.realestate.com.au/property-house-sa-adelaide-137161174,-34.9266219,138.5889857
-87b91682effffff,"404/112 South Terrace, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147208452,-34.9356778,138.5969615
-87b91682effffff,"25/211-219 Gilles Street, Adelaide",Adelaide,https://www.realestate.com.au/property-townhouse-sa-adelaide-146733164,-34.9342881,138.6081543
-87b91682effffff,"1302/156 Wright Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147205548,-34.9313797,138.5945858
-87b91682effffff,"1908/29 Angas Street, Adelaide",Adelaide,https://www.realestate.com.au/property-unit-sa-adelaide-147204256,-34.9304755,138.6019832
-87b91682effffff,"718/185 Morphett Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-145886508,-34.9271418,138.5934539
-87b91682effffff,"1804/17 Penny Place, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146161012,-34.9310118,138.6016612
-87b91682effffff,"11/33-45 Stafford Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146826668,-34.9352275,138.5984095
-87b91682effffff,"501/88 Frome Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146159004,-34.9242886,138.6083355
-87b91682effffff,"1/179 Sturt st, Adelaide",Adelaide,https://www.realestate.com.au/property-townhouse-sa-adelaide-146580552,-34.9335334,138.5920178
-87b91682effffff,"607A/82 King William Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-140446991,-34.924544,138.6000379
-87b91682effffff,"912/156 Wright Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146945616,-34.9315105,138.594387
-87b91682effffff,"10 Crowther Street, Adelaide",Adelaide,https://www.realestate.com.au/property-townhouse-sa-adelaide-145133536,-34.9265352,138.5911728
-87b91682affffff,"520/304 Waymouth Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146944436,-34.9261004,138.588488
-87b91682effffff,"404/62 Hurtle Square, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-145004352,-34.9333989,138.6071263
-87b916805ffffff,"1405/15 Synagogue Place, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147048752,-34.9220181,138.6064273
-87b91682effffff,"35d/17 Eden Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146210792,-34.9305333,138.6072674
-87b91682effffff,"1304A/20 Hindmarsh Square, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-145866800,-34.9233898,138.6066911
-87b916805ffffff,"202/9 Paxtons Walk, Adelaide",Adelaide,https://www.realestate.com.au/property-unit-sa-adelaide-147005488,-34.9216994,138.6086457
-87b91682effffff,"1010/156 Wright Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146295832,-34.9315615,138.5946025
-87b91682effffff,"501/144 South Terrace, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147060832,-34.9353349,138.5989997
-87b91682effffff,"2308/29 Angas Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146939488,-34.9304755,138.6018798
-87b91682effffff,"419/185 Morphett Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146917904,-34.9271341,138.5934363
-87b91682effffff,"716/160 Grote Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146931656,-34.9286463,138.5925776
-87b91682effffff,"46 Gilbert Street, Adelaide",Adelaide,https://www.realestate.com.au/property-house-sa-adelaide-146931392,-34.93414509999999,138.5985828
-87b91682effffff,"102/248 Flinders Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147004972,-34.9264519,138.609757
-87b91682effffff,"245 Gilbert Street, Adelaide",Adelaide,https://www.realestate.com.au/property-house-sa-adelaide-147048280,-34.93488749999999,138.5912056
-87b91682effffff,"606/23 King William Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146927408,-34.9223273,138.5989768
-87b91682effffff,"1701/10 Balfours Way, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147048176,-34.9267486,138.5926948
-87b91682effffff,"309/23 King William Street, Adelaide",Adelaide,https://www.realestate.com.au/property-studio-sa-adelaide-147185940,-34.9223981,138.5991284
-87b91682effffff,"3206/17 Austin Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146125496,-34.9221943,138.6049172
-87b91682effffff,"311/180 Morphett Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147182908,-34.9267043,138.5943069
-87b91682effffff,"403/12 Tapley Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147044756,-34.9338442,138.5997232
-87b91682effffff,"295a - 297 Waymouth Street, Adelaide",Adelaide,https://www.realestate.com.au/property-house-sa-adelaide-146570016,-34.9265574,138.5887221
-87b91682effffff,"60 South Terrace, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-145476148,-34.9358266,138.5928003
-87b91682effffff,"2003/15 Austin Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-145195100,-34.9221484,138.6048291
-87b91682effffff,"3/326 Angas Street, Adelaide",Adelaide,https://www.realestate.com.au/property-unit-sa-adelaide-147161736,-34.9288491,138.6131609
-87b91682effffff,"213/211 Grenfell Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147171860,-34.9242034,138.6090639
-87b91682effffff,"101/180 Morphett Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146110972,-34.9268426,138.5939777
-87b91682effffff,"1308/297 Pirie Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146700792,-34.92546890000001,138.6107787
-87b91682effffff,"238-240 Franklin Street, Adelaide",Adelaide,https://www.realestate.com.au/property-other-sa-adelaide-147166020,-34.9274163,138.590153
-87b91682effffff,"1710/160 Grote Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147029516,-34.9286463,138.5925776
-87b91682effffff,"1607/160 Grote Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147029508,-34.9286463,138.5925776
-87b91682effffff,"805/15 Austin Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-140928208,-34.9221474,138.6049361
-87b91682affffff,"1015/96 North Terrace, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147164096,-34.9222472,138.5947189
-87b91682effffff,"24 Hallett St, Adelaide",Adelaide,https://www.realestate.com.au/property-house-sa-adelaide-146913280,-34.9335162,138.6039438
-87b91682effffff,"57/65 King William Street, Adelaide",Adelaide,https://www.realestate.com.au/property-unit-sa-adelaide-147158808,-34.9238145,138.5993087
-87b91682effffff,"3604/21-59 Grote Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147026528,-34.9295366,138.5977294
-87b91682effffff,"407/39 Grenfell Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146695348,-34.924717,138.6013056
-87b91682effffff,"N1110/68 Elizabeth Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147025184,-34.9269135,138.5919587
-87b91682effffff,"1812/15 Austin Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146910916,-34.9221066,138.6047515
-87b91682effffff,"1205/271-281 Gouger Street, Adelaide",Adelaide,https://www.realestate.com.au/property-other-sa-adelaide-145583412,-34.9309707,138.5890411
-87b91682effffff,"411/10 Balfours Way, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147154904,-34.9268926,138.5929649
-87b91682effffff,"106/23 Frew Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146544512,-34.9322849,138.5986402
-87b91682effffff,"801/180 Morphett Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-145709992,-34.9268506,138.5942012
-87b91682effffff,"214 Carrington Street, Adelaide",Adelaide,https://www.realestate.com.au/property-house-sa-adelaide-146689272,-34.9309032,138.6082352
-87b91682effffff,"1609/180 Franklin Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146799840,-34.9272401,138.5921893
-87b91682effffff,"2507/38 Rosina Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147113692,-34.9243246,138.5955929
-87b91682effffff,"1603/180 Franklin Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147148876,-34.9268966,138.5923187
-87b91682effffff,"910/421 King William Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147146372,-34.9350922,138.6000089
-87b91682effffff,"1107/10 Balfours Way, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147015124,-34.9267486,138.5926948
-87b91682effffff,"4 Southcott Walk, Adelaide",Adelaide,https://www.realestate.com.au/property-townhouse-sa-adelaide-147144356,-34.9331839,138.6101427
-87b91682effffff,"205/10 Balfours Way, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147141360,-34.9270471,138.5927283
-87b91682effffff,"1110/160 Grote Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-145696448,-34.9286463,138.5925776
-87b91682effffff,"16 Wakeham Street, Adelaide",Adelaide,https://www.realestate.com.au/property-house-sa-adelaide-146666920,-34.9330168,138.6083721
-87b91682effffff,"242 Gilbert Street, Adelaide",Adelaide,https://www.realestate.com.au/property-house-sa-adelaide-146870256,-34.9346297,138.5912811
-87b91682effffff,"503/23 King William Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146776480,-34.9223201,138.5991445
-87b916805ffffff,"104/9 Paxtons Walk, Adelaide",Adelaide,https://www.realestate.com.au/property-house-sa-adelaide-145942168,-34.9216945,138.6086816
-87b91682effffff,"205/21-39 Bentham Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-144463760,-34.9269153,138.5975989
-87b91682effffff,"3106/17 Austin Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146766856,-34.9221939,138.6049169
-87b91682effffff,"28 Chatham Street, Adelaide",Adelaide,https://www.realestate.com.au/property-house-sa-adelaide-146645256,-34.932858,138.5910273
-87b91682effffff,"108/267 Hutt Street, Adelaide",Adelaide,https://www.realestate.com.au/property-unit-sa-adelaide-147002168,-34.9344716,138.6121873
-87b91682effffff,"1702/18 Rowlands Place, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-145064288,-34.9281832,138.5967693
-87b91682effffff,"32 - 38 Grote Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-139037655,-34.928554,138.5976918
-87b91682effffff,"108/10 Balfours Way, Adelaide",Adelaide,https://www.realestate.com.au/property-other-sa-adelaide-145903680,-34.9269956,138.5930109
-87b91682effffff,"175-177 Halifax Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146888896,-34.9327726,138.608484
-87b91682effffff,"24/21 Pulteney Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147243712,-34.9222463,138.6051423
-87b91682effffff,"202/185 Morphett Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-147208488,-34.9268327,138.5933326
-87b91682effffff,"80 South Terrace, Adelaide",Adelaide,https://www.realestate.com.au/property-residential+land-sa-adelaide-204072992,-34.9357668,138.5941382
-87b91682effffff,"707/160 Rundle Mall, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146455028,-34.9223499,138.6053407
-87b91682effffff,"205/160 Rundle Mall, Adelaide",Adelaide,https://www.realestate.com.au/property-unit-sa-adelaide-146104824,-34.9224263,138.605335
-87b91682effffff,"204/180 Morphett Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-146101224,-34.9266693,138.5939609
-87b91682effffff,"Address available on request, Adelaide",Adelaide,https://www.realestate.com.au/property-residential+land-sa-adelaide-204007588,-34.9284989,138.6007456
-87b91682effffff,"6/61 Symonds place, Adelaide",Adelaide,https://www.realestate.com.au/property-townhouse-sa-adelaide-145395528,-34.9351309,138.6015435
-87b91682effffff,"Address available on request, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-145150448,-34.9284989,138.6007456
-87b91682effffff,"UNIT 904A/20 HINDMARSH SQUARE, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-140050815,-34.9233898,138.6066911
-87b91682effffff,"1202/180 Morphett Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-133899558,-34.9268477,138.5942609
-87b91682effffff,"601A Morphett Street, Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-adelaide-126515198,-34.9358452,138.5944121
-87b916805ffffff,"5/3 Little Grenfell Street, Kent Town",Adelaide,https://www.realestate.com.au/property-townhouse-sa-kent+town-145929212,-34.9196013,138.6211532
-87b916952ffffff,"100 Rugby Street, Malvern",Adelaide,https://www.realestate.com.au/property-house-sa-malvern-146996260,-34.9640709,138.6103966
-87b91682cffffff,"3 Victoria Avenue, Unley Park",Adelaide,https://www.realestate.com.au/property-house-sa-unley+park-145743936,-34.961717,138.5990381
-87b916805ffffff,"12a River Street, St Peters",Adelaide,https://www.realestate.com.au/property-house-sa-st+peters-146853756,-34.9029218,138.6166094
-87b916823ffffff,"305/170 The Parade, Norwood",Adelaide,https://www.realestate.com.au/property-apartment-sa-norwood-145922856,-34.9222153,138.6358221
-87b91682affffff,"210/1 Kevin Taylor Lane, Bowden",Adelaide,https://www.realestate.com.au/property-unit-sa-bowden-147120760,-34.9050335,138.5793582
-87b91682affffff,"51 Childers Street, North Adelaide",Adelaide,https://www.realestate.com.au/property-house-sa-north+adelaide-146901576,-34.9043077,138.5932671
-8748e8508ffffff,"D2 & D3/21 Surrey Rd, Keswick",Adelaide,https://www.realestate.com.au/property-townhouse-sa-keswick-144301700,-34.94343752927213,138.57253700353758
-87b91682cffffff,"27B Joslin Street, Wayville",Adelaide,https://www.realestate.com.au/property-other-sa-wayville-147116940,-34.9459369,138.5934305
-87b916804ffffff,"9-11 Foster Street, Norwood",Adelaide,https://www.realestate.com.au/property-house-sa-norwood-147116508,-34.9161592,138.6370692
-87b916820ffffff,"13 Allinga Avenue, Glenside",Adelaide,https://www.realestate.com.au/property-house-sa-glenside-147168700,-34.9412921,138.6368137
-87b916823ffffff,"128 The Parade, Norwood",Adelaide,https://www.realestate.com.au/property-apartment-sa-norwood-143425884,-34.9215328,138.6329383
-87b916823ffffff,"305/128 The Parade, Norwood",Adelaide,https://www.realestate.com.au/property-apartment-sa-norwood-143818268,-34.9215328,138.6329383
-87b916823ffffff,"106 George Street, Norwood",Adelaide,https://www.realestate.com.au/property-house-sa-norwood-147078680,-34.92572,138.6373365
-87b916823ffffff,"607/128 The Parade, Norwood",Adelaide,https://www.realestate.com.au/property-apartment-sa-norwood-143818240,-34.9215328,138.6329383
-87b916821ffffff,"95 Frederick Street, Unley",Adelaide,https://www.realestate.com.au/property-house-sa-unley-146984856,-34.9496677,138.6085196
-87b91682affffff,"27 Cambridge Street, North Adelaide",Adelaide,https://www.realestate.com.au/property-house-sa-north+adelaide-146983560,-34.9070998,138.5932883
-87b916821ffffff,"118 Robsart Street, Parkside",Adelaide,https://www.realestate.com.au/property-house-sa-parkside-147019116,-34.9451548,138.6110128
-87b91682affffff,"153 Gover Street, North Adelaide",Adelaide,https://www.realestate.com.au/property-house-sa-north+adelaide-147110280,-34.9052092,138.5941586
-87b916821ffffff,"21A Commercial Road, Hyde Park",Adelaide,https://www.realestate.com.au/property-house-sa-hyde+park-147108888,-34.9587302,138.605492
-87b916821ffffff,"203/3 Banksia Street, Glenside",Adelaide,https://www.realestate.com.au/property-apartment-sa-glenside-146980864,-34.9442098,138.6256922
-87b916828ffffff,"64 Bagot Avenue, Mile End",Adelaide,https://www.realestate.com.au/property-house-sa-mile+end-147107192,-34.9289071,138.5608485
-87b916804ffffff,"14 George Street, Norwood",Adelaide,https://www.realestate.com.au/property-house-sa-norwood-147106472,-34.9162722,138.6365969
-87b91682affffff,"71a Gibson Street, Bowden",Adelaide,https://www.realestate.com.au/property-townhouse-sa-bowden-147171760,-34.9030406,138.5801428
-87b916828ffffff,"13 Lurline Street, Mile End",Adelaide,https://www.realestate.com.au/property-house-sa-mile+end-147105676,-34.9259578,138.5680922
-87b91682cffffff,"72 Mary Street, Unley",Adelaide,https://www.realestate.com.au/property-house-sa-unley-147105500,-34.9481449,138.6019898
-87b916805ffffff,"37A Margaret Street South, North Adelaide",Adelaide,https://www.realestate.com.au/property-townhouse-sa-north+adelaide-146978260,-34.9074777,138.5989513
-87b91682cffffff,"2 Foundry Street, Goodwood",Adelaide,https://www.realestate.com.au/property-house-sa-goodwood-147105068,-34.9478929,138.5941429
-87b916821ffffff,"8/2-4 Glen Osmond Road, Parkside",Adelaide,https://www.realestate.com.au/property-apartment-sa-parkside-146977868,-34.9409827,138.6160052
-87b91682cffffff,"126 Rose Terrace, Wayville",Adelaide,https://www.realestate.com.au/property-apartment-sa-wayville-145905832,-34.942975,138.5856162
-87b916828ffffff,"30 Lurline Street, Mile End",Adelaide,https://www.realestate.com.au/property-house-sa-mile+end-146495868,-34.9255711,138.5653381
-87b916823ffffff,"81 Osmond Terrace, Norwood",Adelaide,https://www.realestate.com.au/property-house-sa-norwood-147249364,-34.9239512,138.6319638
-87b91682affffff,"601/3 Fourth Street, Bowden",Adelaide,https://www.realestate.com.au/property-apartment-sa-bowden-147179900,-34.9060007,138.5790739
-87b916823ffffff,"31 Cedar Crescent, Glenside",Adelaide,https://www.realestate.com.au/property-house-sa-glenside-147248252,-34.9432374,138.6304979
-87b91682affffff,"33 Hill Street, North Adelaide",Adelaide,https://www.realestate.com.au/property-house-sa-north+adelaide-147248248,-34.9096986,138.5872633
-87b916805ffffff,"25A River Street, St Peters",Adelaide,https://www.realestate.com.au/property-house-sa-st+peters-146339700,-34.903419,138.6169286
-87b91682effffff,"53 Rose Terrace, Wayville",Adelaide,https://www.realestate.com.au/property-house-sa-wayville-147097916,-34.9430809,138.5940097
-87b916823ffffff,"47 Cleland Avenue, Dulwich",Adelaide,https://www.realestate.com.au/property-house-sa-dulwich-147245508,-34.9392216,138.6293316
-87b916821ffffff,"4 Esmond Street, Hyde Park",Adelaide,https://www.realestate.com.au/property-house-sa-hyde+park-146636596,-34.9560273,138.6069504
-87b91682affffff,"06/3 Fifth Street, Bowden",Adelaide,https://www.realestate.com.au/property-apartment-sa-bowden-147240460,-34.9053498,138.5797892
-87b916821ffffff,"1/25 Leicester Street, Parkside",Adelaide,https://www.realestate.com.au/property-unit-sa-parkside-147240380,-34.9462076,138.6188495
-87b916823ffffff,"3 Prescott Terrace, Rose Park",Adelaide,https://www.realestate.com.au/property-house-sa-rose+park-146755608,-34.9279835,138.6321944
-87b916821ffffff,"34 Eton Street, Malvern",Adelaide,https://www.realestate.com.au/property-house-sa-malvern-147239364,-34.9562123,138.6136563
-87b916821ffffff,"17 Austral Terrace, Malvern",Adelaide,https://www.realestate.com.au/property-house-sa-malvern-147166928,-34.9634593,138.6159726
-87b916821ffffff,"31 Jaffrey Street, Parkside",Adelaide,https://www.realestate.com.au/property-house-sa-parkside-147135580,-34.9433734,138.6141507
-87b916804ffffff,"406/256 The Parade, Norwood",Adelaide,https://www.realestate.com.au/property-apartment-sa-norwood-146967236,-34.9213616,138.6407101
-87b916805ffffff,"64 North Terrace, Kent Town",Adelaide,https://www.realestate.com.au/property-house-sa-kent+town-146325328,-34.9172454,138.6204671
-87b91682cffffff,"7 Louisa Street, Goodwood",Adelaide,https://www.realestate.com.au/property-house-sa-goodwood-147076332,-34.9531605,138.5961044
-87b916823ffffff,"3 Somerset Place, Norwood",Adelaide,https://www.realestate.com.au/property-house-sa-norwood-147089092,-34.9231813,138.630525
-87b916821ffffff,"5/92 Robsart Street, Parkside",Adelaide,https://www.realestate.com.au/property-unit-sa-parkside-147087984,-34.9452056,138.6121632
-87b916821ffffff,"18 Elizabeth Street, Eastwood",Adelaide,https://www.realestate.com.au/property-house-sa-eastwood-147188960,-34.9430086,138.6229547
-87b916801ffffff,"17 James Street, Gilberton",Adelaide,https://www.realestate.com.au/property-house-sa-gilberton-146327380,-34.8957326,138.6095245
-87b916828ffffff,"8 Claremont Street, Mile End",Adelaide,https://www.realestate.com.au/property-house-sa-mile+end-146327264,-34.9293824,138.5720334
-87b916821ffffff,"49 Hill Street, Parkside",Adelaide,https://www.realestate.com.au/property-house-sa-parkside-146964456,-34.9480219,138.6162984
-87b916823ffffff,"5B Rosemont Street, Norwood",Adelaide,https://www.realestate.com.au/property-house-sa-norwood-147120444,-34.9264586,138.6287965
-87b916823ffffff,"11 Alfred Street, Norwood",Adelaide,https://www.realestate.com.au/property-house-sa-norwood-146962572,-34.9261193,138.6313526
-87b916823ffffff,"18 Theresa Street, Norwood",Adelaide,https://www.realestate.com.au/property-house-sa-norwood-147084128,-34.9194917,138.6290931
-87b916821ffffff,"15 Arnold Street, Parkside",Adelaide,https://www.realestate.com.au/property-house-sa-parkside-147230660,-34.947552,138.6219437
-87b916821ffffff,"802/1 George Street, Parkside",Adelaide,https://www.realestate.com.au/property-apartment-sa-parkside-147062916,-34.941345,138.6132257
-87b91682cffffff,"1/54 Essex Street, Goodwood",Adelaide,https://www.realestate.com.au/property-unit-sa-goodwood-147228272,-34.9527242,138.5868646
-87b916823ffffff,"87 Swaine Avenue, Rose Park",Adelaide,https://www.realestate.com.au/property-house-sa-rose+park-147150944,-34.9328108,138.631751
-87b916821ffffff,"7 Markey Street, Eastwood",Adelaide,https://www.realestate.com.au/property-house-sa-eastwood-147203428,-34.9441736,138.623275
-87b916821ffffff,"34 Austral Terrace, Malvern",Adelaide,https://www.realestate.com.au/property-house-sa-malvern-147224736,-34.9630988,138.6138553
-87b916823ffffff,"2B/58 William Street, Norwood",Adelaide,https://www.realestate.com.au/property-unit-sa-norwood-147224740,-34.925298,138.6288405
-87b916805ffffff,"8/3 Little Grenfell Street, Kent Town",Adelaide,https://www.realestate.com.au/property-townhouse-sa-kent+town-146317464,-34.919539,138.6212743
-87b916823ffffff,"2/1A Clarke Street, Norwood",Adelaide,https://www.realestate.com.au/property-house-sa-norwood-147148832,-34.9254965,138.6242916
-87b91682bffffff,"30 Bagot Avenue, Mile End",Adelaide,https://www.realestate.com.au/property-house-sa-mile+end-147223444,-34.9266391,138.560785
-87b916805ffffff,"48 Torrens Street, College Park",Adelaide,https://www.realestate.com.au/property-house-sa-college+park-146619720,-34.9072621,138.6149904
-87b916823ffffff,"2/75 George Street, Norwood",Adelaide,https://www.realestate.com.au/property-unit-sa-norwood-147221936,-34.9227868,138.6364599
-87b916821ffffff,"50 Cambridge Terrace, Malvern",Adelaide,https://www.realestate.com.au/property-house-sa-malvern-146048704,-34.955182,138.611897
-87b916821ffffff,"57 Marion Street, Unley",Adelaide,https://www.realestate.com.au/property-house-sa-unley-147221812,-34.9484216,138.6109776
-87b916952ffffff,"23 Victoria Avenue, Unley Park",Adelaide,https://www.realestate.com.au/property-house-sa-unley+park-146745860,-34.965022,138.5993203
-87b916821ffffff,"28 Fashoda Street, Hyde Park",Adelaide,https://www.realestate.com.au/property-house-sa-hyde+park-147219568,-34.9570005,138.6046856
-87b916805ffffff,"39 Mersey Street, Gilberton",Adelaide,https://www.realestate.com.au/property-house-sa-gilberton-146745808,-34.9089757,138.6133083
-87b91682affffff,"85 Jeffcott Street, North Adelaide",Adelaide,https://www.realestate.com.au/property-house-sa-north+adelaide-146614792,-34.9102246,138.5921555
-87b916952ffffff,"26a George Street, Unley Park",Adelaide,https://www.realestate.com.au/property-house-sa-unley+park-146744512,-34.9649198,138.6050983
-87b91682affffff,"8/45 King William Road, North Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-north+adelaide-138112334,-34.9115945,138.5986778
-87b91682affffff,"89 Jeffcott Street, North Adelaide",Adelaide,https://www.realestate.com.au/property-house-sa-north+adelaide-146614504,-34.9102229,138.5921615
-87b916805ffffff,"18A Player Court, St Peters",Adelaide,https://www.realestate.com.au/property-house-sa-st+peters-141672032,-34.9018009,138.6159341
-87b91682affffff,"603/14 Sixth Street, Bowden",Adelaide,https://www.realestate.com.au/property-apartment-sa-bowden-147216800,-34.9051622,138.579855
-87b91682bffffff,"1/54 Norma Street, Mile End",Adelaide,https://www.realestate.com.au/property-house-sa-mile+end-147215564,-34.9248466,138.5614517
-87b916821ffffff,"301/293 Fullarton Road, Parkside",Adelaide,https://www.realestate.com.au/property-apartment-sa-parkside-146308376,-34.9491453,138.6250582
-87b916952ffffff,"19 Northgate Street, Unley Park",Adelaide,https://www.realestate.com.au/property-house-sa-unley+park-146341348,-34.9606139,138.6049429
-87b91682effffff,"27a Miller Street, Unley",Adelaide,https://www.realestate.com.au/property-townhouse-sa-unley-147134056,-34.9431206,138.601839
-87b916823ffffff,"3/47 Edward Street, Norwood",Adelaide,https://www.realestate.com.au/property-house-sa-norwood-147210592,-34.9201226,138.634088
-87b916821ffffff,"101 Cambridge Terrace, Malvern",Adelaide,https://www.realestate.com.au/property-house-sa-malvern-146736388,-34.9602124,138.6129484
-87b916821ffffff,"22 Jaffrey Street, Parkside",Adelaide,https://www.realestate.com.au/property-house-sa-parkside-146602460,-34.9433661,138.6137151
-87b916821ffffff,"41 Eton Street, Malvern",Adelaide,https://www.realestate.com.au/property-house-sa-malvern-147206284,-34.95690080000001,138.6114919
-87b916823ffffff,"115 Sydenham Road, Norwood",Adelaide,https://www.realestate.com.au/property-house-sa-norwood-146833044,-34.9266372,138.6276933
-87b91682cffffff,"15 Trevelyan Street, Wayville",Adelaide,https://www.realestate.com.au/property-house-sa-wayville-146594708,-34.9470587,138.5974932
-87b916805ffffff,"1 Brougham Place, North Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-north+adelaide-146441828,-34.9082948,138.6012106
-87b916801ffffff,"3/122 Barton Terrace West, North Adelaide",Adelaide,https://www.realestate.com.au/property-unit-sa-north+adelaide-146589176,-34.9030052,138.5916479
-87b916821ffffff,"1 Marion Street, Unley",Adelaide,https://www.realestate.com.au/property-house-sa-unley-145882296,-34.9481785,138.6159328
-87b916804ffffff,"1 Moulden Street, Norwood",Adelaide,https://www.realestate.com.au/property-house-sa-norwood-146723000,-34.9155506,138.6347994
-87b916823ffffff,"1A Edsall Street, Norwood",Adelaide,https://www.realestate.com.au/property-house-sa-norwood-146586032,-34.9224918,138.6280693
-87b91682cffffff,"18 Florence Street, Goodwood",Adelaide,https://www.realestate.com.au/property-house-sa-goodwood-146905972,-34.9501115,138.5926525
-87b916804ffffff,"22 Queen Street, Norwood",Adelaide,https://www.realestate.com.au/property-house-sa-norwood-146151956,-34.9166793,138.638792
-87b916820ffffff,"48 L'Estrange Street, Glenside",Adelaide,https://www.realestate.com.au/property-house-sa-glenside-146295308,-34.94365,138.636023
-87b916805ffffff,"24/14 Dequetteville Terrace, Kent Town",Adelaide,https://www.realestate.com.au/property-apartment-sa-kent+town-147059880,-34.922037,138.616196
-87b916823ffffff,"10 Margaret Street, Norwood",Adelaide,https://www.realestate.com.au/property-house-sa-norwood-147063972,-34.9220337,138.6379676
-87b91682cffffff,"17 Gilbert Street, Goodwood",Adelaide,https://www.realestate.com.au/property-house-sa-goodwood-147063728,-34.95278340000001,138.5927238
-87b916823ffffff,"44 Watson Avenue, Rose Park",Adelaide,https://www.realestate.com.au/property-house-sa-rose+park-146291024,-34.930163,138.6274536
-87b91682affffff,"27 Tormore Place, North Adelaide",Adelaide,https://www.realestate.com.au/property-house-sa-north+adelaide-146708108,-34.9057121,138.5872091
-87b916828ffffff,"4/229 South Road, Mile End",Adelaide,https://www.realestate.com.au/property-unit-sa-mile+end-146938028,-34.9281697,138.5702651
-87b916805ffffff,"Unit 7/70 Rundle St, Kent Town",Adelaide,https://www.realestate.com.au/property-townhouse-sa-kent+town-147194324,-34.9201275,138.6201021
-87b916804ffffff,"5 Foster Street, Norwood",Adelaide,https://www.realestate.com.au/property-house-sa-norwood-142246044,-34.9157203,138.6371561
-87b916805ffffff,"3/25 River Street, St Peters",Adelaide,https://www.realestate.com.au/property-house-sa-st+peters-146436936,-34.9034656,138.6171591
-87b916821ffffff,"20 - 22 Olive Street, Parkside",Adelaide,https://www.realestate.com.au/property-house-sa-parkside-146436928,-34.9495423,138.6233666
-87b91682affffff,"402/53 Gibson Street, Bowden",Adelaide,https://www.realestate.com.au/property-apartment-sa-bowden-147056688,-34.9048288,138.5784924
-87b916821ffffff,"1D Birks Street, Parkside",Adelaide,https://www.realestate.com.au/property-house-sa-parkside-145238380,-34.9492574,138.6246451
-87b91682affffff,"403/61-69 Brougham Place, North Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-north+adelaide-147051240,-34.9088922,138.5965682
-87b916952ffffff,"19 Whistler Avenue, Unley Park",Adelaide,https://www.realestate.com.au/property-house-sa-unley+park-147114116,-34.9646745,138.6007077
-87b91682affffff,"17/103 Strangways Terrace, North Adelaide",Adelaide,https://www.realestate.com.au/property-unit-sa-north+adelaide-147048120,-34.910405,138.587458
-87b916805ffffff,"503/95 Hackney Road, Hackney",Adelaide,https://www.realestate.com.au/property-apartment-sa-hackney-145847408,-34.91019720000001,138.6136105
-87b91682effffff,"4/18 Miller Street, Unley",Adelaide,https://www.realestate.com.au/property-townhouse-sa-unley-147185200,-34.9423247,138.6013134
-87b916805ffffff,"4/18 First Avenue, St Peters",Adelaide,https://www.realestate.com.au/property-unit-sa-st+peters-147184536,-34.9104801,138.6245939
-87b916821ffffff,"12/333 Fullarton Road, Parkside",Adelaide,https://www.realestate.com.au/property-unit-sa-parkside-147045148,-34.9515332,138.6250658
-87b916823ffffff,"7/43 Osmond Terrace, Norwood",Adelaide,https://www.realestate.com.au/property-townhouse-sa-norwood-147182104,-34.9199746,138.6313366
-87b916805ffffff,"3/1-7 Richmond Street, Hackney",Adelaide,https://www.realestate.com.au/property-townhouse-sa-hackney-146121212,-34.9101661,138.6136412
-87b916805ffffff,"87 Kingston Terrace, North Adelaide",Adelaide,https://www.realestate.com.au/property-house-sa-north+adelaide-147181656,-34.9059905,138.6049551
-87b916821ffffff,"83 Castle Street, Parkside",Adelaide,https://www.realestate.com.au/property-other-sa-parkside-146269024,-34.9512964,138.6193103
-87b916801ffffff,"8 Edwin Terrace, Gilberton",Adelaide,https://www.realestate.com.au/property-house-sa-gilberton-145351832,-34.8981647,138.6104351
-87b916821ffffff,"2/53 Kenilworth Road, Parkside",Adelaide,https://www.realestate.com.au/property-duplex+semi-detached-sa-parkside-147021488,-34.9463631,138.6215488
-87b916828ffffff,"39A Gladstone Road, Mile End",Adelaide,https://www.realestate.com.au/property-house-sa-mile+end-146570404,-34.9264002,138.5743792
-87b916821ffffff,"28 Jaffrey Street, Parkside",Adelaide,https://www.realestate.com.au/property-house-sa-parkside-147178468,-34.9435951,138.6137293
-87b916823ffffff,"4/121 Kensington Road, Norwood",Adelaide,https://www.realestate.com.au/property-townhouse-sa-norwood-146920980,-34.9263755,138.6358992
-87b916821ffffff,"43 Wallis Street, Parkside",Adelaide,https://www.realestate.com.au/property-house-sa-parkside-146986220,-34.9525488,138.6174749
-87b91682cffffff,"4/19 Florence Street, Goodwood",Adelaide,https://www.realestate.com.au/property-unit-sa-goodwood-147036932,-34.9505252,138.5925034
-87b916828ffffff,"60A Darebin Street, Mile End",Adelaide,https://www.realestate.com.au/property-house-sa-mile+end-146883548,-34.9296311,138.5630113
-87b916804ffffff,"59 Henry Street, Stepney",Adelaide,https://www.realestate.com.au/property-house-sa-stepney-147173816,-34.9122673,138.6304979
-87b916821ffffff,"61 Leicester Street, Parkside",Adelaide,https://www.realestate.com.au/property-house-sa-parkside-146564260,-34.94637,138.6161529
-87b916805ffffff,"3/88 Sussex Street, North Adelaide",Adelaide,https://www.realestate.com.au/property-unit-sa-north+adelaide-147172900,-34.9063198,138.606768
-87b916823ffffff,"18/2 Davis Street, Norwood",Adelaide,https://www.realestate.com.au/property-unit-sa-norwood-147035588,-34.9270474,138.6263974
-87b916821ffffff,"111/293 Fullarton Road, Parkside",Adelaide,https://www.realestate.com.au/property-apartment-sa-parkside-146258956,-34.9495216,138.6249309
-87b916821ffffff,"6/63 Marlborough Street, Malvern",Adelaide,https://www.realestate.com.au/property-unit-sa-malvern-147016560,-34.9590136,138.6088968
-87b91682effffff,"603/56 Greenhill Road, Wayville",Adelaide,https://www.realestate.com.au/property-apartment-sa-wayville-147144304,-34.9421236,138.5927094
-87b916804ffffff,"7 Sheldon Street, Norwood",Adelaide,https://www.realestate.com.au/property-house-sa-norwood-147152812,-34.9172963,138.628112
-87b916821ffffff,"Lot 1-4/283 Fullarton Road, Parkside",Adelaide,https://www.realestate.com.au/property-house-sa-parkside-147031324,-34.9484706,138.6248817
-87b916805ffffff,"50 MacKinnon Parade, North Adelaide",Adelaide,https://www.realestate.com.au/property-house-sa-north+adelaide-146558492,-34.907651,138.6086464
-87b91682effffff,"4/66 Rose Terrace, Wayville",Adelaide,https://www.realestate.com.au/property-townhouse-sa-wayville-147134644,-34.9425127,138.5934244
-87b916821ffffff,"304/1 George Street, Parkside",Adelaide,https://www.realestate.com.au/property-apartment-sa-parkside-146558052,-34.9413967,138.6130574
-87b91682cffffff,"55 Commercial Road, Hyde Park",Adelaide,https://www.realestate.com.au/property-house-sa-hyde+park-146677420,-34.9593569,138.5987571
-87b916823ffffff,"82 Osmond Terrace, Norwood",Adelaide,https://www.realestate.com.au/property-apartment-sa-norwood-144481940,-34.9221537,138.6327258
-87b916805ffffff,"9/23 Park Terrace, Gilberton",Adelaide,https://www.realestate.com.au/property-house-sa-gilberton-146404400,-34.9043097,138.6132411
-87b916823ffffff,"27 Albert Street, Dulwich",Adelaide,https://www.realestate.com.au/property-house-sa-dulwich-146403964,-34.9377244,138.6270447
-87b916800ffffff,"9 Eleventh Avenue, St Peters",Adelaide,https://www.realestate.com.au/property-house-sa-st+peters-147161256,-34.8985621,138.6202632
-87b91682cffffff,"58 Hampton Street, Goodwood",Adelaide,https://www.realestate.com.au/property-house-sa-goodwood-147161164,-34.9518283,138.588098
-87b916823ffffff,"24 Birrell Street, Norwood",Adelaide,https://www.realestate.com.au/property-house-sa-norwood-147161116,-34.9256558,138.6359369
-87b916805ffffff,"13 Harrow Road, St Peters",Adelaide,https://www.realestate.com.au/property-house-sa-st+peters-146551448,-34.9118985,138.6236306
-87b91682affffff,"4/258 Ward Street, North Adelaide",Adelaide,https://www.realestate.com.au/property-unit-sa-north+adelaide-146911280,-34.9094021,138.5913965
-87b916804ffffff,"4D Ann Street, Stepney",Adelaide,https://www.realestate.com.au/property-house-sa-stepney-146548112,-34.9144799,138.632078
-87b916823ffffff,"2/1A Grant Avenue, Rose Park",Adelaide,https://www.realestate.com.au/property-unit-sa-rose+park-146693772,-34.9321254,138.6246975
-87b916821ffffff,"603/1 George, Parkside",Adelaide,https://www.realestate.com.au/property-apartment-sa-parkside-146489564,-34.9438628,138.612976
-87b91682effffff,"16 Palmerston Road, Unley",Adelaide,https://www.realestate.com.au/property-house-sa-unley-146693000,-34.9430675,138.6036186
-87b916805ffffff,"64 Gilbert Street, Gilberton",Adelaide,https://www.realestate.com.au/property-house-sa-gilberton-146688360,-34.9044215,138.6142238
-87b916805ffffff,"502/95 Hackney Road, Hackney",Adelaide,https://www.realestate.com.au/property-apartment-sa-hackney-145835472,-34.91019720000001,138.6136105
-87b916805ffffff,"21 Player Avenue, St Peters",Adelaide,https://www.realestate.com.au/property-house-sa-st+peters-147144900,-34.9009695,138.6155742
-87b916805ffffff,"23 Player Avenue, St Peters",Adelaide,https://www.realestate.com.au/property-house-sa-st+peters-147144892,-34.90073030000001,138.6154501
-87b916952ffffff,"12 Thornber Street, Unley Park",Adelaide,https://www.realestate.com.au/property-house-sa-unley+park-146531948,-34.9621798,138.605934
-87b916805ffffff,"612/1 King William Street, Kent Town",Adelaide,https://www.realestate.com.au/property-apartment-sa-kent+town-147144292,-34.9201147,138.6154905
-87b916821ffffff,"37 Arthur Street, Unley",Adelaide,https://www.realestate.com.au/property-house-sa-unley-146509412,-34.9506126,138.6033951
-87b916823ffffff,"59 Elizabeth Street, Norwood",Adelaide,https://www.realestate.com.au/property-house-sa-norwood-146677124,-34.9264842,138.6298354
-87b916805ffffff,"12a/19 North Terrace, Hackney",Adelaide,https://www.realestate.com.au/property-apartment-sa-hackney-146527540,-34.9190898,138.615613
-87b91682cffffff,"49 Davenport Terrace, Wayville",Adelaide,https://www.realestate.com.au/property-house-sa-wayville-147125684,-34.9442789,138.5921484
-87b916804ffffff,"17 Foster Street, Norwood",Adelaide,https://www.realestate.com.au/property-house-sa-norwood-145691580,-34.9164421,138.6371156
-87b916823ffffff,"312/3 Church Ave, Norwood",Adelaide,https://www.realestate.com.au/property-apartment-sa-norwood-146875304,-34.9218643,138.6331724
-87b91680cffffff,"2 Gething Crescent, Bowden",Adelaide,https://www.realestate.com.au/property-house-sa-bowden-147133276,-34.8980548,138.583389
-87b916805ffffff,"501/95 Hackney Road, Hackney",Adelaide,https://www.realestate.com.au/property-apartment-sa-hackney-145820336,-34.91019720000001,138.6136105
-87b916821ffffff,"9 Northgate Street, Unley Park",Adelaide,https://www.realestate.com.au/property-house-sa-unley+park-146099512,-34.9604949,138.6061027
-87b91682affffff,"Apartment 701/62 Brougham Place, North Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-north+adelaide-141256396,-34.9093145,138.5967069
-87b916821ffffff,"235 Fullarton Road, Eastwood",Adelaide,https://www.realestate.com.au/property-residential+land-sa-eastwood-203929376,-34.9441898,138.6246095
-87b916804ffffff,"509/256 The Parade, Norwood",Adelaide,https://www.realestate.com.au/property-apartment-sa-norwood-142842664,-34.92135210000001,138.6406036
-87b916828ffffff,"103/10 Railway Terrace, Mile End",Adelaide,https://www.realestate.com.au/property-apartment-sa-mile+end-147003356,-34.9243558,138.5789538
-87b91682affffff,"65 Strangways Terrace, North Adelaide",Adelaide,https://www.realestate.com.au/property-house-sa-north+adelaide-146509404,-34.9107036,138.5900324
-87b916823ffffff,"7/84 Fullarton Rd, Norwood",Adelaide,https://www.realestate.com.au/property-townhouse-sa-norwood-147191256,-34.9239596,138.6241587
-87b916805ffffff,"15 Brougham Place, North Adelaide",Adelaide,https://www.realestate.com.au/property-townhouse-sa-north+adelaide-129461706,-34.9083958,138.6002743
-87b91682affffff,"Lot 12/2 Third Street, Bowden",Adelaide,https://www.realestate.com.au/property-house-sa-bowden-144908628,-34.9057012,138.5766543
-87b916828ffffff,"10 Railway Terrace, Mile End",Adelaide,https://www.realestate.com.au/property-house-sa-mile+end-146439628,-34.9243558,138.5789538
-87b91682affffff,"38-46 Second Street, Bowden",Adelaide,https://www.realestate.com.au/property-townhouse-sa-bowden-144513748,-34.9055691,138.5755215
-87b916828ffffff,"31 Ashford Road, Keswick",Adelaide,https://www.realestate.com.au/property-house-sa-keswick-145354520,-34.9444133,138.5774014
-87b91682affffff,"7 Karra Tapa Lane, Bowden",Adelaide,https://www.realestate.com.au/property-house-sa-bowden-144606776,-34.9056129,138.5761143
-87b916828ffffff,"81 Gladstone Road, Mile End",Adelaide,https://www.realestate.com.au/property-house-sa-mile+end-146539648,-34.9265876,138.5708044
-87b916805ffffff,"201/87 Hackney Road, Hackney",Adelaide,https://www.realestate.com.au/property-apartment-sa-hackney-146796804,-34.9103376,138.6136758
-87b91682affffff,"Address available on request, North Adelaide",Adelaide,https://www.realestate.com.au/property-house-sa-north+adelaide-141731208,-34.9083198,138.5919105
-87b91682affffff,"38 Second Street, Bowden",Adelaide,https://www.realestate.com.au/property-house-sa-bowden-146101520,-34.9055691,138.5755215
-87b91682cffffff,"6 Short Street, Wayville",Adelaide,https://www.realestate.com.au/property-house-sa-wayville-147075136,-34.9439615,138.5903831
-87b91682affffff,"4/98 Childers Street, North Adelaide",Adelaide,https://www.realestate.com.au/property-townhouse-sa-north+adelaide-146714088,-34.9034844,138.5912503
-87b916823ffffff,"31/220 Greenhill Road, Eastwood",Adelaide,https://www.realestate.com.au/property-apartment-sa-eastwood-147000976,-34.9409262,138.6232547
-87b916823ffffff,"79-81 William Street, Norwood",Adelaide,https://www.realestate.com.au/property-retirement+living-sa-norwood-140268763,-34.9239707,138.6335293
-87b916823ffffff,"Lot 3 Boswell Place, Norwood",Adelaide,https://www.realestate.com.au/property-house-sa-norwood-147200352,-34.9261666,138.634032
-87b916823ffffff,"79-81 William St, Norwood",Adelaide,https://www.realestate.com.au/property-retirement+living-sa-norwood-136786618,-34.9239707,138.6335293
-87b916805ffffff,"27a Park Terrace, Gilberton",Adelaide,https://www.realestate.com.au/property-house-sa-gilberton-146816888,-34.9054806,138.6132942
-87b916828ffffff,"16 Junction Lane, Mile End",Adelaide,https://www.realestate.com.au/property-townhouse-sa-mile+end-146680396,-34.9239276,138.5763993
-87b916805ffffff,"43 Mersey Street, Gilberton",Adelaide,https://www.realestate.com.au/property-house-sa-gilberton-146908960,-34.9090539,138.6131103
-87b916823ffffff,"Proposed Allotment 3 Boswell Place, Norwood",Adelaide,https://www.realestate.com.au/property-residential+land-sa-norwood-204044156,-34.9261666,138.634032
-87b91682cffffff,"3/110 Rose Terrace, Wayville",Adelaide,https://www.realestate.com.au/property-house-sa-wayville-146628032,-34.9427772,138.5871869
-87b916821ffffff,"32 Oxenbould Street, Parkside",Adelaide,https://www.realestate.com.au/property-residential+land-sa-parkside-204085228,-34.9413015,138.6149084
-87b916823ffffff,"92c Osmond Tce, Norwood",Adelaide,https://www.realestate.com.au/property-house-sa-norwood-146829400,-34.9235866,138.632722
-87b916823ffffff,"92B Osmond Terrace, Norwood",Adelaide,https://www.realestate.com.au/property-house-sa-norwood-146823588,-34.9234234,138.6327101
-87b916823ffffff,"10/9 Wakefield Street, Kent Town",Adelaide,https://www.realestate.com.au/property-unit-sa-kent+town-146816868,-34.9244967,138.6211123
-87194e69affffff,"Address available on request, Hackney",Adelaide,https://www.realestate.com.au/property-house-sa-hackney-146743856,51.5495005,-0.0596855
-87b916823ffffff,"3 Boswell Place, Norwood",Adelaide,https://www.realestate.com.au/property-house-sa-norwood-146722384,-34.9261666,138.634032
-87b916805ffffff,"2 Park Terrace, Gilberton",Adelaide,https://www.realestate.com.au/property-house-sa-gilberton-146421944,-34.9018283,138.6102013
-87b916952ffffff,"12 High St, Unley Park",Adelaide,https://www.realestate.com.au/property-house-sa-unley+park-146401364,-34.9638641,138.6066779
-87b91682cffffff,"3/40 Le Hunte Street, Wayville",Adelaide,https://www.realestate.com.au/property-apartment-sa-wayville-145343256,-34.9463605,138.5920636
-87b916805ffffff,"17-23 Grenfell St, Kent Town",Adelaide,https://www.realestate.com.au/property-retirement+living-sa-kent+town-140056559,-34.9199108,138.6214906
-87b916952ffffff,"2 High Street, Unley Park",Adelaide,https://www.realestate.com.au/property-house-sa-unley+park-145027596,-34.9636379,138.6078064
-87b916823ffffff,"6 Hampton Grove, Norwood",Adelaide,https://www.realestate.com.au/property-house-sa-norwood-144388628,-34.9225649,138.6311692
-87b916820ffffff,"19 L'estrange Street, Glenside",Adelaide,https://www.realestate.com.au/property-house-sa-glenside-143706408,-34.9423109,138.6350713
-87194e69affffff,"Address available on request, Hackney",Adelaide,https://www.realestate.com.au/property-retirement+living-sa-hackney-135849774,51.5495005,-0.0596855
-87b91682affffff,"Apartment 707/62 Brougham Place, North Adelaide",Adelaide,https://www.realestate.com.au/property-apartment-sa-north+adelaide-128874850,-34.9093145,138.5967069
+Address,Url,PriceLower,PriceUpper,PropertyType,NumBathrooms,NumBedrooms,NumCarSpaces,CityCode,Lat,Lng,H3Index
+"81/223 North Terrace, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-147424576,585000,585000,Apartment,1,2,1,Adelaide,-34.83709236841708,138.55386690788455,87b9168e4ffffff
+"2002/29 Angas Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-147423156,499000,539000,Apartment,1,1,1,Adelaide,-34.92960527813925,138.6102581513616,87b91682effffff
+"3206/17 Austin Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-146125496,1100000,1100000,Apartment,2,3,1,Adelaide,-34.921997250000004,138.6048101123671,87b91682effffff
+"711/160 Rundle Mall, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-147415260,135000,145000,Apartment,1,1,0,Adelaide,-34.922835101014854,138.6025992797875,87b91682effffff
+"7/376 South Terrace, Adelaide",https://www.realestate.com.au/property-townhouse-sa-adelaide-147398416,999000,1089000,Townhouse,1,2,2,Adelaide,-34.97223563333057,138.54772088487408,87b91695effffff
+"10/326 Gilles Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-140238631,489000,537900,Apartment,1,2,1,Adelaide,-34.93398717219582,138.6064178510701,87b91682effffff
+"503/23 King William Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-146776480,309100,340000,Apartment,1,3,0,Adelaide,-34.92245830209435,138.59939842220888,87b91682effffff
+"7 Southcott Walk, Adelaide",https://www.realestate.com.au/property-townhouse-sa-adelaide-147401164,1290000,1390000,Townhouse,2,2,2,Adelaide,-34.93329187914973,138.61038318939907,87b91682effffff
+"3106/17 Austin Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-146766856,1250000,1250000,Apartment,2,3,1,Adelaide,-34.88121536824469,138.57041321127667,87b91680effffff
+"211/175-185 Waymouth Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-147262012,389000,409000,Apartment,1,1,0,Adelaide,-34.92638075,138.58763085,87b91682affffff
+"105/62 Hurtle Square, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-147001240,525000,525000,Apartment,1,1,0,Adelaide,-34.93182854684359,138.6070252397105,87b91682effffff
+"306/304 Waymouth Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-146985788,155000,165000,Apartment,1,1,0,Adelaide,-34.9261228816573,138.59303424945108,87b91682effffff
+"1802/29 Angas Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-147250396,500000,530000,Apartment,1,1,1,Adelaide,-34.85868465,138.5160373,87b916856ffffff
+"206/14 Gilbert Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-147237852,460000,475000,Apartment,1,1,0,Adelaide,-34.93429185481178,138.60037249793103,87b91682effffff
+"6/20 Norman Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-147383672,545000,565000,Apartment,1,2,0,Adelaide,-35.00837924297763,138.58140765913782,87b916955ffffff
+"114 East Terrace, Adelaide",https://www.realestate.com.au/property-house-sa-adelaide-143886020,4250000,4500000,House,2,4,4,Adelaide,-34.912106436398076,138.49666915785144,87b916870ffffff
+"1213/180 Morphett Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-147379784,485000,515000,Apartment,1,1,1,Adelaide,-34.861439354285785,138.65259454723204,87b916815ffffff
+"207/211 Grenfell Street, Adelaide",https://www.realestate.com.au/property-house-sa-adelaide-147084144,495000,515000,House,1,1,1,Adelaide,-34.92394165964885,138.6078117976964,87b91682effffff
+"71 South Terrace, Adelaide",https://www.realestate.com.au/property-house-sa-adelaide-147228292,1250000,1350000,House,2,3,2,Adelaide,-34.97223563333057,138.54772088487408,87b91695effffff
+"910/421 King William Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-147146372,600000,650000,Apartment,1,2,1,Adelaide,-34.84884734842526,138.5191623146657,87b916856ffffff
+"417/304 Waymouth Street, Adelaide",https://www.realestate.com.au/property-studio-sa-adelaide-147223620,169000,179000,Studio,1,0,0,Adelaide,-34.92638075,138.58763085,87b91682affffff
+"66A Vinrace Street, Adelaide",https://www.realestate.com.au/property-house-sa-adelaide-147157432,995000,1085000,House,3,3,2,Adelaide,-34.93520195253918,138.58903946959032,87b91682effffff
+"316 Halifax Street, Adelaide",https://www.realestate.com.au/property-house-sa-adelaide-147366840,1100000,1100000,House,1,3,1,Adelaide,-34.931978,138.6137394048982,87b91682effffff
+"1802/421 King William Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-147346232,500000,530000,Apartment,1,1,1,Adelaide,-34.84884734842526,138.5191623146657,87b916856ffffff
+"619/61 Hindmarsh Square, Adelaide",https://www.realestate.com.au/property-serviced+apartment-sa-adelaide-143918348,350000,370000,Serviced,1,2,0,Adelaide,-34.92489311597964,138.60503082330666,87b91682effffff
+"3 Angas Court, Adelaide",https://www.realestate.com.au/property-townhouse-sa-adelaide-147211708,880000,920000,Townhouse,2,3,1,Adelaide,-34.837861149602645,138.67664308587987,87b916810ffffff
+"404/112 South Terrace, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-147208452,685000,685000,Apartment,1,2,1,Adelaide,-34.97223563333057,138.54772088487408,87b91695effffff
+"718/185 Morphett Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-145886508,349000,369000,Apartment,1,1,0,Adelaide,-34.92181902377455,138.5932700139091,87b91682affffff
+"18 Pope Street, Adelaide",https://www.realestate.com.au/property-house-sa-adelaide-147340336,880000,950000,House,2,2,1,Adelaide,-34.88933696577367,138.54486256167215,87b91680dffffff
+"424/304 Waymouth Street, Adelaide",https://www.realestate.com.au/property-studio-sa-adelaide-147340272,165000,175000,Studio,1,1,0,Adelaide,-34.92638075,138.58763085,87b91682affffff
+"1804/17 Penny Place, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-146161012,649000,699000,Apartment,1,2,1,Adelaide,-34.93109709311816,138.60217975235653,87b91682effffff
+"501/88 Frome Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-146159004,200000,200000,Apartment,1,1,0,Adelaide,-34.922077400000006,138.60783435000002,87b916805ffffff
+"1308/10 Balfours Way, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-147331796,545000,575000,Apartment,1,2,1,Adelaide,-34.9271573,138.5928691,87b91682effffff
+"520/304 Waymouth Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-146944436,170000,180000,Apartment,1,1,0,Adelaide,-34.92638075,138.58763085,87b91682affffff
+"419/185 Morphett Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-146917904,520000,550000,Apartment,1,2,1,Adelaide,-34.92181902377455,138.5932700139091,87b91682affffff
+"716/160 Grote Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-146931656,695000,735000,Apartment,1,2,2,Adelaide,-34.9291861,138.58784885,87b91682effffff
+"422/304 Waymouth Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-146276800,165000,180000,Apartment,1,1,0,Adelaide,-34.92638075,138.58763085,87b91682affffff
+"245 Gilbert Street, Adelaide",https://www.realestate.com.au/property-house-sa-adelaide-147048280,1225000,1315000,House,3,3,2,Adelaide,-34.93429185481178,138.60037249793103,87b91682effffff
+"309/23 King William Street, Adelaide",https://www.realestate.com.au/property-studio-sa-adelaide-147185940,215000,235000,Studio,1,1,0,Adelaide,-34.92245830209435,138.59939842220888,87b91682effffff
+"4 Southcott Walk, Adelaide",https://www.realestate.com.au/property-townhouse-sa-adelaide-147144356,1550000,1650000,Townhouse,2,3,2,Adelaide,-34.93329187914973,138.61038318939907,87b91682effffff
+"311/180 Morphett Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-147182908,530000,550000,Apartment,1,2,0,Adelaide,-34.861439354285785,138.65259454723204,87b916815ffffff
+"403/12 Tapley Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-147044756,950000,950000,Apartment,2,3,1,Adelaide,-34.93402029852484,138.5994702681089,87b91682effffff
+"101/180 Morphett Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-146110972,485000,525000,Apartment,1,2,0,Adelaide,-34.861439354285785,138.65259454723204,87b916815ffffff
+"610/104 North Terrace, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-147309648,350000,370000,Apartment,1,1,0,Adelaide,-34.9159473,138.62216375000003,87b916805ffffff
+"805/15 Austin Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-140928208,630000,650000,Apartment,2,2,1,Adelaide,-34.88121536824469,138.57041321127667,87b91680effffff
+"27/41 Hurtle Square, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-147027996,635000,655000,Apartment,1,2,1,Adelaide,-34.93182854684359,138.6070252397105,87b91682effffff
+"2311/17 Austin Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-147292740,580000,580000,Apartment,1,1,0,Adelaide,-34.88121536824469,138.57041321127667,87b91680effffff
+"1812/15 Austin Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-146910916,480000,480000,Apartment,1,1,0,Adelaide,-34.88121536824469,138.57041321127667,87b91680effffff
+"214 Carrington Street, Adelaide",https://www.realestate.com.au/property-house-sa-adelaide-146689272,1595000,1695000,House,1,3,1,Adelaide,-34.93099630799129,138.61043659790454,87b91682effffff
+"1603/180 Franklin Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-147148876,515000,515000,Apartment,1,1,1,Adelaide,-34.91518295,138.49773015,87b916870ffffff
+"1107/10 Balfours Way, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-147015124,428000,428000,Apartment,1,1,1,Adelaide,-34.9271573,138.5928691,87b91682effffff
+"24/21 Pulteney Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-147243712,500000,500000,Apartment,1,1,0,Adelaide,-34.929808151062225,138.6061035492531,87b91682effffff
+"202/185 Morphett Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-147208488,345000,345000,Apartment,1,1,0,Adelaide,-34.861439354285785,138.65259454723204,87b916815ffffff
+"80 South Terrace, Adelaide",https://www.realestate.com.au/property-residential+land-sa-adelaide-204072992,2500000,2500000,Residential,0,0,0,Adelaide,-34.97223563333057,138.54772088487408,87b91695effffff
+"204/180 Morphett Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-146101224,299000,325000,Apartment,1,0,0,Adelaide,-34.861439354285785,138.65259454723204,87b916815ffffff
+"6/61 Symonds place, Adelaide",https://www.realestate.com.au/property-townhouse-sa-adelaide-145395528,850000,850000,Townhouse,2,3,1,Adelaide,-34.93350950994527,138.6016072579468,87b91682effffff
+"1202/180 Morphett Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-133899558,610000,630000,Apartment,1,2,1,Adelaide,-34.861439354285785,138.65259454723204,87b916815ffffff
+"601A Morphett Street, Adelaide",https://www.realestate.com.au/property-apartment-sa-adelaide-126515198,410000,420000,Apartment,1,2,0,Adelaide,-34.861439354285785,138.65259454723204,87b916815ffffff
+"9/165 Beulah Road, Norwood",https://www.realestate.com.au/property-house-sa-norwood-147428952,27032512,27032512,House,2,3,2,Adelaide,-34.91870179026342,138.62321294878805,87b916805ffffff
+"49 Davenport Terrace, Wayville",https://www.realestate.com.au/property-house-sa-wayville-147125684,2650000,2850000,House,2,4,4,Adelaide,-34.943922521235365,138.59472420411961,87b91682cffffff
+"137 Robsart Street, Parkside",https://www.realestate.com.au/property-house-sa-parkside-147279304,1645000,1695000,House,2,3,2,Adelaide,-34.94508501827885,138.61707748293847,87b916821ffffff
+"2 Battams Street, Stepney",https://www.realestate.com.au/property-house-sa-stepney-147424292,1050000,1050000,House,1,3,1,Adelaide,-34.909428321007105,138.63027308586973,87b916804ffffff
+"17 Foster Street, Norwood",https://www.realestate.com.au/property-house-sa-norwood-145691580,2450000,2650000,House,3,4,2,Adelaide,-34.91619329004659,138.63740742198067,87b916804ffffff
+"312/3 Church Ave, Norwood",https://www.realestate.com.au/property-apartment-sa-norwood-146875304,1425000,1425000,Apartment,2,2,1,Adelaide,-34.92292488379596,138.63342734423017,87b916823ffffff
+"27a Miller Street, Unley",https://www.realestate.com.au/property-townhouse-sa-unley-147134056,2000000,2200000,Townhouse,2,3,2,Adelaide,-34.94340644883712,138.60124348013753,87b91682effffff
+"6/49 Duthy Street, Malvern",https://www.realestate.com.au/property-unit-sa-malvern-147276352,469000,499000,Unit,1,2,1,Adelaide,-34.95907045034637,138.61494631130924,87b916821ffffff
+"5B Rosemont Street, Norwood",https://www.realestate.com.au/property-house-sa-norwood-147120444,1850000,1950000,House,3,5,4,Adelaide,-34.92667051879134,138.62906130126854,87b916823ffffff
+"87 Swaine Avenue, Rose Park",https://www.realestate.com.au/property-house-sa-rose+park-147150944,1250000,1250000,House,1,3,1,Adelaide,-34.93334802083103,138.6262261501613,87b916823ffffff
+"64 Grant Avenue, Rose Park",https://www.realestate.com.au/property-house-sa-rose+park-147414564,2000000,2200000,House,2,3,2,Adelaide,-34.93204682476401,138.63079204873065,87b916823ffffff
+"3/50 Chatham Road, Keswick",https://www.realestate.com.au/property-unit-sa-keswick-147406892,490000,530000,Unit,1,2,1,Adelaide,-34.94349100148551,138.57472762883233,87b916828ffffff
+"103/10 Railway Terrace, Mile End",https://www.realestate.com.au/property-apartment-sa-mile+end-147003356,1269000,1269000,Apartment,2,3,2,Adelaide,-34.930908579991225,138.57658800233224,87b916828ffffff
+"12a River Street, St Peters",https://www.realestate.com.au/property-house-sa-st+peters-146853756,2375000,2500000,House,2,3,2,Adelaide,-34.90421379667429,138.61901522520205,87b916805ffffff
+"305/170 The Parade, Norwood",https://www.realestate.com.au/property-apartment-sa-norwood-145922856,650000,650000,Apartment,1,1,1,Adelaide,-34.9217095959481,138.62364435194573,87b916823ffffff
+"27B Joslin Street, Wayville",https://www.realestate.com.au/property-other-sa-wayville-147116940,1790000,1890000,Other,3,4,2,Adelaide,-34.94415268484504,138.59268908963915,87b91682cffffff
+"27 Cambridge Street, North Adelaide",https://www.realestate.com.au/property-house-sa-north+adelaide-146983560,1150000,1225000,House,1,3,1,Adelaide,-34.907221200933584,138.5935722973899,87b91682affffff
+"14 George Street, Norwood",https://www.realestate.com.au/property-house-sa-norwood-147106472,2700000,2900000,House,4,4,4,Adelaide,-34.92572555265195,138.63694941386325,87b916823ffffff
+"31 Cedar Crescent, Glenside",https://www.realestate.com.au/property-house-sa-glenside-147248252,1200000,1200000,House,2,3,2,Adelaide,-34.94322756346612,138.63066908446226,87b916823ffffff
+"14/2 Kyle Street, Glenside",https://www.realestate.com.au/property-unit-sa-glenside-147388912,535000,535000,Unit,1,1,1,Adelaide,-34.94409393194697,138.63920632548465,87b916820ffffff
+"28 Jaffrey Street, Parkside",https://www.realestate.com.au/property-house-sa-parkside-147178468,2175000,2175000,House,2,4,4,Adelaide,-34.942426095588885,138.61387287196422,87b916821ffffff
+"8/3 Little Grenfell Street, Kent Town",https://www.realestate.com.au/property-townhouse-sa-kent+town-146317464,950000,950000,Townhouse,2,3,2,Adelaide,-34.91971623697969,138.62115567025674,87b916805ffffff
+"4 Esmond Street, Hyde Park",https://www.realestate.com.au/property-house-sa-hyde+park-146636596,1550000,1550000,House,2,3,2,Adelaide,-34.95631138443179,138.60507960177588,87b916821ffffff
+"06/3 Fifth Street, Bowden",https://www.realestate.com.au/property-apartment-sa-bowden-147240460,580000,620000,Apartment,1,2,1,Adelaide,-34.90541755,138.57912770000002,87b91682affffff
+"3 Somerset Place, Norwood",https://www.realestate.com.au/property-house-sa-norwood-147089092,1200000,1200000,House,1,3,2,Adelaide,-34.9233229,138.6303347,87b916823ffffff
+"2/64A Second Avenue, St Peters",https://www.realestate.com.au/property-unit-sa-st+peters-147273776,530000,570000,Unit,1,2,1,Adelaide,-34.90279286703382,138.63016779356192,87b916804ffffff
+"39 Henley Street, Mile End",https://www.realestate.com.au/property-house-sa-mile+end-147285712,1175000,1175000,House,1,3,1,Adelaide,-34.926512306471345,138.56007822902927,87b91682bffffff
+"49 Hill Street, Parkside",https://www.realestate.com.au/property-house-sa-parkside-146964456,1150000,1150000,House,1,2,4,Adelaide,-34.94772420988892,138.61875028182294,87b916821ffffff
+"11 Alfred Street, Norwood",https://www.realestate.com.au/property-house-sa-norwood-146962572,3400000,3740000,House,6,6,2,Adelaide,-34.92595035,138.6315036,87b916823ffffff
+"802/1 George Street, Parkside",https://www.realestate.com.au/property-apartment-sa-parkside-147062916,1175000,1275000,Apartment,2,3,2,Adelaide,-34.94328198106028,138.61293530312867,87b916821ffffff
+"1/54 Essex Street, Goodwood",https://www.realestate.com.au/property-unit-sa-goodwood-147228272,575000,575000,Unit,1,2,1,Adelaide,-34.95239644899478,138.58713669838988,87b91682cffffff
+"1/103 Kenilworth Road, Parkside",https://www.realestate.com.au/property-unit-sa-parkside-147367308,680000,730000,Unit,1,2,2,Adelaide,-34.95081648331249,138.6215860583834,87b916821ffffff
+"17/103 Strangways Terrace, North Adelaide",https://www.realestate.com.au/property-unit-sa-north+adelaide-147048120,720000,720000,Unit,1,2,1,Adelaide,-34.91117546332642,138.5855880447047,87b91682affffff
+"85 Jeffcott Street, North Adelaide",https://www.realestate.com.au/property-house-sa-north+adelaide-146614792,2150000,2150000,House,2,3,2,Adelaide,-34.91251299291792,138.59343737856236,87b91682affffff
+"8/45 King William Road, North Adelaide",https://www.realestate.com.au/property-apartment-sa-north+adelaide-138112334,290000,290000,Apartment,1,1,0,Adelaide,-34.909670592304415,138.59728130064968,87b91682affffff
+"89 Jeffcott Street, North Adelaide",https://www.realestate.com.au/property-house-sa-north+adelaide-146614504,2550000,2550000,House,2,4,2,Adelaide,-34.91251299291792,138.59343737856236,87b91682affffff
+"1A Le Hunte Street, Wayville",https://www.realestate.com.au/property-house-sa-wayville-147361648,1300000,1300000,House,2,3,2,Adelaide,-34.946505837472344,138.5948074443781,87b91682cffffff
+"18A Player Court, St Peters",https://www.realestate.com.au/property-house-sa-st+peters-141672032,2790000,2950000,House,2,4,2,Adelaide,-34.901940468836074,138.61565750642905,87b916805ffffff
+"603/14 Sixth Street, Bowden",https://www.realestate.com.au/property-apartment-sa-bowden-147216800,670000,695000,Apartment,2,2,1,Adelaide,-34.905332267561484,138.58029818844696,87b91682affffff
+"24 Harrow Road, College Park",https://www.realestate.com.au/property-house-sa-college+park-147361164,1750000,1750000,House,1,3,1,Adelaide,-34.91058265667106,138.62125886861705,87b916805ffffff
+"3/122 Barton Terrace West, North Adelaide",https://www.realestate.com.au/property-unit-sa-north+adelaide-146589176,850000,900000,Unit,1,2,1,Adelaide,-34.90248274705419,138.5922104524899,87b916801ffffff
+"22/11 Pennington Terrace, North Adelaide",https://www.realestate.com.au/property-unit-sa-north+adelaide-147356668,790000,850000,Unit,1,2,1,Adelaide,-34.91332961672455,138.59882696626576,87b91682affffff
+"27 Kyle Street, Glenside",https://www.realestate.com.au/property-duplex+semi-detached-sa-glenside-147320620,1200000,1320000,Duplex,1,2,1,Adelaide,-34.94409393194697,138.63920632548465,87b916820ffffff
+"6/30 College Road, Kent Town",https://www.realestate.com.au/property-unit-sa-kent+town-147348856,499000,548000,Unit,1,2,2,Adelaide,-34.92020863178336,138.6209415510286,87b916805ffffff
+"10 Margaret Street, Norwood",https://www.realestate.com.au/property-house-sa-norwood-147063972,1280000,1400000,House,1,3,0,Adelaide,-34.92203705,138.6379232,87b916823ffffff
+"27 Tormore Place, North Adelaide",https://www.realestate.com.au/property-house-sa-north+adelaide-146708108,1800000,1900000,House,2,3,3,Adelaide,-34.90555591207787,138.587435673847,87b91682affffff
+"402/53 Gibson Street, Bowden",https://www.realestate.com.au/property-apartment-sa-bowden-147056688,640000,665000,Apartment,1,2,1,Adelaide,-34.90533044007905,138.5776684818856,87b91682affffff
+"1D Birks Street, Parkside",https://www.realestate.com.au/property-house-sa-parkside-145238380,2600000,2800000,House,3,4,2,Adelaide,-34.94888565,138.6240828,87b916821ffffff
+"18 Elizabeth Street, Eastwood",https://www.realestate.com.au/property-house-sa-eastwood-147188960,1200000,1250000,House,1,2,0,Adelaide,-34.94282291961927,138.62321392723385,87b916821ffffff
+"12/333 Fullarton Road, Parkside",https://www.realestate.com.au/property-unit-sa-parkside-147045148,465000,465000,Unit,1,2,1,Adelaide,-34.950917652883376,138.625399163915,87b916821ffffff
+"4/121 Kensington Road, Norwood",https://www.realestate.com.au/property-townhouse-sa-norwood-146920980,3000000,3250000,Townhouse,3,4,2,Adelaide,-34.927210986360315,138.63651525176076,87b916823ffffff
+"60A Darebin Street, Mile End",https://www.realestate.com.au/property-house-sa-mile+end-146883548,950000,980000,House,3,5,2,Adelaide,-34.92969235609603,138.56570024776676,87b916828ffffff
+"59 Henry Street, Stepney",https://www.realestate.com.au/property-house-sa-stepney-147173816,875000,875000,House,1,2,1,Adelaide,-34.91120199556794,138.6323548392521,87b916804ffffff
+"71a Gibson Street, Bowden",https://www.realestate.com.au/property-townhouse-sa-bowden-147171760,960000,1000000,Townhouse,2,3,2,Adelaide,-34.90533044007905,138.5776684818856,87b91682affffff
+"7 Sheldon Street, Norwood",https://www.realestate.com.au/property-house-sa-norwood-147152812,950000,995000,House,1,3,0,Adelaide,-34.917390432517166,138.6295026015869,87b916804ffffff
+"31 Jaffrey Street, Parkside",https://www.realestate.com.au/property-house-sa-parkside-147135580,1050000,1150000,House,1,3,1,Adelaide,-34.942426095588885,138.61387287196422,87b916821ffffff
+"9/23 Park Terrace, Gilberton",https://www.realestate.com.au/property-house-sa-gilberton-146404400,1250000,1250000,House,3,3,2,Adelaide,-34.90348236764043,138.61143573572357,87b916805ffffff
+"9 Eleventh Avenue, St Peters",https://www.realestate.com.au/property-house-sa-st+peters-147161256,2450000,2450000,House,2,4,2,Adelaide,-34.89811998133425,138.620218942081,87b916800ffffff
+"13 Harrow Road, St Peters",https://www.realestate.com.au/property-house-sa-st+peters-146551448,3000000,3300000,House,3,4,2,Adelaide,-34.90808988033081,138.61795945947844,87b916805ffffff
+"64 Gilbert Street, Gilberton",https://www.realestate.com.au/property-house-sa-gilberton-146688360,1380000,1380000,House,2,3,4,Adelaide,-34.90180715730072,138.61240569526862,87b916805ffffff
+"612/1 King William Street, Kent Town",https://www.realestate.com.au/property-apartment-sa-kent+town-147144292,880000,920000,Apartment,2,2,2,Adelaide,-34.919605211562846,138.61759373432744,87b916805ffffff
+"76 Sydenham Road, Norwood",https://www.realestate.com.au/property-house-sa-norwood-147367452,870000,950000,House,1,2,0,Adelaide,-34.92597776391573,138.62790927814993,87b916823ffffff
+"6 Short Street, Wayville",https://www.realestate.com.au/property-house-sa-wayville-147075136,1400000,1500000,House,1,3,3,Adelaide,-34.94444081374656,138.5907450592106,87b91682cffffff
+"31 Ashford Road, Keswick",https://www.realestate.com.au/property-house-sa-keswick-145354520,900000,930000,House,2,3,2,Adelaide,-34.94391415074607,138.5771000394246,87b916828ffffff
+"12 High St, Unley Park",https://www.realestate.com.au/property-house-sa-unley+park-146401364,3890000,3890000,House,2,4,2,Adelaide,-34.963994515781295,138.6054502483626,87b916952ffffff
+"31/220 Greenhill Road, Eastwood",https://www.realestate.com.au/property-apartment-sa-eastwood-147000976,850000,850000,Apartment,2,2,1,Adelaide,-34.94033772054275,138.62029917347573,87b916823ffffff
+"79-81 William Street, Norwood",https://www.realestate.com.au/property-retirement+living-sa-norwood-140268763,212000,212000,Retirement,1,1,0,Adelaide,-34.9241587,138.63343040278806,87b916823ffffff
+"Lot 3 Boswell Place, Norwood",https://www.realestate.com.au/property-house-sa-norwood-147200352,2135000,2135000,House,2,5,2,Adelaide,-34.926456184723,138.63373434854844,87b916823ffffff
+"79-81 William St, Norwood",https://www.realestate.com.au/property-retirement+living-sa-norwood-136786618,170000,170000,Retirement,1,1,0,Adelaide,-34.9241587,138.63343040278806,87b916823ffffff
+"92B Osmond Terrace, Norwood",https://www.realestate.com.au/property-house-sa-norwood-146823588,4300000,4300000,House,1,4,2,Adelaide,-34.915653353118344,138.63158057411755,87b916804ffffff
+"92c Osmond Tce, Norwood",https://www.realestate.com.au/property-house-sa-norwood-146829400,4300000,4300000,House,3,4,2,Adelaide,-34.915653353118344,138.63158057411755,87b916804ffffff
+"10/9 Wakefield Street, Kent Town",https://www.realestate.com.au/property-unit-sa-kent+town-146816868,520000,520000,Unit,1,2,1,Adelaide,-34.92456836047554,138.62183853072162,87b916823ffffff
+"3 Boswell Place, Norwood",https://www.realestate.com.au/property-house-sa-norwood-146722384,2283000,2283000,House,3,5,2,Adelaide,-34.926456184723,138.63373434854844,87b916823ffffff
+"17-23 Grenfell St, Kent Town",https://www.realestate.com.au/property-retirement+living-sa-kent+town-140056559,369000,369000,Retirement,1,1,0,Adelaide,-34.920223580771165,138.62140789558725,87b916805ffffff

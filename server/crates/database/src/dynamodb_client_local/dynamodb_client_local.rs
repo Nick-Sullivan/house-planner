@@ -90,12 +90,19 @@ impl DynamoDbClient {
         let mut items = HashMap::new();
         for result in reader.records() {
             let record = result?;
-            let h3_index = record[0].to_string();
-            let address = record[1].to_string();
-            let city_code = record[2].to_string();
-            let url = record[3].to_string();
-            let lat = (record[4].parse::<f64>()?).to_string();
-            let lng = (record[5].parse::<f64>()?).to_string();
+            let address = record[0].to_string();
+            let url = record[1].to_string();
+            let price_lower = record[2].parse::<i32>()?.to_string();
+            let price_upper = record[3].parse::<i32>()?.to_string();
+            let property_type = record[4].to_string();
+            let num_bathrooms = record[5].parse::<i32>()?.to_string();
+            let num_bedrooms = record[6].parse::<i32>()?.to_string();
+            let num_carspaces = record[7].parse::<i32>()?.to_string();
+            let city_code = record[8].to_string();
+            let lat = (record[9].parse::<f64>()?).to_string();
+            let lng = (record[10].parse::<f64>()?).to_string();
+            let h3_index = record[11].to_string();
+
             let item = FakeItem {
                 hash_map: HashMap::from([
                     ("H3Index".to_string(), AttributeValue::S(h3_index.clone())),
@@ -104,6 +111,12 @@ impl DynamoDbClient {
                     ("Url".to_string(), AttributeValue::S(url)),
                     ("Lat".to_string(), AttributeValue::S(lat)),
                     ("Lng".to_string(), AttributeValue::S(lng)),
+                    ("PriceLower".to_string(), AttributeValue::N(price_lower)),
+                    ("PriceUpper".to_string(), AttributeValue::N(price_upper)),
+                    ("PropertyType".to_string(), AttributeValue::S(property_type)),
+                    ("NumBathrooms".to_string(), AttributeValue::N(num_bathrooms)),
+                    ("NumBedrooms".to_string(), AttributeValue::N(num_bedrooms)),
+                    ("NumCarSpaces".to_string(), AttributeValue::N(num_carspaces)),
                 ]),
             };
             let key = format!("{}{}{}", h3_index, KEY_JOIN_STR, address);
@@ -316,15 +329,47 @@ impl IDynamoDbClient for DynamoDbClient {
             .get(value_key)
             .ok_or(anyhow::anyhow!("Value not found in expression attributes"))?;
         let value = parse_attribute_value::<String>(Some(value))?;
+        let start_key = query.exclusive_start_key;
+        println!("Start key: {:?}", start_key);
         let mut items = Vec::new();
+        let mut item_count = 0;
+        let mut found_start = start_key.is_none();
+        let mut last_evaluated_key = None;
+        let mut hit_limit = false;
         for (_key, item) in table_data.iter() {
-            if let Some(AttributeValue::S(code)) = item.hash_map.get(field_name) {
-                if code == &value {
-                    items.push(item.hash_map.clone());
+            let code = match item.hash_map.get(field_name) {
+                Some(AttributeValue::S(code)) => code,
+                _ => continue,
+            };
+            if code != &value {
+                continue;
+            }
+            if !found_start {
+                let start = start_key.as_ref().unwrap();
+                println!("Checking match: {:?}", item.hash_map);
+                let start_matches = start
+                    .iter()
+                    .all(|(k, v)| item.hash_map.get(k).map_or(false, |item_v| item_v == v));
+                if start_matches {
+                    found_start = true;
+                }
+                continue;
+            }
+            last_evaluated_key = Some(item.hash_map.clone());
+            items.push(item.hash_map.clone());
+            item_count += 1;
+            if let Some(limit) = query.limit {
+                if item_count >= limit {
+                    hit_limit = true;
+                    break;
                 }
             }
         }
-        let query_output = QueryOutput::builder().set_items(Some(items)).build();
-        Ok(query_output)
+        println!("Last evaluated key: {:?}", last_evaluated_key);
+        let mut builder = QueryOutput::builder().set_items(Some(items));
+        if hit_limit && item_count > 0 {
+            builder = builder.set_last_evaluated_key(last_evaluated_key);
+        }
+        Ok(builder.build())
     }
 }

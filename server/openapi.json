@@ -180,7 +180,13 @@
           "address",
           "url",
           "lat",
-          "lon"
+          "lon",
+          "price_lower",
+          "price_upper",
+          "num_bathrooms",
+          "num_bedrooms",
+          "num_carspaces",
+          "property_type"
         ],
         "properties": {
           "address": {
@@ -196,6 +202,29 @@
           "lon": {
             "type": "number",
             "format": "double"
+          },
+          "num_bathrooms": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "num_bedrooms": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "num_carspaces": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "price_lower": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "price_upper": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "property_type": {
+            "type": "string"
           },
           "url": {
             "type": "string"
@@ -303,7 +332,13 @@
                 "address",
                 "url",
                 "lat",
-                "lon"
+                "lon",
+                "price_lower",
+                "price_upper",
+                "num_bathrooms",
+                "num_bedrooms",
+                "num_carspaces",
+                "property_type"
               ],
               "properties": {
                 "address": {
@@ -319,6 +354,29 @@
                 "lon": {
                   "type": "number",
                   "format": "double"
+                },
+                "num_bathrooms": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "num_bedrooms": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "num_carspaces": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "price_lower": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "price_upper": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "property_type": {
+                  "type": "string"
                 },
                 "url": {
                   "type": "string"

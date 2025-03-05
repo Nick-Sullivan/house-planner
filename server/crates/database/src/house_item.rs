@@ -18,6 +18,12 @@ pub struct HouseItem {
     pub url: String,
     pub lat: f64,
     pub lng: f64,
+    pub price_lower: i32,
+    pub price_upper: i32,
+    pub num_bathrooms: i32,
+    pub num_bedrooms: i32,
+    pub num_carspaces: i32,
+    pub property_type: String,
 }
 
 impl HouseItem {
@@ -28,6 +34,12 @@ impl HouseItem {
         let url = parse_attribute_value::<String>(hash_map.get("Url"))?;
         let lat = parse_attribute_value::<f64>(hash_map.get("Lat"))?;
         let lng = parse_attribute_value::<f64>(hash_map.get("Lng"))?;
+        let price_lower = parse_attribute_value::<i32>(hash_map.get("PriceLower"))?;
+        let price_upper = parse_attribute_value::<i32>(hash_map.get("PriceUpper"))?;
+        let num_bathrooms = parse_attribute_value::<i32>(hash_map.get("NumBathrooms"))?;
+        let num_bedrooms = parse_attribute_value::<i32>(hash_map.get("NumBedrooms"))?;
+        let num_carspaces = parse_attribute_value::<i32>(hash_map.get("NumCarSpaces"))?;
+        let property_type = parse_attribute_value::<String>(hash_map.get("PropertyType"))?;
         let item = Self {
             h3_index,
             address,
@@ -35,6 +47,12 @@ impl HouseItem {
             url,
             lat,
             lng,
+            price_lower,
+            price_upper,
+            num_bathrooms,
+            num_bedrooms,
+            num_carspaces,
+            property_type,
         };
         Ok(item)
     }
@@ -55,8 +73,8 @@ impl HouseItem {
         let items = query_output.items.unwrap_or_default();
         let mut results = Vec::new();
         for item in items {
-            let spatial_distance_item = Self::from_map(&item)?;
-            results.push(spatial_distance_item);
+            let item = Self::from_map(&item)?;
+            results.push(item);
         }
         Ok(PaginatedDbResponse {
             items: results,
@@ -94,6 +112,30 @@ impl HouseItem {
             .item("Url", AttributeValue::S(self.url.to_string()))
             .item("Lat", AttributeValue::N(self.lat.to_string()))
             .item("Lng", AttributeValue::N(self.lng.to_string()))
+            .item(
+                "PriceLower",
+                AttributeValue::N(self.price_lower.to_string()),
+            )
+            .item(
+                "PriceUpper",
+                AttributeValue::N(self.price_upper.to_string()),
+            )
+            .item(
+                "NumBathrooms",
+                AttributeValue::N(self.num_bathrooms.to_string()),
+            )
+            .item(
+                "NumBedrooms",
+                AttributeValue::N(self.num_bedrooms.to_string()),
+            )
+            .item(
+                "NumCarspaces",
+                AttributeValue::N(self.num_carspaces.to_string()),
+            )
+            .item(
+                "PropertyType",
+                AttributeValue::S(self.property_type.to_string()),
+            )
             .item("TimeToLive", AttributeValue::N(ttl_timestamp.to_string()))
             .build()?;
         let transaction_item = TransactWriteItem::builder().put(put_item).build();
